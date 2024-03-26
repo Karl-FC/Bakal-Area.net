@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Column Analysis Calculator</title>
+    
+</head>
+<body>
+    <h1>Bakal-AREA.net</h1>
+    <h2>Steel Column Compression chuchu</h2>
+    <p> try lang HAHAHA</p>
+    
+    <form> <!--wag kayo matakot sa code ko huhu-->
+        <label for="YieldStrength">Fy:</label><br>
+        <input type="text" id="YieldStrength" name="YieldStrength" value="50" pattern="\d*"><br><br> 
+
+        <label for="ModulusE">E(in ksi):</label><br>
+        <input type="text" id="ModulusE" name="ModulusE" value="29000" pattern="\d*"><br><br><br> 
+
+            <!--Itong mga nandito sa baba, gagawin ko, may javascript na hahanap sya sa spreadsheet. Since tigabasa ko pa kung pano, input muna HAHAHA--> 
+            <label for="AreaGross"></label><br>
+            <input type="text" id="AreaGross" name="AreaGross" value="AreaGross" pattern="\d*"><br><br>
+            <label for="LamdaFlange"></label><br>
+            <input type="text" id="LamdaFlange" name="LamdaFlange" value="LamdaFlange" pattern="\d*"><br><br>
+            <label for="LamdaWeb"></label><br>
+            <input type="text" id="LamdaWeb" name="LamdaWeb" value="LamdaWeb" pattern="\d*"><br><br>
+
+        <button type="submit" value="Calculate"> <!--Calculate button nilagay ko lang para makita kung gumana. Dapat sa mas baba pa yan-->Calculate</button>
+    </form>
+
+    <div> <!--Dito natin ilagay yun results haha-->
+            <blockquote id="ResultCompactnessFlange">Dito ilalagay kung compact ba o hindi yun flange</blockquote>
+            <blockquote id="ResultCompactnessWeb">Dito ilalagay kung compact ba o hindi yun web</blockquote>
+    </div>
+<script src="ColumnAnalysis.js"></script>
+</body>
+</html>
