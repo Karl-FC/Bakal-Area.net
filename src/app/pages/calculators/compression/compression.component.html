@@ -1,0 +1,29 @@
+<h1>Bakal-AREA.net</h1>
+    <h2>Steel Column Compression chuchu</h2>
+    <p> try lang HAHAHA</p>
+    
+    <form>
+        <label for="YieldStrength">Fy:</label><br>
+        <input type="text" id="YieldStrength" name="YieldStrength" value="50" pattern="\d*"><br><br>
+      
+        <label for="ModulusE">E(in ksi):</label><br>
+        <input type="text" id="ModulusE" name="ModulusE" value="29000" pattern="\d*"><br><br><br>
+      
+        <label for="LamdaFlange">F_Lamda:</label><br>
+        <input type="text" id="LamdaFlange" name="LamdaFlange" value="LamdaFlange" pattern="\d*"><br><br>
+      
+        <label for="LamdaWeb">W_Lamda:</label><br>
+        <input type="text" id="LamdaWeb" name="LamdaWeb" value="LamdaWeb" pattern="\d*"><br><br>
+      
+        <label for="AreaGross">AreaGross:</label><br>
+        <input type="text" id="AreaGross" name="AreaGross" value="AreaGross" pattern="\d*"><br><br>
+      
+        <button id="calculate" type="button" (mousedown)="calculate()">Calculate</button>
+      </form>
+      
+      
+
+    <div> <!--Dito natin ilagay yun results haha-->
+            <blockquote id="ResultCompactnessFlange">Dito ilalagay kung compact ba o hindi yun flange</blockquote>
+            <blockquote id="ResultCompactnessWeb">Dito ilalagay kung compact ba o hindi yun web</blockquote>
+    </div>
