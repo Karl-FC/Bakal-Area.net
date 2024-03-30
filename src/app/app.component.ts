@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
@@ -20,3 +21,20 @@ import { CompressionbeamshapesComponent } from './shared/data/compressionbeamsha
 export class AppComponent {
   title = 'bakal-area';
 }
+=======
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { CompressionComponent } from './pages/calculators/compression/compression.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, NavbarComponent, CompressionComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent {
+  title = 'bakal-area';
+}
+>>>>>>> fa38da51d8686245a1bbb2f9dda78a0dbfbfb915
