@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SharedVariable } from '../../../shared.service';
-import { CompressionComponent } from '../../../pages/calculators/compression/compression.component';
+import { CompressionComponent } from '../../../pages/calculators/slenderness/compression.component';
 
 interface beamShape {
   AISC_Manual_Label: string;
