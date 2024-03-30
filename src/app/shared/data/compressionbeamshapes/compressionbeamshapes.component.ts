@@ -98,13 +98,17 @@ interface beamShape {
   styleUrl: './compressionbeamshapes.component.scss'
 })
 export class CompressionbeamshapesComponent implements OnInit {
-  constructor(private http: HttpClient, sharedService: SharedVariable) { }
+  constructor(private http: HttpClient, private sharedService: SharedVariable) { }
 
   selectedA: number | null = null;
   selectedRx: number | null = null;
   selectedType: string = '';
-  selectedLabel: string = '';
+  selectedManualLabel: string = '';
 
+  get areaGross() {
+    // Access areaGross from the shared service
+    return this.sharedService.Ag;
+  }
 
 
 
@@ -136,33 +140,42 @@ export class CompressionbeamshapesComponent implements OnInit {
       this.http.get<beamShape[]>('assets/db/AISC15-imperial.json').subscribe(data => {
         this.allBeamShapes = data;
         this.filteredBeamShapes = data;
+        console.log("Loadbeamshapes is working");
       });
     }
     
 
     
-    onBeamShapeSelected(AreaGrossString: string): void {
-      // Convert the selected "A" value to a number
-      this.selectedA = parseFloat(AreaGrossString);
+    onBeamShapeSelected(event: Event): void {
+      console.log("onBeamShapeSelected is working");
     
-      // Find the selected beam shape object based on the selected "A" value
-      const selectedBeamShape = this.filteredBeamShapes.find(beamShape => beamShape.A === this.selectedA);
-    
-      // If a beam shape is found, extract and assign its properties to separate variables
-      if (selectedBeamShape) {
-        this.selectedRx = selectedBeamShape.rx;
-        this.selectedType = selectedBeamShape.Type;
-        this.selectedLabel = selectedBeamShape.AISC_Manual_Label;
-      } else {
-        // If no beam shape is found, reset the variables
-        this.selectedRx = null;
-        this.selectedType = '';
-        this.selectedLabel = '';
+      const target = event.target as HTMLSelectElement;
+      const selectedManualLabel = target.value;
+      
+      if (selectedManualLabel) {
+        const selectedBeamShape = this.filteredBeamShapes.find(
+          beamShape => beamShape.AISC_Manual_Label === selectedManualLabel);
+        
+        
+        if (selectedBeamShape) {
+          // Assuming you have a function to handle the selected value
+          this.handleSelectedBeamShape(selectedBeamShape);
+          
+          
+          // Assuming 'Ag' is a FormControl in your SharedVariable service
+          this.sharedService.Ag.setValue(selectedBeamShape.A);
+          console.log("Area Gross (Ag) is:", selectedBeamShape.A);
+        }
       }
-    
-      // Do something with the extracted properties, such as passing them to another component
-      // You can emit an event or directly assign them to properties in the other component
     }
+    
+    handleSelectedBeamShape(beamShape: beamShape): void {
+      // Perform actions based on the selected beam shape
+      console.log("Selected beam shape is:", beamShape.AISC_Manual_Label);
+      // You can call other functions, update component properties, etc.
+    }
+    
+    
     
 
 

@@ -23,8 +23,9 @@
         [formControl]="W_Lamda" (input)="calcCompact()"><br><br>
       
         <label for="AreaGross">AreaGross:</label><br>
-        <input type="number" id="AreaGross" name="AreaGross" value="AreaGross" 
-        [formControl]="Ag" (input)="calcCompact()"><br><br>
+        <input type="number" id="AreaGross" name="AreaGross" value="AreaGross"
+         
+        [formControl]="sharedService.Ag" (input)="calcCompact()"><br><br>
       
         <button id="calculate" type="button" (mousedown)="calcCompact()">Calculate</button>
       </form>

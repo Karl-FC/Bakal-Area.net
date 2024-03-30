@@ -13,18 +13,31 @@ import { SharedVariable } from '../../../shared.service';
 })
 
 export class CompressionComponent{
-  constructor(private renderer: Renderer2, private el: ElementRef, private sharedService: SharedVariable) { }
+  constructor(private renderer: Renderer2, private el: ElementRef, public sharedService: SharedVariable) { }
+
 
     E = new FormControl('');
     Fy = new FormControl('');
     Ag = new FormControl('');
     F_Lamda = new FormControl('');
     W_Lamda = new FormControl('');
+
     flangeStatus: string = 'Flange Status';
     WebStatus: string = 'Web Status';
 
-
+  // Update the Ag FormControl value
+  //const AgValue = /* Calculate Ag value based on other inputs */;
+  //this.setAgValue(AgValue);
+    
       calcCompact() {
+        const AgValue = this.sharedService.Ag.value;
+        console.log("Previous Ag value:", this.sharedService.Ag.value);
+  
+        // Update Ag form control with the calculated value
+        this.sharedService.Ag.setValue(AgValue);
+        console.log("New Ag value:", this.sharedService.Ag.value);
+        
+
         let E = parseFloat((<HTMLInputElement>document.getElementById('ModulusE')).value);
         console.log("Modulus of Elasticity is " + E);
         let Fy = parseFloat((<HTMLInputElement>document.getElementById('YieldStrength')).value);

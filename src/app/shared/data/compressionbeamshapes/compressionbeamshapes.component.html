@@ -1,8 +1,9 @@
 <!--<input type="text" (input)="onSearchChange($event)" placeholder="Search beam shapes...">-->
 
-<select id="beamShapeDropdown">
+<select id="beamShapeDropdown" (change)="onBeamShapeSelected($event)">
     <option value="">Select Beam Shape</option>
-    <option *ngFor="let beamShape of filteredBeamShapes" [value]="beamShape.AISC_Manual_Label">{{ beamShape.AISC_Manual_Label }}</option>
+    <option *ngFor="let beamShape of filteredBeamShapes" 
+    [value]="beamShape.AISC_Manual_Label">{{ beamShape.AISC_Manual_Label }}</option>
   </select>
   
   
