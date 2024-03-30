@@ -1,0 +1,37 @@
+<h1>Bakal-AREA.net</h1>
+    <h2>Steel Column Compression chuchu</h2>
+    <p> try lang HAHAHA</p>
+    
+    <!-- In compression.component.html -->
+    
+
+    <form>
+        <label for="YieldStrength">Fy:</label><br>
+        <input type="number" id="YieldStrength" name="YieldStrength" value="50"
+        [formControl]="Fy" (input)="calcCompact()"><br><br>
+      
+        <label for="ModulusE">E(in ksi):</label><br>
+        <input type="number" id="ModulusE" name="ModulusE" value="29000"
+        [formControl]="E" (input)="calcCompact()"><br><br><br>
+      
+        <label for="LamdaFlange">F_Lamda:</label><br>
+        <input type="number" id="LamdaFlange" name="LamdaFlange" value="LamdaFlange"
+        [formControl]="F_Lamda" (input)="calcCompact()"><br><br>
+      
+        <label for="LamdaWeb">W_Lamda:</label><br>
+        <input type="number" id="LamdaWeb" name="LamdaWeb" value="LamdaWeb"
+        [formControl]="W_Lamda" (input)="calcCompact()"><br><br>
+      
+        <label for="AreaGross">AreaGross:</label><br>
+        <input type="number" id="AreaGross" name="AreaGross" value="AreaGross" 
+        [formControl]="Ag" (input)="calcCompact()"><br><br>
+      
+        <button id="calculate" type="button" (mousedown)="calcCompact()">Calculate</button>
+      </form>
+      
+      
+
+    <div> <!--Dito natin ilagay yun results haha-->
+            <blockquote class="ResultCompact text-sky-400" id="ResultCompactnessFlange"></blockquote>
+            <blockquote class="ResultCompact" id="ResultCompactnessWeb"></blockquote>
+    </div>
