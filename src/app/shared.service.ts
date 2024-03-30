@@ -6,10 +6,15 @@ import { FormControl } from '@angular/forms';
 })
 export class SharedVariable {
     Ag: FormControl = new FormControl(null);
+    bf2tf: FormControl = new FormControl(null);
+    htw: FormControl = new FormControl(null);
+
     E: number = 0; 
     Fy: number = 0; 
+
     F_Lamda: number = 0; 
     W_Lamda: number = 0; 
+
     flangeStatus: string = 'Flange Status';
     WebStatus: string = 'Web Status';
   

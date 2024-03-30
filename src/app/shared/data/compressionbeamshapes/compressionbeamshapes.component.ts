@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SharedVariable } from '../../../shared.service';
+import { CompressionComponent } from '../../../pages/calculators/compression/compression.component';
 
 interface beamShape {
   AISC_Manual_Label: string;
@@ -118,11 +119,11 @@ export class CompressionbeamshapesComponent implements OnInit {
   searchText: string = '';
   
 
-  onSearchChange(event: Event): void {
+  /*onSearchChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.searchText = inputElement.value;
     this.filterBeamShapes();
-  }
+  }*/
   
     
 
@@ -144,27 +145,40 @@ export class CompressionbeamshapesComponent implements OnInit {
       });
     }
     
-
+    calcCompact(): void {
+      // ITO YUN NAGNONOTIFY SA UPDATE. naol
+      console.log("calcCompact is executed");
+    }
     
     onBeamShapeSelected(event: Event): void {
       console.log("onBeamShapeSelected is working");
     
       const target = event.target as HTMLSelectElement;
       const selectedManualLabel = target.value;
-      
+
+      //Get Label//
       if (selectedManualLabel) {
         const selectedBeamShape = this.filteredBeamShapes.find(
           beamShape => beamShape.AISC_Manual_Label === selectedManualLabel);
-        
+          this.calcCompact(); //Para mag update
         
         if (selectedBeamShape) {
-          // Assuming you have a function to handle the selected value
+          // Assuming may function to handle the selected value
           this.handleSelectedBeamShape(selectedBeamShape);
           
           
-          // Assuming 'Ag' is a FormControl in your SharedVariable service
-          this.sharedService.Ag.setValue(selectedBeamShape.A);
-          console.log("Area Gross (Ag) is:", selectedBeamShape.A);
+                  // Get Ag
+                  this.sharedService.Ag.setValue(selectedBeamShape.A);
+                  console.log("Area Gross (Ag) is:", selectedBeamShape.A);
+
+                  // Get bf2tf
+                  this.sharedService.bf2tf.setValue(selectedBeamShape['bf/2tf']);
+                  console.log("Lamba Flange (bf2tf) is:", selectedBeamShape['bf/2tf']);
+
+                  // Get htw
+                  this.sharedService.htw.setValue(selectedBeamShape['h/tw']);
+                  console.log("Lamba Web (htw) is:", selectedBeamShape['h/tw']);
+                  
         }
       }
     }
