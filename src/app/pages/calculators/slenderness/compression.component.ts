@@ -36,10 +36,10 @@ export class CompressionComponent{
 
                     //GET AREA GROSS - AG
                         const AgValue = this.sharedService.Ag.value;
-                        console.log("Previous Ag value:", this.sharedService.Ag.value);
+                        //console.log("Previous Ag value:", this.sharedService.Ag.value);
                         // Update Ag form control with the calculated value
                         this.sharedService.Ag.setValue(AgValue);
-                        console.log("New Ag value:", this.sharedService.Ag.value);
+                        //console.log("New Ag value:", this.sharedService.Ag.value);
                             /*GET LAMDA
                                 const bf2tfValue = this.sharedService.bf2tf.value;
                                 console.log("Previous Lamda Flange value:", this.sharedService.bf2tf.value);
@@ -59,7 +59,7 @@ export class CompressionComponent{
               console.log("bf/tf or Lamda F is " + F_Lamda);
               console.log("htw or Lamda W is " + W_Lamda);
         
-        //Checking for Slenderness//    
+        //Checking Slenderness//    
         let F_LamdaP = 0.38 * Math.sqrt(E / Fy);
         let F_LamdaR = 1.0 * Math.sqrt(E / Fy);
         console.log("Flange Lamda P is " + F_LamdaP);
@@ -88,14 +88,16 @@ export class CompressionComponent{
               this.WebStatus = "The web is slender";
             }
           
-          // Update the blockquote element
+          // Update blockquote element
           let ResultFlange = this.el.nativeElement.querySelector('#ResultCompactnessFlange');
           let ResultWeb = this.el.nativeElement.querySelector('#ResultCompactnessWeb');
+
 
             if (this.flangeStatus !== 'Flange Status') {
               this.renderer.setStyle(ResultFlange, 'display', 'block');
               this.renderer.setStyle(ResultFlange, 'color', this.flangeStatus === 'The flange is compact' ? 'green' : 'red');
               this.renderer.setProperty(ResultFlange, 'textContent', this.flangeStatus);
+              console.log("FLANGE UPDATED");
             } else {
               this.renderer.setStyle(ResultFlange, 'display', 'none');
             }
@@ -104,6 +106,7 @@ export class CompressionComponent{
               this.renderer.setStyle(ResultWeb, 'display', 'block');
               this.renderer.setStyle(ResultWeb, 'color', this.WebStatus === 'The web is compact' ? 'green' : 'red');
               this.renderer.setProperty(ResultWeb, 'textContent', this.WebStatus);
+              console.log("WEB UPDATED");
             } else {
               this.renderer.setStyle(ResultWeb, 'display', 'none');
             }
@@ -114,7 +117,9 @@ export class CompressionComponent{
 
 
 
-}
+    }
+
+
 }
 
 

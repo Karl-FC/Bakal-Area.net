@@ -3,93 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SharedVariable } from '../../../shared.service';
 import { CompressionComponent } from '../../../pages/calculators/slenderness/compression.component';
-
-interface beamShape {
-  AISC_Manual_Label: string;
-  Type: string;
-  EDI_Std_Nomenclature: string;
-  T_F: string;
-  W: number;
-  A: number;
-  d: number;
-  ddet: string;
-  HT: string;
-  h: string;
-  OD: string;
-  bf: number;
-  bfdet: string;
-  B: string;
-  b: string;
-  ID: string;
-  tw: number;
-  twdet: string;
-  'twdet/2': string;
-  tf: number;
-  tfdet: string;
-  t: string;
-  tnom: string;
-  tdes: string;
-  kdes: number;
-  kdet: string;
-  k1: string;
-  x: string;
-  y: string;
-  eo: string;
-  xp: string;
-  yp: string;
-  'bf/2tf':number;
-  'b/t': string;
-  'b/tdes': string;
-  'h/tw': number;
-  'h/tdes': string;
-  'D/t': string;
-  Ix: number;
-  Zx: number;
-  Sx: number;
-  rx: number;
-  Iy: number;
-  Zy: number;
-  Sy: number;
-  ry: number;
-  Iz: number;
-  rz: number;
-  Sz: number;
-  J: number;
-  Cw: number;
-  C: string;
-  Wno: number;
-  Sw1: number;
-  Sw2: string;
-  Sw3: string;
-  Qf: number;
-  Qw: number;
-  ro: string;
-  H: string;
-  'tan(a)': string;
-  Iw: string;
-  zA: string;
-  zB: string;
-  zC: string;
-  wA: string;
-  wB: string;
-  wC: string;
-  SwA: string;
-  SwB: string;
-  SwC: string;
-  SzA: string;
-  SzB: string;
-  SzC: string;
-  rts: number;
-  ho: number;
-  PA: number;
-  PA2: string;
-  PB: number;
-  PC: number;
-  PD: number;
-  T: number;
-  WGi: string;
-  WGo: string;
-}
+import { beamShape } from '../../../shared.service';
 
 @Component({
   selector: 'app-compressionbeamshapes',
@@ -138,7 +52,7 @@ export class CompressionbeamshapesComponent implements OnInit {
     };    
 
     loadBeamShapes() {
-      this.http.get<beamShape[]>('assets/db/AISC15-imperial.json').subscribe(data => {
+      this.http.get<beamShape[]>('assets/db/AISC15-imperial-Wshapes.json').subscribe(data => {
         this.allBeamShapes = data;
         this.filteredBeamShapes = data;
         console.log("Loadbeamshapes is working");
@@ -161,10 +75,13 @@ export class CompressionbeamshapesComponent implements OnInit {
         const selectedBeamShape = this.filteredBeamShapes.find(
           beamShape => beamShape.AISC_Manual_Label === selectedManualLabel);
           this.calcCompact(); //Para mag update
+          
         
         if (selectedBeamShape) {
           // Assuming may function to handle the selected value
           this.handleSelectedBeamShape(selectedBeamShape);
+          this.sharedService.chosenBeamShape.next(selectedBeamShape);
+          console.log("Shared beamshape: " + this.sharedService.chosenBeamShape)
           
           
                   // Get Ag
@@ -178,6 +95,14 @@ export class CompressionbeamshapesComponent implements OnInit {
                   // Get htw
                   this.sharedService.htw.setValue(selectedBeamShape['h/tw']);
                   console.log("Lamba Web (htw) is:", selectedBeamShape['h/tw']);
+
+                  // Get rx
+                  this.sharedService.rx.setValue(selectedBeamShape.rx);
+                  console.log("rX is:", selectedBeamShape.rx);
+
+                  // Get ry
+                  this.sharedService.ry.setValue(selectedBeamShape.ry);
+                  console.log("rY is:", selectedBeamShape.ry);
                   
         }
       }

@@ -1,1 +1,54 @@
-<p>elements works!</p>
+<div class="overflow-x-auto">
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Element</th>
+        <th>Length (in inches)</th>
+        <th>K</th>
+        <th>r</th>
+        <th>KL/r</th>
+        <th></th> <!-- Bagong column para sa "remove button" -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of AnalysisRows; let i = index" >
+        <td>{{i+1}}</td>
+        <td>{{row.element}}</td>
+        <td>{{row.elemLength}}</td>
+        <td>{{row.KFactor}}</td>
+        <td>{{row.radiusGyration}}</td>
+        <td>{{row.kLr}}</td>
+        <td>
+          <button (click)="removeRow(i)">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div id="addRow">
+  <button (click)="addRow()">Add Row</button>
+  <br>
+  <form>
+    <input type="radio" id="xelement" name="element" [value]="false"
+        [formControl]="element" >
+        <label for="element">x-axis</label> <br>
+    <input type="radio" id="yelement" name="element" [value]="true"
+        [formControl]="element" > 
+        <label for="element">y-axis</label> <br>
+
+    <select name="KFactor" [formControl]="KFactor">
+        <label for="KFactor">Select K</label>
+      <option value=0.65>Fixed-Fixed</option>
+      <option value=0.8>Pinned-Fixed</option>
+      <option value=1.2>Roller-Fixed</option>
+      <option value=1>Pinned-Pinned</option>
+      <option value=2.1>Free-Fixed</option>
+      <option value=2>Roller-Pinned</option>
+    </select><br>
+
+  <label for="elemLength">Length</label>
+  <input type="number" id="elemLength" name="elemLength" 
+  [formControl]="elemLength" value="1" (input)="insertLength()"> <br>
+</form>
+</div>
