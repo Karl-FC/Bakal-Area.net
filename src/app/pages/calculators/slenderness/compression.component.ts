@@ -2,6 +2,7 @@ import { Component, Renderer2, ElementRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CompressionbeamshapesComponent } from '../../../shared/data/compressionbeamshapes/compressionbeamshapes.component';
 import { SharedVariable } from '../../../shared.service';
+import { style } from '@angular/animations';
 
 
 @Component({
@@ -37,23 +38,9 @@ export class CompressionComponent{
     
       calcCompact() {
         
-
-                    //GET AREA GROSS - AG
-                        const AgValue = this.sharedService.Ag.value;
-                        //console.log("Previous Ag value:", this.sharedService.Ag.value);
-                        // Update Ag form control with the calculated value
-                        //this.sharedService.Ag.setValue(AgValue);
-                        //console.log("New Ag value:", this.sharedService.Ag.value);
-                            /*GET LAMDA
-                                const bf2tfValue = this.sharedService.bf2tf.value;
-                                console.log("Previous Lamda Flange value:", this.sharedService.bf2tf.value);
-                                // Update Ag form control with the calculated value
-                                this.sharedService.Ag.setValue(bf2tfValue);
-                                console.log("New bf2tf value:", this.sharedService.bf2tf.value);*/
-        
-
-
         //CALCULATION PROPER//
+          const AgValue = this.sharedService.Ag.value;
+
           let E = parseFloat((<HTMLInputElement>document.getElementById('ModulusE')).value);
           
 
@@ -111,71 +98,51 @@ export class CompressionComponent{
               this.WebStatus = "The web is slender";
             }
           
-          // Update blockquote element
+          // Update results card
               let ResultFlange = this.el.nativeElement.querySelector('#ResultCompactnessFlange');
               let ResultWeb = this.el.nativeElement.querySelector('#ResultCompactnessWeb');
+              let BgCompactnessFlange = this.el.nativeElement.querySelector('#BgCompactnessFlange');
+              let BgCompactnessWeb = this.el.nativeElement.querySelector('#BgCompactnessWeb');
+              let SubCompactnessFlange = this.el.nativeElement.querySelector('#SubCompactnessFlange');
+              let SubCompactnessWeb = this.el.nativeElement.querySelector('#SubCompactnessWeb');
 
-              if (this.flangeStatus !== 'Flange Status') {
-                this.renderer.setStyle(ResultFlange, 'display', 'block');
-                let badge = this.renderer.createElement('div');
-                this.renderer.addClass(badge, 'badge');
-                this.renderer.addClass(badge, 'gap-2');
-                this.renderer.addClass(badge, this.flangeStatus === 'The flange is compact' ? 'badge-success' : this.flangeStatus === 'The flange is noncompact' ? 'badge-warning' : 'badge-error');
-                let svg = this.renderer.createElement('svg', 'http://www.w3.org/2000/svg');
+                this.renderer.setStyle(SubCompactnessFlange, 'display', 'none');
+                this.renderer.removeClass(BgCompactnessFlange, 'bg-success');
+                this.renderer.removeClass(BgCompactnessFlange, 'bg-warning');
+                this.renderer.removeClass(BgCompactnessFlange, 'bg-error');
+                this.renderer.setStyle(BgCompactnessFlange,'width', '220px');
+                this.renderer.setStyle(BgCompactnessWeb,'width', '220px');
 
-                this.renderer.setAttribute(svg, 'fill', 'none');
-                this.renderer.setAttribute(svg, 'viewBox', '0 0 24 24');
-                this.renderer.addClass(svg, 'inline-block');
-                this.renderer.addClass(svg, 'w-4');
-                this.renderer.addClass(svg, 'h-4');
-                this.renderer.addClass(svg, 'stroke-current');
-                let path = this.renderer.createElement('path', 'http://www.w3.org/2000/svg');
+                      if (this.flangeStatus === 'The flange is compact') {
+                        this.renderer.addClass(BgCompactnessFlange, 'bg-success');
+                        this.renderer.setProperty(ResultFlange, 'innerHTML', 'COMPACT');
+                        this.renderer.setStyle(ResultFlange,'font-size', '36px')
 
-                this.renderer.setAttribute(path, 'stroke-linecap', 'round');
-                this.renderer.setAttribute(path, 'stroke-linejoin', 'round');
-                this.renderer.setAttribute(path, 'stroke-width', '2');
-                this.renderer.setAttribute(path, 'd', 'M6 18L18 6M6 6l12 12');
-                this.renderer.appendChild(svg, path);
-                this.renderer.appendChild(badge, svg);
-                this.renderer.setProperty(badge, 'innerHTML', this.flangeStatus.toUpperCase());
-                this.renderer.setProperty(ResultFlange, 'innerHTML', '');
-                this.renderer.appendChild(ResultFlange, badge);
-                console.log("FLANGE UPDATED");
-              } else {
-                this.renderer.setStyle(ResultFlange, 'display', 'none');
-              }
-
-              if (this.WebStatus !== 'Web Status') {
-                this.renderer.setStyle(ResultWeb, 'display', 'block');
-                let badge = this.renderer.createElement('div');
-                this.renderer.addClass(badge, 'badge');
-                this.renderer.addClass(badge, 'gap-2');
-                this.renderer.addClass(badge, this.WebStatus === 'The web is compact' ? 'badge-success' : this.WebStatus === 'The web is noncompact' ? 'badge-warning' : 'badge-error');
-                let svg = this.renderer.createElement('svg', 'http://www.w3.org/2000/svg');
-                this.renderer.setAttribute(svg, 'fill', 'none');
-                this.renderer.setAttribute(svg, 'viewBox', '0 0 24 24');
-                this.renderer.addClass(svg, 'inline-block');
-                this.renderer.addClass(svg, 'w-4');
-                this.renderer.addClass(svg, 'h-4');
-                this.renderer.addClass(svg, 'stroke-current');
-                let path = this.renderer.createElement('path', 'http://www.w3.org/2000/svg');
-                this.renderer.setAttribute(path, 'stroke-linecap', 'round');
-                this.renderer.setAttribute(path, 'stroke-linejoin', 'round');
-                this.renderer.setAttribute(path, 'stroke-width', '2');
-                this.renderer.setAttribute(path, 'd', 'M6 18L18 6M6 6l12 12');
-                this.renderer.appendChild(svg, path);
-                this.renderer.appendChild(badge, svg);
-                this.renderer.setProperty(badge, 'innerHTML', this.WebStatus.toUpperCase());
-                this.renderer.setProperty(ResultWeb, 'innerHTML', '');
-                this.renderer.appendChild(ResultWeb, badge);
-                console.log("WEB UPDATED");
-              } else {
-                this.renderer.setStyle(ResultWeb, 'display', 'none');
-                const elemError = document.getElementById('elemError');
-                console.log("No beam shape has selected");
-                if (elemError) elemError.style.display = 'block';
-                return;
-              }}
+                    } else if (this.flangeStatus === 'The flange is noncompact') {
+                        this.renderer.addClass(BgCompactnessFlange, 'bg-warning');
+                        this.renderer.setProperty(ResultFlange, 'innerHTML', 'NONCOMPACT');
+                        this.renderer.setStyle(ResultFlange,'font-size', '24px')
+                    } else if (this.flangeStatus === 'The flange is slender') {
+                        this.renderer.addClass(BgCompactnessFlange, 'bg-error');
+                        this.renderer.setProperty(ResultFlange, 'innerHTML', 'SLENDER');
+                        this.renderer.setStyle(ResultFlange,'font-size', '36px')
+                }
+              
+                this.renderer.setStyle(SubCompactnessWeb, 'display', 'none');
+                this.renderer.removeClass(BgCompactnessWeb, 'bg-success');
+                this.renderer.removeClass(BgCompactnessWeb, 'bg-warning');
+                this.renderer.removeClass(BgCompactnessWeb, 'bg-error');
+                      if (this.WebStatus === 'The web is compact') {
+                          this.renderer.addClass(BgCompactnessWeb, 'bg-success');
+                          this.renderer.setProperty(ResultWeb, 'innerHTML', 'COMPACT');
+                      } else if (this.WebStatus === 'The web is noncompact') {
+                          this.renderer.addClass(BgCompactnessWeb, 'bg-warning');
+                          this.renderer.setProperty(ResultWeb, 'innerHTML', 'NONCOMPACT');
+                      } else if (this.WebStatus === 'The web is slender') {
+                          this.renderer.addClass(BgCompactnessWeb, 'bg-error');
+                          this.renderer.setProperty(ResultWeb, 'innerHTML', 'SLENDER');
+                }
+      }
 
 
 

@@ -1,32 +1,40 @@
 <app-navbar />
 <!--TITLE-->
-<div class="flex flex-col w-full bg-base-300 card" style="z-index: 0;">
-        <h1 style="font-size: 50px;">Bakal-AREA.net</h1>
-        <h2>Steel Column Compression chuchu</h2>
-        <p> try lang HAHAHA</p>
-        </div>
-
-<div class="flex flex-col w-full lg:flex-row">
-    <!--SLENDERNESS CHECK-->
-    <div id="backcard" class="flex flex-col w-full bg-base-300 card" style="z-index: 0;">
-        <h1 style="font-size: 20px;">Slenderness Check</h1>
-        <p>I</p>
-            <app-compressionbeamshapes /> <!--Dropdown-->
-            <app-compression /> <!--Inputsssssss-->
-            </div>
-
-        <div class="divider lg:divider-horizontal">OR</div>
-    <!--MAX KLR TABLE-->
-            <app-elements />
-            <br>
+<div class="flex flex-col w-full bg-base-300 card" 
+    style="z-index: 0;
+    padding: 1%;">
+    <h1 style="font-size: 50px;">Bakal-AREA.net</h1>
+    <h2>Steel Column Compression chuchu</h2>
 </div>
 
-<div class="divider"></div>
-    <div id="backcard" class="flex flex-col w-full bg-base-300 card" style="z-index: 0;">
-        
-    <app-elastic-buckling />
-    <p> try lang HAHAHA</p>
+<!-- Wrap the first three divs in a parent div -->
+<div class="flex flex-col lg:flex-row">
+    <app-leftside/>
+
+    <div class="flex flex-col lg:flex-row">
+            <!--SLENDERNESS CHECK-->
+            <div id="backcard" class="flex flex-col bg-base-300 card" 
+                style="z-index: 0;
+                padding: 30px;">
+                <h1 style="font-size: 20px;">Slenderness Check</h1>
+                <p>Directions</p>
+                <app-compressionbeamshapes /> <!--Dropdown-->
+                <br>
+                <app-compression /> <!--Inputsssssss-->
+            </div>
+            <!--MAX KLR TABLE-->
+            <div class="grow lg:flex">
+                <app-elements />
+            </div>
 
         </div>
-    <br> <br>
 
+    </div>
+    <div class="divider"></div>
+<!-- The fourth div will take the full width of the next row -->
+
+<div class="flex flex w-full bg-base-300" style="z-index: 0;">   
+    <app-elastic-buckling />
+</div>
+
+<br> <br>

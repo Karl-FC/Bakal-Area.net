@@ -7,13 +7,14 @@ import { CommonModule } from '@angular/common';
 import { CompressionbeamshapesComponent } from './shared/data/compressionbeamshapes/compressionbeamshapes.component';
 import { ElementsComponent } from './pages/calculators/elements/elements.component';
 import { ElasticBucklingComponent } from './pages/calculators/elastic-buckling/elastic-buckling.component';
+import { LeftsideComponent } from './shared/components/leftside/leftside.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, FormsModule, CommonModule, 
-    NavbarComponent, 
+    NavbarComponent,LeftsideComponent, 
     CompressionComponent, 
     CompressionbeamshapesComponent, 
     ElementsComponent, 

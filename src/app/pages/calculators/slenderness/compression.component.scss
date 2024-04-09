@@ -1,13 +1,19 @@
+
 //COMPACT CHECK
     #ResultCompactnessWeb #ResultCompactnessFlange {
         font-size: 200pt;
         font-weight: 500;
     }
 
+    form {
+        margin-left: auto;
+        margin-right: auto;
+        padding-right: 25%;
+    }
     form input {
         min-width: 75px;
-        width: 110%;
-        max-width: 225px;
+        width: 130%;
+        max-width: 500px;
         height: 30px;
         padding: 15px;
         border-radius: 5px;

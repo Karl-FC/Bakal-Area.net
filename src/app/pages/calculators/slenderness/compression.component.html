@@ -1,8 +1,5 @@
-   
-    <!--Compression.component.html -->
-    
-
-  <form >
+  <div class="place-items-center card">
+  <form>
     <!--Select Input for Fy-->
         <!--<input type="radio" id="dropdown" name="inputType" [value]="false" (click)="FyInputDrop()">
         <label for="dropdown">Select Steel Grade</label><br>
@@ -50,8 +47,6 @@
         <label for="AreaGross">AreaGross:</label><br>
         <input type="number" id="AreaGross" name="AreaGross" value="AreaGross"
         [formControl]="sharedService.Ag" (input)="calcCompact()"><br><br>
-      
-        <button id="calculate" type="button" (mousedown)="calcCompact()">Calculate</button>
   </form>
     <!--Error Message-->
     <div id="beamError" role="alert" class="alert alert-error" style="display: none;">
@@ -64,9 +59,23 @@
       <span>ERROR: Please input all fields</span>
     </div>
       
-
-    <div> <!--Dito natin ilagay yun results haha-->
-            <blockquote class="ResultCompact text-sky-400" id="ResultCompactnessFlange"></blockquote>
-            
-            <blockquote class="ResultCompact" id="ResultCompactnessWeb"></blockquote>
-    </div>
+<div> <br>
+    <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary"> <!--Dito natin ilagay yun results haha-->  
+        <div id="BgCompactnessFlange" class="stat text-primary-content place-items-center" style="width: 220px;">
+          <div class="stat-title">Flange slenderness</div>
+          <div id="ResultCompactnessFlange" class="stat-value">N/A</div>
+          <div id="SubCompactnessFlange" class="stat-desc">Input required</div>
+        </div>
+        
+        <div id="BgCompactnessWeb" class="stat text-primary-content place-items-center" style="width: 220px;">
+          <div class="stat-title">Web slenderness</div>
+          <div id="ResultCompactnessWeb" class="stat-value">N/A</div>
+          <div id="SubCompactnessWeb" class="stat-desc">Input required</div>
+        </div>
+  </div>
+</div>
+<br><br>
+  <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary">
+    <button id="calculate" type="button" (mousedown)="calcCompact()">Calculate</button> 
+  </div>
+</div> 
