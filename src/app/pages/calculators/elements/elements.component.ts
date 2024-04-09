@@ -6,6 +6,7 @@ import { CompressionComponent } from '../slenderness/compression.component';
 import { CommonModule } from '@angular/common';
 import { AnalysisTableRow } from './elements-table-row.interface';
 import { beamShape } from '../../../shared.service';
+import { ElasticBucklingService } from '../elastic-buckling/elastic-buckling.service';
 
 @Component({
   selector: 'app-elements',
@@ -18,7 +19,7 @@ import { beamShape } from '../../../shared.service';
 export class ElementsComponent {
   selectedBeamShape: beamShape | null = null; 
   
-constructor( private sharedService: SharedVariable) {}
+constructor( private sharedService: SharedVariable, private SharedVariable: ElasticBucklingService) {}
 
   AnalysisRows: { 
     element: string, 
@@ -27,26 +28,40 @@ constructor( private sharedService: SharedVariable) {}
     radiusGyration: number, 
     kLr: number }[] = []; //Make array
 
+
   element = new FormControl('');
   elemLength = new FormControl('', Validators.pattern("^[0-9]*\.?[0-9]*$"));
   KFactor = new FormControl('', Validators.pattern("^[0-9]*\.?[0-9]*$"));
 
+  get maxKLr() {
+    return this.sharedService.maxKLr.value;
+    
+  }
+
+  set maxKLr(value: number) {
+    this.sharedService.maxKLr.next(value);
+  }
+  
   onBeamShapeSelected(event: Event): void {
     console.log("onBeamShapeSelected is working");
     
     const target = event.target as HTMLSelectElement;
-    const selectedManualLabel = target.value;}
+    const selectedManualLabel = target.value;
+    console.log("Selected Manual Label is " + selectedManualLabel)}
 
     
   addRow() {
     console.log("addRow kinda works");
-
+    console.log("Max kL/r is " + this.sharedService.maxKLr.value)
     const selectedBeamShape = this.sharedService.chosenBeamShape.value;
-
-  if (!selectedBeamShape) {
-    console.log("No beam shape has selected");
-    return;
-  }
+    
+            //No beam
+            if (!selectedBeamShape) {
+              const elemError = document.getElementById('elemError');
+              console.log("No beam shape has selected");
+              if (elemError) elemError.style.display = 'block';
+              return;
+              }
 
   const radiusGyration = this.element.value ? 
   Number(selectedBeamShape.ry) : Number(selectedBeamShape.rx);
@@ -57,10 +72,11 @@ constructor( private sharedService: SharedVariable) {}
     //Calculating kL/r
     let elemLength = Number(this.elemLength.value);
     let KFactor = Number(this.KFactor.value)
-    let kLr = (elemLength * KFactor)/radiusGyration;
-        console.log("Length is " + elemLength);
+    let kLr = Number(((elemLength * KFactor) / radiusGyration).toFixed(6));
+        console.log("Inputed length is " + elemLength);
         console.log("Slected K is " + KFactor);
         console.log("kLr is " + kLr);
+
 
     if (this.AnalysisRows && this.AnalysisRows !== null) {
       this.AnalysisRows.push({
@@ -70,29 +86,41 @@ constructor( private sharedService: SharedVariable) {}
         radiusGyration: radiusGyration,
         kLr: kLr
         });
-      }
+        
+      } this.SharedVariable.FeSolve();
+
+      // Update maxKLr if current kLr is greater
+      if (kLr > this.maxKLr) {
+        this.maxKLr = kLr;
+        console.log("Max kL/r updated to " + this.sharedService.maxKLr.value)
+        this.SharedVariable.FeSolve();
+  }
+
     }
 
 
   insertLength() {
     let L = parseFloat((<HTMLInputElement>document.getElementById('elemLength')).value);
     console.log("Lenght is " + L);
+
   }
 
    
   removeRow(index: number): void {
-    this.AnalysisRows.splice(index, 1);
+    if (this.AnalysisRows[index].kLr === this.maxKLr) {
+      // Remove the row
+      this.AnalysisRows.splice(index, 1);
+  
+      // Update maxKLr
+      this.maxKLr = Math.max(...this.AnalysisRows.map(row => row.kLr));
+      console.log("Max kL/r downdated to " + this.sharedService.maxKLr.value);
+    } else {
+      // If maxKLr is not in the row to be removed, just remove the row
+      this.AnalysisRows.splice(index, 1);
+    }
+  }
+
+  maxkLr() {
+
   }
 }
- /* updateSelectedElement(element: string): void {
-    this.AnalysisRows = element;
-  }
-
-  updateSelectedLength(length: number): void {
-    this.AnalysisRows = length;
-  }
-
-  updateSelectedKFactor(kFactor: number): void {
-    this.selectedKFactor = kFactor;
-  }
-}*/

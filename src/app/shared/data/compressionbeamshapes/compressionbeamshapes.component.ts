@@ -78,10 +78,15 @@ export class CompressionbeamshapesComponent implements OnInit {
           
         
         if (selectedBeamShape) {
-          // Assuming may function to handle the selected value
+          // May function sa baba na maga handle sa selected value
           this.handleSelectedBeamShape(selectedBeamShape);
           this.sharedService.chosenBeamShape.next(selectedBeamShape);
-          console.log("Shared beamshape: " + this.sharedService.chosenBeamShape)
+          this.sharedService.chosenBeamShapeLabel.next(selectedBeamShape.AISC_Manual_Label);
+          console.log("Shared beamshape: " + this.sharedService.chosenBeamShapeLabel.getValue())
+
+              //Error handle
+              const elemError = document.getElementById('elemError');
+              if (elemError) elemError.style.display = 'none';
           
           
                   // Get Ag

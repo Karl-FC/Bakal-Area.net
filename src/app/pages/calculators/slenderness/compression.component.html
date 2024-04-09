@@ -2,14 +2,42 @@
     <!--Compression.component.html -->
     
 
-    <form>
-        <label for="YieldStrength">Fy:</label><br>
-        <input type="number" id="YieldStrength" name="YieldStrength" value="50"
-        [formControl]="Fy" (input)="calcCompact()"><br><br>
+  <form >
+    <!--Select Input for Fy-->
+        <!--<input type="radio" id="dropdown" name="inputType" [value]="false" (click)="FyInputDrop()">
+        <label for="dropdown">Select Steel Grade</label><br>
+      <input type="radio" id="numerical" name="inputType" [value]="true" (click)="FyInputType()">
+        <label for="numerical">Input Fy</label><br><br>
+
+        <div id="FyDropdown" style="display: none; z-index: 10;">
+        <label for="YieldStrengthSelect">Fy:</label><br>
+        <select id="YieldStrengthSelect" name="YieldStrength"
+        [formControl]="Fy" (change)="calcCompact()">
+            <option value=36>A36</option>
+            <option value=42>A572 G 42</option>
+            <option value=50>A572 G 50</option>
+            <option value=55>A572 G 55</option>
+            <option value=60>A572 G 60</option>
+            <option value=65>A572 G 65</option>
+            <option value=50>A913 G 50</option>
+            <option value=60>A913 G 60</option>
+            <option value=65>A913 G 65</option> 
+            <option value=50>A992 G 50</option>
+            <option value=1200>TEST</option>
+        </select></div>-->
+
+        <div id="FyNumType" style="display: block; z-index: 10;">
+        <label for="YieldStrengthType">Fy:</label><br>
+        <input type="number" id="YieldStrengthType" name="YieldStrength" value="50"
+        [formControl]="Fy" ><br><br>
+        </div>
       
+
+
+
         <label for="ModulusE">E(in ksi):</label><br>
         <input type="number" id="ModulusE" name="ModulusE" value="29000"
-        [formControl]="E" (input)="calcCompact()"><br><br><br>
+        [formControl]="E" ><br><br><br>
       
         <label for="LamdaFlange">F_Lamda:</label><br>
         <input type="number" id="LamdaFlange" name="LamdaFlange" value="LamdaFlange"
@@ -24,11 +52,21 @@
         [formControl]="sharedService.Ag" (input)="calcCompact()"><br><br>
       
         <button id="calculate" type="button" (mousedown)="calcCompact()">Calculate</button>
-      </form>
-      
+  </form>
+    <!--Error Message-->
+    <div id="beamError" role="alert" class="alert alert-error" style="display: none;">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span>ERROR: Please select a beam</span>
+    </div>
+    <!--Error Message-->
+    <div id="varError" role="alert" class="alert alert-error" style="display: none;">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span>ERROR: Please input all fields</span>
+    </div>
       
 
     <div> <!--Dito natin ilagay yun results haha-->
             <blockquote class="ResultCompact text-sky-400" id="ResultCompactnessFlange"></blockquote>
+            
             <blockquote class="ResultCompact" id="ResultCompactnessWeb"></blockquote>
     </div>

@@ -8,18 +8,21 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SharedVariable {
   chosenBeamShape: BehaviorSubject<beamShape | null> = 
-  new BehaviorSubject<beamShape | null>(null);
+      new BehaviorSubject<beamShape | null>(null);
+  chosenBeamShapeLabel = new BehaviorSubject<string>('');
   KFactor = new BehaviorSubject<number>(1);
+  maxKLr = new BehaviorSubject<number>(0);
 
     Ag: FormControl = new FormControl(null);
+    Load: FormControl = new FormControl(null);
     bf2tf: FormControl = new FormControl(null);
     htw: FormControl = new FormControl(null);
     
     rx: FormControl = new FormControl(null);
     ry: FormControl = new FormControl(null);
 
-    E: number = 0; 
-    Fy: number = 0; 
+    E = new BehaviorSubject<number>(0);
+Fy = new BehaviorSubject<number>(0);
 
     F_Lamda: number = 0; 
     W_Lamda: number = 0; 
@@ -34,6 +37,7 @@ export class SharedVariable {
     
  
     constructor() { }
+
   }
 
 
