@@ -1,29 +1,55 @@
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<head><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
 
 <div id="summary" style="padding: 10%;">
 <h1>Computations</h1>
 
+
     <h2>Euler Elastic Buckling (Fe)</h2>
-        <p>'F_e=(π^2 E)/((〖kL/r)〗^2 )'</p> <br>
+        <p>\(F_e=(π^2 E)/((〖kL/r)〗^2 ))\</p> 
+            <br><br>
+        <h6>{{ elasticBucklingService.FeResult }}</h6>
+            <br><br><br>
 
     <h2>F critical</h2>
-        <blockquote>F_cr=[〖0.658〗^(F_y/F_e )]F_y</blockquote><br>
-        <blockquote>F_cr=0.877F_e</blockquote><br><br>
+        <p>\(F_cr=[〖0.658〗^(F_y/F_e )]F_y)\</p>
+            <br>
+        <p>F_cr=0.877F_e</p>
+            <br><br>
+            <h6>{{ elasticBucklingService.FcrResult }}</h6>
+            <br><br><br>
 
     <h2>Pn</h2>
-    <blockquote>P_cr=F_cr Ag</blockquote><br><br>
-    <blockquote>P_cr=P_n</blockquote><br>
-    <blockquote>P_n=F_cr Ag</blockquote><br>
+        <p>P_cr=F_cr Ag</p>
+            <br><br>
+        <p>P_cr=P_n</p>
+            <br><br>
+        <p>P_n=F_cr Ag</p>
+            <br>
+            <h6>{{ elasticBucklingService.PcrResult }}</h6>
+            <br><br><br>
 
     <h3>LRFD</h3>
-        <blockquote>
-            P_u=∅P_n
-        </blockquote><br>
+        <br>
+        <p>P_u=∅P_n</p>
+            <br>
+        <h4>{{ elasticBucklingService.LRFDResult }}</h4>
+            <br><br><br>
 
     <h3>ASD</h3>
-        <blockquote>
-            P_a=P_n/Ω
-        </blockquote><br>
+        <br>
+        <p>P_a=P_n/Ω</p>
+            <br>
+        <h4>{{ elasticBucklingService.ASDResult }}</h4>
+            <br><br><br>
+
+
+        <br><br>
+        <p>{{ elasticBucklingService.result }}</p>
+            <br><br><br>
+
 
     </div>
+</body>

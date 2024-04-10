@@ -3,6 +3,7 @@ import { SharedVariable } from '../../../shared.service';
 import { CompressionComponent } from '../slenderness/compression.component';
 import { ElementsComponent } from '../elements/elements.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ElasticBucklingService } from './elastic-buckling.service';
 
 @Component({
   selector: 'app-elastic-buckling',
@@ -12,7 +13,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './elastic-buckling.component.scss'
 })
 export class ElasticBucklingComponent {
-  constructor(private renderer: Renderer2, private el: ElementRef, public sharedService: SharedVariable) { }
+  constructor(private renderer: Renderer2, 
+    private el: ElementRef, 
+    public sharedService: SharedVariable,
+    public elasticBucklingService: ElasticBucklingService) { }
 
 
   

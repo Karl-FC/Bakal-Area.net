@@ -1,7 +1,22 @@
 h1, h2, h3, h4, h5 {
-    font-weight: 500;
+    font-weight:600;
 }
 
-h1, h2, h3, h4, h5, p, blockquote {
-    font-size: 20px;
+h1, h2, h3, p, blockquote {
+    font-size: 24px;
 }
+
+h6{
+    font-weight:500;
+    font-size: 24px;
+}
+
+h4{
+    font-weight: 700;
+    font-size: 28px;
+}
+
+p, h4, h5, h6 {
+    padding-left: 15px;
+}
+

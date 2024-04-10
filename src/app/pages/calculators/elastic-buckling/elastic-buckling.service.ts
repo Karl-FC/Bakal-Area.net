@@ -12,6 +12,13 @@ export class ElasticBucklingService {
   Fe: number = 0
   Fcheck: number = 0
   Load = new FormControl('');
+  FeResult: string = '';
+  FcrResult: string = '';
+  PcrResult: string = '';
+  PnResult: string = '';
+  LRFDResult: string = '';
+  ASDResult: string = '';
+  result: string = '';
 
   FeSolve() {
     console.log("~~~~FE SOLVE~~~~~")
@@ -23,12 +30,14 @@ export class ElasticBucklingService {
     let Ag = this.sharedService.Ag.value;
     let Load = this.sharedService.Load.value
     
+    
     let Fcheck = 4.71* (Math.sqrt(E/Fy))
     console.log("4.71 * Sqrt(E/Fy) is " + Fcheck)
     console.log("E is " + E + ", Fy is " + Fy + "HAHAHAHAH")
 
     //Fe:
     let Fe = (Math.pow(Math.PI, 2) * E) / Math.pow(maxKLr, 2);
+    if (Fe) {this.FeResult = "Fe = " + Fe};
     console.log("Fe= (PI^2E)/ (MaxKLr)^2 " + Fe)
     console.log("Fe= (" + (Math.pow(Math.PI, 2)) + " * " + E + ")/ (" + maxKLr + ")^2 " + Fe)
       console.log("THEREFORE, Fe is " + Fe)
@@ -40,41 +49,75 @@ export class ElasticBucklingService {
             let Fcr = (Math.pow(0.658, (Fy/Fe)) ) * (Fy)
             console.log("let Fcr = (0.658^ (Fe/Fy) * Fy", "Fcr = (0.658^ (" + Fe + " / " + Fy + ") * " + Fy)
             console.log("Fcr is " + Fcr)
+            if (Fcr) {this.FcrResult = "Fcr = " + Fcr};
          
             //SOLVING PCR
                   let Pcr = Fcr*Ag;
                   console.log("Pcr = Fcr*Ag, Pcr= " + Fcr + " * " + Ag)
                   console.log ("Pcr is " + Pcr)
+                  if (Pcr) {this.PcrResult = "Pcr = Pn =" + Pcr};
             
                 //LRFD
-                  let Ro = 0.9
-                  let Pu = Ro*Pcr
-                  console.log ("Pu is " + Pu)
+                let Ro = 0.9
+                let PuLRFD = Ro*Pcr
+                  console.log ("Pu is " + PuLRFD)
+                  if (PuLRFD) {this.LRFDResult = "Pu = " + PuLRFD};
 
                   //CHECKING
-                    if (Pu > Load) {console.log ("Selected Beam is SAFE")} 
-                      else {console.log ("Selected Beam is UNSAFE")} 
+                  if (PuLRFD > Load) {console.log ("Selected Beam is SAFE"); 
+                  this.result = "Selected Beam is SAFE";}
+                  else {console.log ("Selected Beam is UNSAFE")
+                  this.result = "Selected Beam is UNSAFE"} 
+              
+            //ASD
+                let Om = 1.67
+                let PuASD = Pcr/Om
+                console.log ("Pu is " + PuASD)
+                if (PuASD) {this.ASDResult = "Pa = " + PuASD};
+
+                  //CHECKING
+                  if (PuASD > Load) {console.log ("Selected Beam is SAFE"); 
+                  this.result = "Selected Beam is SAFE";}
+                  else {console.log ("Selected Beam is UNSAFE")
+                  this.result = "Selected Beam is UNSAFE"}  
 
         
       } else {
             console.log("Fe is greater than" + Fcheck + ", so 0.0.877Fe gagamitin") 
             let Fcr = 0.877 * Fe
             console.log("let Fcr = 0.877 * Fe", "Fcr = 0.877 * " + Fe)
-            console.log("Fcr is " + Fcr);
+            console.log("Fcr is " + Fcr)
+            if (Fcr) {this.FcrResult = "Fcr = " + Fcr};
 
                   //SOLVING PCR
-                        let Pcr = Fcr*Ag;
+                  let Pcr = Fcr*Ag;
                   console.log("Pcr = Fcr*Ag, Pcr= " + Fcr + " * " + Ag)
-                  console.log ("Pcr is " + Pcr)
+                  console.log ("Pcr is " + Pcr);
+                  if (Pcr) {this.PcrResult = "Pcr = Pn =" + Pcr};
 
-                  //LRFD
+              //LRFD
                   let Ro = 0.9
-                  let Pu = Ro*Pcr
-                    console.log ("Pu is " + Pu)
+                  let PuLRFD = Ro*Pcr
+                    console.log ("Pu is " + PuLRFD)
+                    if (PuLRFD) {this.LRFDResult = "Pu = " + PuLRFD};
 
                     //CHECKING
-                    if (Pu > Load) {console.log ("Selected Beam is SAFE")} 
-                    else {console.log ("Selected Beam is UNSAFE")} 
+                    if (PuLRFD > Load) {console.log ("Selected Beam is SAFE"); 
+                    this.result = "Selected Beam is SAFE";}
+                    else {console.log ("Selected Beam is UNSAFE")
+                    this.result = "Selected Beam is UNSAFE"} 
+                
+              //ASD
+                  let Om = 1.67
+                  let PuASD = Pcr/Om
+                  console.log ("Pu is " + PuASD)
+                  if (PuASD) {this.ASDResult = "Pa = " + PuASD};
+
+                    //CHECKING
+                    if (PuASD > Load) {console.log ("Selected Beam is SAFE"); 
+                    this.result = "Selected Beam is SAFE";}
+                    else {console.log ("Selected Beam is UNSAFE")
+                    this.result = "Selected Beam is UNSAFE"} 
                   }
 
       //

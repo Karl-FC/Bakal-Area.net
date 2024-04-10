@@ -7,7 +7,7 @@
     <h2>Steel Column Compression chuchu</h2>
 </div>
 
-<!-- Wrap the first three divs in a parent div -->
+
 <div class="flex flex-col lg:flex-row">
     <app-leftside/>
 
@@ -31,9 +31,9 @@
 
     </div>
     <div class="divider"></div>
-<!-- The fourth div will take the full width of the next row -->
 
-<div class="flex flex w-full bg-base-300" style="z-index: 0;">   
+
+<div class="flex flex-nowrap flex w-full bg-base-300 overflow: auto;" style="z-index: 0; min-width: 100%">   
     <app-elastic-buckling />
 </div>
 
