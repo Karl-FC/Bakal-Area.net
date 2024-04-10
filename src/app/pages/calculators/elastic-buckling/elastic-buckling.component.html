@@ -1,72 +1,64 @@
-<head><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-
 <div id="summary" style="padding: 10%;">
-<h1>Computations</h1>
+    <h1>Computations</h1>
+    <div #mathContent>
+        \(A = \pi r^2\)
 
-
-    <h2>Euler Elastic Buckling (Fe)</h2>
-        <p>\(F_e=(π^2 E)/((〖kL/r)〗^2 ))\</p> 
+        <h2>Euler Elastic Buckling (Fe)</h2>
+        \(F_e=(π^2 E)/((〖kL/r)〗^2 ))\)
             <br><br>
         <h6>{{ elasticBucklingService.FeResult }}</h6>
             <br><br><br>
-
-    <h2>F critical</h2>
-        <p>\(F_cr=[〖0.658〗^(F_y/F_e )]F_y)\</p>
+    
+        <h2>F critical</h2>
+        \(F_cr=[〖0.658〗^(F_y/F_e )]F_y)\)
             <br>
-        <p>F_cr=0.877F_e</p>
+        F_cr=0.877F_e
             <br><br>
-            <h6>{{ elasticBucklingService.FcrResult }}</h6>
+        <h6>{{ elasticBucklingService.FcrResult }}</h6>
             <br><br><br>
-
-    <h2>Pn</h2>
-        <p>P_cr=F_cr Ag</p>
+    
+        <h2>Pn</h2>
+        P_cr=F_cr Ag
             <br><br>
-        <p>P_cr=P_n</p>
+        P_cr=P_n
             <br><br>
-        <p>P_n=F_cr Ag</p>
+        P_n=F_cr Ag
             <br>
-            <h6>{{ elasticBucklingService.PcrResult }}</h6>
+        <h6>{{ elasticBucklingService.PcrResult }}</h6>
             <br><br><br>
-
-    <h3>LRFD</h3>
-        <br>
-        <p>P_u=∅P_n</p>
+    
+        <h3>LRFD</h3>
+            <br>
+        P_u=∅P_n
             <br>
         <h4>{{ elasticBucklingService.LRFDResult }}</h4>
             <br><br><br>
-
-    <h3>ASD</h3>
-        <br>
-        <p>P_a=P_n/Ω</p>
+    
+        <h3>ASD</h3>
+            <br>
+        P_a=P_n/Ω
             <br>
         <h4>{{ elasticBucklingService.ASDResult }}</h4>
             <br><br><br>
-
-
+    
         <br><br>
         <p>{{ elasticBucklingService.result }}</p>
             <br><br><br>
-
-            <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary">
-                <!-- LRFD Results -->  
-                <div id="BgLRFD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
-                    <div class="stat-title" style="font-size: 24px; font-weight: 600;">LRFD</div>
-                    <div id="LRFDResult" class="stat-value">{{ elasticBucklingService.displayLRFDResult }}</div>
-                    <div id="LRFDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">Pu</div>
-                </div>
-                
-                <!-- ASD Results -->
-                <div id="BgASD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
-                    <div class="stat-title" style="font-size: 24px; font-weight: 600;">ASD</div>
-                    <div id="ASDResult" class="stat-value">{{ elasticBucklingService.displayASDResult }}</div>
-                    <div id="ASDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">Pa</div>
-                </div>
+    
+        <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary">
+            <!-- LRFD Results -->  
+            <div id="BgLRFD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
+                <div class="stat-title" style="font-size: 24px; font-weight: 600;">LRFD</div>
+                <div id="LRFDResult" class="stat-value">{{ elasticBucklingService.displayLRFDResult }}</div>
+                <div id="LRFDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">Pu</div>
             </div>
+            
+            <!-- ASD Results -->
+            <div id="BgASD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
+                <div class="stat-title" style="font-size: 24px; font-weight: 600;">ASD</div>
+                <div id="ASDResult" class="stat-value">{{ elasticBucklingService.displayASDResult }}</div>
+                <div id="ASDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">Pa</div>
+            </div>
+        </div>
     </div>
-
-    
-    
-</body>
+</div>

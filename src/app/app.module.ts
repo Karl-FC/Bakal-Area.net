@@ -1,4 +1,7 @@
 import { FormsModule } from '@angular/forms'; // Add this line at the top
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -6,9 +9,10 @@ import { FormsModule } from '@angular/forms'; // Add this line at the top
   ],
   imports: [
     // ...
-    FormsModule, // Add this line
+    FormsModule,
+    CommonModule // Add this line
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }
