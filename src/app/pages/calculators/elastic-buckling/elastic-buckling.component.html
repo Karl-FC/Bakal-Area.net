@@ -50,6 +50,23 @@
         <p>{{ elasticBucklingService.result }}</p>
             <br><br><br>
 
-
+            <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary">
+                <!-- LRFD Results -->  
+                <div id="BgLRFD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
+                    <div class="stat-title" style="font-size: 24px; font-weight: 600;">LRFD</div>
+                    <div id="LRFDResult" class="stat-value">{{ elasticBucklingService.displayLRFDResult }}</div>
+                    <div id="LRFDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">Pu</div>
+                </div>
+                
+                <!-- ASD Results -->
+                <div id="BgASD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
+                    <div class="stat-title" style="font-size: 24px; font-weight: 600;">ASD</div>
+                    <div id="ASDResult" class="stat-value">{{ elasticBucklingService.displayASDResult }}</div>
+                    <div id="ASDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">Pa</div>
+                </div>
+            </div>
     </div>
+
+    
+    
 </body>

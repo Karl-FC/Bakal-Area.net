@@ -18,6 +18,8 @@ export class ElasticBucklingService {
   PnResult: string = '';
   LRFDResult: string = '';
   ASDResult: string = '';
+  displayLRFDResult: string = '';
+  displayASDResult: string = '';
   result: string = '';
 
   FeSolve() {
@@ -60,8 +62,10 @@ export class ElasticBucklingService {
                 //LRFD
                 let Ro = 0.9
                 let PuLRFD = Ro*Pcr
+                let displayPuLRFD = PuLRFD.toFixed(3);
                   console.log ("Pu is " + PuLRFD)
-                  if (PuLRFD) {this.LRFDResult = "Pu = " + PuLRFD};
+                  if (PuLRFD) {(this.LRFDResult = "Pa = " + PuLRFD),
+                (this.displayLRFDResult = displayPuLRFD)};
 
                   //CHECKING
                   if (PuLRFD > Load) {console.log ("Selected Beam is SAFE"); 
@@ -72,8 +76,10 @@ export class ElasticBucklingService {
             //ASD
                 let Om = 1.67
                 let PuASD = Pcr/Om
+                let displayPuASD = PuASD.toFixed(3);
                 console.log ("Pu is " + PuASD)
-                if (PuASD) {this.ASDResult = "Pa = " + PuASD};
+                if (PuASD) {(this.ASDResult = "Pa = " + PuASD),
+                (this.displayASDResult = displayPuASD)};
 
                   //CHECKING
                   if (PuASD > Load) {console.log ("Selected Beam is SAFE"); 
@@ -98,8 +104,10 @@ export class ElasticBucklingService {
               //LRFD
                   let Ro = 0.9
                   let PuLRFD = Ro*Pcr
+                  let displayPuLRFD = PuLRFD.toFixed(3);
                     console.log ("Pu is " + PuLRFD)
-                    if (PuLRFD) {this.LRFDResult = "Pu = " + PuLRFD};
+                    if (PuLRFD) {(this.LRFDResult = "Pa = " + PuLRFD),
+                (this.displayLRFDResult = displayPuLRFD)};
 
                     //CHECKING
                     if (PuLRFD > Load) {console.log ("Selected Beam is SAFE"); 
@@ -110,8 +118,11 @@ export class ElasticBucklingService {
               //ASD
                   let Om = 1.67
                   let PuASD = Pcr/Om
+                  let displayPuASD = PuASD.toFixed(3);
                   console.log ("Pu is " + PuASD)
-                  if (PuASD) {this.ASDResult = "Pa = " + PuASD};
+                  if (PuASD) {(this.ASDResult = "Pa = " + PuASD),
+                (this.displayASDResult = displayPuASD)
+              };
 
                     //CHECKING
                     if (PuASD > Load) {console.log ("Selected Beam is SAFE"); 
