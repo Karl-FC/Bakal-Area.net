@@ -1,4 +1,4 @@
-  <div class="place-items-center card">
+  <div class="place-items-center">
   <form>
     <!--Select Input for Fy-->
         <!--<input type="radio" id="dropdown" name="inputType" [value]="false" (click)="FyInputDrop()">
@@ -24,7 +24,8 @@
         </select></div>-->
 
         <div id="FyNumType" style="display: block; z-index: 10;">
-        <label for="YieldStrengthType">Fy:</label><br>
+
+        <label for="YieldStrengthType">Yield Strength, Fy (in ksi):</label>
         <input type="number" id="YieldStrengthType" name="YieldStrength" value="50"
         [formControl]="Fy" ><br><br>
         </div>
@@ -32,19 +33,19 @@
 
 
 
-        <label for="ModulusE">E(in ksi):</label><br>
+        <label for="ModulusE">Modulus of Elasticity:</label>
         <input type="number" id="ModulusE" name="ModulusE" value="29000"
         [formControl]="E" ><br><br><br>
       
-        <label for="LamdaFlange">F_Lamda:</label><br>
+        <label for="LamdaFlange">F_Lamda:</label>
         <input type="number" id="LamdaFlange" name="LamdaFlange" value="LamdaFlange"
-        [formControl]="sharedService.bf2tf" (input)="calcCompact()"><br><br>
+        [formControl]="sharedService.bf2tf" (input)="calcCompact()"><br>
       
-        <label for="LamdaWeb">W_Lamda:</label><br>
+        <label for="LamdaWeb">W_Lamda:</label>
         <input type="number" id="LamdaWeb" name="LamdaWeb" value="LamdaWeb"
-        [formControl]="sharedService.htw" (input)="calcCompact()"><br><br>
+        [formControl]="sharedService.htw" (input)="calcCompact()"><br>
       
-        <label for="AreaGross">AreaGross:</label><br>
+        <label for="AreaGross">AreaGross:</label>
         <input type="number" id="AreaGross" name="AreaGross" value="AreaGross"
         [formControl]="sharedService.Ag" (input)="calcCompact()"><br><br>
   </form>
@@ -59,15 +60,15 @@
       <span>ERROR: Please input all fields</span>
     </div>
       
-<div> <br>
+<div style="justify-content: center; display: flex;"> <br>
     <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary"> <!--Dito natin ilagay yun results haha-->  
-        <div id="BgCompactnessFlange" class="stat text-primary-content place-items-center" style="width: 220px;">
+        <div id="BgCompactnessFlange" class="stat text-primary-content place-items-center" style="width: 200px;">
           <div class="stat-title">Flange slenderness</div>
           <div id="ResultCompactnessFlange" class="stat-value">N/A</div>
           <div id="SubCompactnessFlange" class="stat-desc">Input required</div>
         </div>
         
-        <div id="BgCompactnessWeb" class="stat text-primary-content place-items-center" style="width: 220px;">
+        <div id="BgCompactnessWeb" class="stat text-primary-content place-items-center" style="width: 200px;">
           <div class="stat-title">Web slenderness</div>
           <div id="ResultCompactnessWeb" class="stat-value">N/A</div>
           <div id="SubCompactnessWeb" class="stat-desc">Input required</div>
@@ -75,7 +76,7 @@
   </div>
 </div>
 <br><br>
-  <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary">
+  <div style="justify-content: center; display: flex;"><div class="stats stats-vertical lg:stats-horizontal shadow bg-info">
     <button id="calculate" type="button" (mousedown)="calcCompact()">Calculate</button> 
-  </div>
+  </div></div>
 </div> 

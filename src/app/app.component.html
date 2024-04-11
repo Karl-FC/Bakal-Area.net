@@ -1,40 +1,45 @@
 <app-navbar />
 <!--TITLE-->
-<div class="flex flex-col w-full bg-base-300 card" 
-    style="z-index: 0;
-    padding: 1%;">
+<div id="top" class="flex flex-col w-full bg-secondary card" 
+    style="z-index: 0;">
     <h1 style="font-size: 50px;">Bakal-AREA.net</h1>
     <h2>Steel Column Compression chuchu</h2>
 </div>
 
 
-<div class="lg:flex-row">
+<div id="contentall">
+    <div id="leftside">
     <app-leftside/>
-
-    <div class="lg:flex-row">
-            <!--SLENDERNESS CHECK-->
-            <div id="bgSlender" class="bg-base-300 card" 
-                style="z-index: 0;
-                padding: 30px;">
-                <h1 style="font-size: 20px;">Slenderness Check</h1>
-                <p>Directions</p>
-                <app-compressionbeamshapes /> <!--Dropdown-->
-                <br>
-                <app-compression /> <!--Inputsssssss-->
-            </div>
-            <!--MAX KLR TABLE-->
-            <div id="bgTable" class="lg:flex">
-                <app-elements />
-            </div>
-
-        </div>
-
     </div>
-    <div class="divider"></div>
 
+        <div id="columns">
+                <div id="content">
+                        <!--SLENDERNESS CHECK-->
+                        <div id="bgSlender" class="bg-secondary card" 
+                            style="z-index: 0;
+                            ">
+                            <h1 style="font-size: 20px;">Slenderness Check</h1>
+                            <p>Directions</p>
+                            <app-compressionbeamshapes /> <!--Dropdown-->
+                            <br>
+                            <app-compression /> <!--Inputsssssss-->
+                        </div>
+                        <!--MAX KLR TABLE-->
+                        <div id="bgTable">
+                            <app-elements />
+                        </div>
+                    </div>    
 
-<div class="flex flex-nowrap flex w-full bg-base-300 overflow: auto;" style="z-index: 0; min-width: 100%">   
-    <app-elastic-buckling />
+            <div class="divider"></div>
+                <div id="results" class="bg-secondary">
+                    <div id="calculations" class="flex flex-nowrap flex w-full overflow: auto;" style="z-index: 0; min-width: 100%">   
+                        <app-elastic-buckling />
+                    </div>
+                </div>
+        </div>
 </div>
+
+
+
 
 <br> <br>

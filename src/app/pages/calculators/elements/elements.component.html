@@ -1,6 +1,6 @@
-<div id="container" class="bg-base-200 lg:flex">
+<div id="container">
     <div id="tablediv" class="grow"  style="margin: 20px;">
-        <div class="overflow-x-auto">
+        <div class="bg-neutral overflow-x-auto">
             <table class="table">
               <thead>
                 <tr>
@@ -10,23 +10,22 @@
                   <th><div style="resize: horizontal; overflow: auto;">k</div></th>
                   <th><div style="resize: horizontal; overflow: auto;">r</div></th>
                   <th><div style="resize: horizontal; overflow: auto;">kL/r</div></th>
-                  <th></th>
+                  <th style="color: red;"></th> <!-- Bagong column para sa "remove button" -->
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let row of AnalysisRows; let i = index" >
                   <td>{{i+1}}</td>
-                  <td>{{row.element}}</td>
-                  <td><div style="resize: horizontal; overflow: auto;">{{row.elemLength}}</div></td>
-                  <td><div style="resize: horizontal; overflow: auto;">{{row.KFactor}}</div></td>
-                  <td><div style="resize: horizontal; overflow: auto;">{{row.radiusGyration}}</div></td>
-                  <td><div style="resize: horizontal; overflow: auto;">{{row.kLr}}</div></td>
+                  <td style="overflow-wrap: break-word;">{{row.element}}</td>
+                  <td style="overflow-wrap: break-word;">{{row.elemLength}}</td>
+                  <td style="overflow-wrap: break-word;">{{row.KFactor}}</td>
+                  <td style="overflow-wrap: break-word;">{{row.radiusGyration}}</td>
+                  <td style="overflow-wrap: break-word;">{{row.kLr}}</td>
                   <td>
                     <button (click)="removeRow(i)">Remove</button>
                   </td>
                 </tr>
               </tbody>
-              
             </table>
           </div>
 
