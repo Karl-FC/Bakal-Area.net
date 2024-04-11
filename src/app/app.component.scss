@@ -1,46 +1,63 @@
+#top{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
 #contentall {
     display: grid;
     grid-template-columns: 200px 1fr; /* Colum1 (sidebar) + Column2 (main content) */
     grid-auto-flow: row;
 }
 
-#leftside {
-    grid-column: 1;
-    min-width: 10px;
-    width: 200px;
-}
+    #leftside {
+        grid-column: 1;
+        min-width: 10px;
+        width: 200px;
+    }
 
-#columns {
-    grid-column: 2;
+    #columns {
+        grid-column: 2;
 
-    display: grid;
-    grid-template-rows: auto auto; /* Rows */
-    grid-gap: 20px; /* betwwen left and ride section */
-}
+        display: grid;
+        grid-template-rows: auto auto; /* Rows */
+        grid-gap: 20px; /* betwwen left and ride section */
+    }
 
-#content {
-    grid-row: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust as needed */
-    grid-gap: 20px; /* margins */
-}
+            #content {
+                grid-row: 1;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust as needed */
+                grid-gap: 20px; /* margins */
+            }
 
-#bgTable {
-    grid-column: span 3; /* Adjust as needed */
-}
+                        #bgTable {
+                            grid-column: span 3; /* Adjust as needed */
+                        }
 
-#bgSlender {
-    grid-column: span 2;
-    height: 120vh;
-    padding: 30px;
-}
+                        #bgSlender {
+                            grid-column: span 2;
+                            height: 120vh;
+                            padding: 30px;
+                            border-top-left-radius: 0;
+                            border-top-right-radius: 0;
+                        }
 
-#results {
-    grid-row: 2;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust as needed */
-    grid-gap: 20px; /* Adjust as needed */
-}
+                    .content {
+                        grid-row: 1;
+                    }
+                    
+                    .divider {
+                        grid-row: 2;
+                        /* Style your divider here */
+                    }
+
+                    #results {
+                        border-radius: 25px;
+                        grid-row: 3;
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust as needed */
+                        grid-gap: 20px; /* Adjust as needed */
+                    }
 
 
 

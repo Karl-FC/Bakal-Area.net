@@ -1,15 +1,15 @@
 <div id="container">
-    <div id="tablediv" class="grow"  style="margin: 20px;">
+    <div id="tablediv"  style="margin: 20px;">
         <div class="bg-neutral overflow-x-auto">
             <table class="table">
               <thead>
                 <tr>
                   <th></th>
                   <th>Element</th>
-                  <th><div style="resize: horizontal; overflow: auto;">Length (in inches)</div></th>
-                  <th><div style="resize: horizontal; overflow: auto;">k</div></th>
-                  <th><div style="resize: horizontal; overflow: auto;">r</div></th>
-                  <th><div style="resize: horizontal; overflow: auto;">kL/r</div></th>
+                  <th><div style="resize: horizontal;">Length (in inches)</div></th>
+                  <th><div style="resize: horizontal;">k</div></th>
+                  <th><div style="resize: horizontal;">r</div></th>
+                  <th><div style="resize: horizontal;">kL/r</div></th>
                   <th style="color: red;"></th> <!-- Bagong column para sa "remove button" -->
                 </tr>
               </thead>
@@ -53,7 +53,10 @@
     [formControl]="elemLength" value="1" (input)="insertLength()"> <br>
   </form>
   <br><br>
-  <button (click)="addRow()">COMPUTE</button>
+      <div id="addRowdiv" class="stats stats-vertical text-primary-content lg:stats-horizontal shadow bg-info">
+    <button (click)="addRow()">CALCULATE</button>
+        </div>
+
     <!--ERROR MESSAGES-->
         <!--No beam-->
         <div id="elemError" role="alert" class="alert alert-error" style="display: none;">
