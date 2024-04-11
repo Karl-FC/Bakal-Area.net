@@ -1,3 +1,12 @@
+* {
+    border: 1px solid red !important;
+  }
+
+  body {
+    width: 100%;
+}
+
+  
 #top{
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -13,6 +22,7 @@
         grid-column: 1;
         min-width: 10px;
         width: 200px;
+        word-wrap: break-word; 
     }
 
     #columns {
@@ -68,10 +78,16 @@
 
 
 /* RESPONSIVE LAYOUTS*/
+
 @media (max-width: 1024px) {
     //Laptops
+    #top{
+        border-bottom-left-radius: 0;
+    }
+
     #contentall {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
     }
 
     #leftside {
@@ -79,51 +95,69 @@
     }
 
     #columns {
-        grid-column: 1;
+        width: 100%;
     }
 
     #bgSlender {
         height: 150vh;
+        grid-column: span 2 ;
     }
 
     #bgTable {
-        grid-column: span 2;
+        width: 100%;
+        grid-column: span 2 ;
     }
 }
 
-
-
-
-
-    //Tablet (768x628)
-    @media (max-width: 800px) {
-        #content {
-            grid-gap: 0px;
-        }
-        #contentall {
-            grid-template-columns: 1fr;
-        }
-        #leftside {
-            display: none;
-            grid-column: span 0;
-        }
-        #columns {
-            grid-column: 1;
-        }
-        #bgSlender {
-            height: 150vh;
-        }
-        #bgTable {
-            grid-column: span 4;
-        }
+@media (max-width: 866px) {
+    #bgSlender {
+        height: 150vh;
+        grid-column: span 1 ;
     }
 
+    #bgTable {
+        width: 100%;
+        grid-column: span 2 ;
+    }
+}
 
-    @media (max-width: 425px) {
+//Tablet (768x628)
+@media (max-width: 768px) {
+    #content {
+        display: flex;
+        flex-direction: column;
+    }
+    #contentall {
+        display: flex;
+        flex-direction: column;
+    }
+    #leftside {
+        display: none;
+    }
+    #columns {
+        width: 100%;
+    }
+    #bgSlender {
+        height: 150vh;
+    }
+    #bgTable {
+        width: 100%;
+    }
+}
 
-        #top {
-          width: 100%;
-          box-sizing: border-box; /* This makes sure padding and border are included in the element's total width */
-        }
-      }
-      
+@media (max-width: 615px) {
+    #top {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
+@media (max-width: 425px) {
+    #top {
+      width: 100%;
+      box-sizing: border-box; /* This makes sure padding and border are included in the element's total width */
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+

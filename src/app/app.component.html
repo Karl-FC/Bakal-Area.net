@@ -1,4 +1,4 @@
-<app-navbar />
+<div id="navbar"><app-navbar /></div>
 <!--TITLE-->
 <div id="top" class="flex flex-col w-full bg-secondary card" 
     style="z-index: 0;">
@@ -20,9 +20,9 @@
                             ">
                             <h1 style="font-size: 20px;">Slenderness Check</h1>
                             <p>Directions</p>
-                            <app-compressionbeamshapes /> <!--Dropdown-->
-                            <br>
-                            <app-compression /> <!--Inputsssssss-->
+                                <app-compressionbeamshapes /> <!--DROPDOWNNNN-->
+                                <br>
+                                <app-compression /> <!--INPUTSSSSS-->
                         </div>
                         <!--MAX KLR TABLE-->
                         <div id="bgTable">
@@ -32,7 +32,12 @@
 
             <div class="divider"></div>
                 <div id="results" class="bg-secondary">
-                    <div id="calculations" class="flex flex-nowrap flex w-full overflow: auto;" style="z-index: 0; min-width: 100%">   
+                    <div id="calculations" class="flex 
+                                                    flex-nowrap 
+                                                    flex w-full 
+                                                    overflow: hidden;" 
+                            style="z-index: 0; 
+                                min-width: 100%">   
                         <app-elastic-buckling />
                     </div>
                 </div>
