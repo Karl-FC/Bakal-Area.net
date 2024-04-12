@@ -25,7 +25,7 @@
 
         <div id="FyNumType" style="display: block; z-index: 10;">
 
-        <label for="YieldStrengthType">Yield Strength, Fy (in ksi):</label>
+        <label for="YieldStrengthType">Yield Strength, F<sub>y</sub> (in ksi):</label>
         <input type="number" id="YieldStrengthType" name="YieldStrength" value="50"
         [formControl]="Fy" ><br><br>
         </div>
@@ -35,17 +35,27 @@
 
         <label for="ModulusE">Modulus of Elasticity:</label>
         <input type="number" id="ModulusE" name="ModulusE" value="29000"
-        [formControl]="E" ><br><br><br>
+        [formControl]="E" ><br><br>
       
-        <label for="LamdaFlange">F_Lamda:</label>
+        <label for="LamdaFlange">
+              <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+              <span>b<sub>f</sub></span>
+              <span style="border-top:1px solid">2t<sub>f</sub></span>
+              </span>
+         or &lambda;<sub>f</sub>:</label>
         <input type="number" id="LamdaFlange" name="LamdaFlange" value="LamdaFlange"
         [formControl]="sharedService.bf2tf" (input)="calcCompact()"><br>
       
-        <label for="LamdaWeb">W_Lamda:</label>
+        <label for="LamdaWeb">
+          <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+            <span>h</span>
+            <span style="border-top:1px solid">t<sub>w</sub></span>
+            </span>
+       or &lambda;<sub>w</sub>:</label>
         <input type="number" id="LamdaWeb" name="LamdaWeb" value="LamdaWeb"
         [formControl]="sharedService.htw" (input)="calcCompact()"><br>
       
-        <label for="AreaGross">AreaGross:</label>
+        <label for="AreaGross">AreaGross, A<sub>g</sub></label>
         <input type="number" id="AreaGross" name="AreaGross" value="AreaGross"
         [formControl]="sharedService.Ag" (input)="calcCompact()"><br><br>
   </form>
