@@ -6,13 +6,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
-    // ...
   ],
   imports: [
-    // ...
-    FormsModule,
-    CommonModule,
-    DragDropModule, // Add this line
+    FormsModule, BrowserModule, CommonModule,
+    DragDropModule, 
+    
+
   ],
   providers: [],
   bootstrap: []

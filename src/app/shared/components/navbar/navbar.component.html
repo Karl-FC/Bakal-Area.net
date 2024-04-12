@@ -14,41 +14,59 @@
           <h1 style="font-size: 18px; 
                     font-weight: 600;
                     padding:2px">Bakal-AREA.net</h1>
-          <li><a>Axial Tension</a></li>
-          <!--<li>
-            <a>Parent</a>
-            <ul class="p-2">
-              <li><a>Design</a></li>
-              <li><a>Submenu 2</a></li>
-            </ul>
-          </li>-->
-          <li><a>Axial Compression</a></li>
-          <li><a>Bending</a></li>
-          <li>
-            <a>Settings</a>
-            <ul class="p-2">
-              <li><a>Theme</a></li>
-              <li><a>About us</a></li>
-            </ul>
-          </li>
+                <li><a>Axial Tension</a>
+                      <ul class="p-2">
+                        <li><a class="nav-link" routerLinkActive="active" routerLink="/Tension/Analysis">Analyzer</a></li>
+                        <li><a class="nav-link" routerLinkActive="active" routerLink="/Tension/Design">Designer</a></li>
+                        </ul></li>
+                <li><a>Axial Compression</a>
+                    <ul class="p-2">
+                      <li><a class="nav-link" routerLinkActive="active" routerLink="/Compression/Analysis">Analyzer</a></li>
+                      <li><a class="nav-link" routerLinkActive="active" routerLink="/Compression/Design">Designer</a></li>
+                      </ul></li>
+              <li><a>Bending</a>
+                  <ul class="p-2">
+                    <li><a class="nav-link" routerLinkActive="active" routerLink="/Bending/Analysis">Analyzer</a></li>
+                    <li><a class="nav-link" routerLinkActive="active" routerLink="/Bending/Design">Designer</a></li>
+                    </ul></li>
+                <li><a>Settings</a>
+                  <ul class="p-2">
+                    <li><a>Theme</a></li>
+                    <li><a>About us</a></li>
+                  </ul></li>
         </ul>
       </div>
       <a class="btn btn-ghost text-xl">Bakal-AREA.net</a>
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
-        <li><a>Analysis</a></li>
         <li>
           <details>
-            <summary>Calculators</summary>
+            <summary>Tension</summary>
             <ul class="p-2" style="z-index: 999;">
-              <li><a>Axial Tension</a></li>
-              <li><a>Axial Compression</a></li>
-              <li><a>Bending</a></li>
+              <li><a class="nav-link" routerLinkActive="active" routerLink="/Tension/Analysis">Analyzer</a></li>
+              <li><a class="nav-link" routerLinkActive="active" routerLink="/Tension/Design">Designer</a></li>
             </ul>
           </details>
-        </li>
-        <li><a>Design</a></li>
+          </li>
+        <li>
+            <details>
+              <summary>Compression</summary>
+              <ul class="p-2" style="z-index: 999;">
+                <li><a class="nav-link" routerLinkActive="active" routerLink="/Compression/Analysis">Analyzer</a></li>
+                <li><a class="nav-link" routerLinkActive="active" routerLink="/Compression/Design">Designer</a></li>
+              </ul>
+            </details>
+            </li>
+        <li>
+            <details>
+              <summary>Bending</summary>
+              <ul class="p-2" style="z-index: 999;">
+                <li><a class="nav-link" routerLinkActive="active" routerLink="/Bending/Analysis">Analyzer</a></li>
+                <li><a class="nav-link" routerLinkActive="active" routerLink="/Bending/Design">Designer</a></li>
+              </ul>
+            </details>
+            </li>
       </ul>
     </div>
     <div class="navbar-end">

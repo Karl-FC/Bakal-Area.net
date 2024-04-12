@@ -26,52 +26,10 @@ body {
         grid-column: 2;
 
         display: grid;
-        grid-template-rows: auto auto; /* Rows */
-        grid-gap: 20px; /* betwwen left and ride section */
+        grid-template-rows: auto auto; /* Rows */ /* betwwen left and ride section */
     }
 
-            #content {
-                grid-row: 1;
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust as needed */
-                grid-gap: 20px; /* margins */
-            }
-
-                        #bgTable {
-                            grid-column: span 3; /* Adjust as needed */
-                        }
-
-                        #bgSlender {
-                            grid-column: span 2;
-                            height: 120vh;
-                            padding: 30px;
-                            border-top-left-radius: 0;
-                            border-top-right-radius: 0;
-                        }
-
-                    .content {
-                        grid-row: 1;
-                    }
-                    
-                    .divider {
-                        grid-row: 2;
-                        /* Style your divider here */
-                    }
-
-                    #results {
-                        border-radius: 25px;
-                        grid-row: 3;
-                        display: grid;
-                        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust as needed */
-                        grid-gap: 20px; /* Adjust as needed */
-                    }
-
-
-
-
-
-
-
+            
 
 
 /* RESPONSIVE LAYOUTS*/
@@ -95,28 +53,9 @@ body {
         width: 100%;
     }
 
-    #bgSlender {
-        height: 150vh;
-        grid-column: span 2 ;
-    }
 
-    #bgTable {
-        width: 100%;
-        grid-column: span 2 ;
-    }
 }
 
-@media (max-width: 866px) {
-    #bgSlender {
-        height: 150vh;
-        grid-column: span 1 ;
-    }
-
-    #bgTable {
-        width: 100%;
-        grid-column: span 2 ;
-    }
-}
 
 //Tablet (768x628)
 @media (max-width: 768px) {
@@ -134,12 +73,7 @@ body {
     #columns {
         width: 100%;
     }
-    #bgSlender {
-        height: 150vh;
-    }
-    #bgTable {
-        width: 100%;
-    }
+
 }
 
 @media (max-width: 615px) {

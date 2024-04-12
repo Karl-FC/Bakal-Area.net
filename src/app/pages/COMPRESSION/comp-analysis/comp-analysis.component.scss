@@ -1,0 +1,160 @@
+body {
+    width: 100%;
+}
+
+  
+#top{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 10px;
+}
+
+#contentall {
+    display: grid;
+    grid-template-columns: 200px 1fr; /* Colum1 (sidebar) + Column2 (main content) */
+    grid-auto-flow: row;
+}
+
+    #leftside {
+        grid-column: 1;
+        min-width: 10px;
+        width: 200px;
+        word-wrap: break-word; 
+    }
+
+    #columns {
+        grid-column: 2;
+
+        display: grid;
+        grid-template-rows: auto auto; /* Rows */
+        grid-gap: 20px; /* betwwen left and ride section */
+    }
+
+            #content {
+                grid-row: 1;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust as needed */
+                grid-gap: 20px; /* margins */
+            }
+
+                        #bgTable {
+                            grid-column: span 3; /* Adjust as needed */
+                        }
+
+                        #bgSlender {
+                            grid-column: span 2;
+                            height: 120vh;
+                            padding: 30px;
+                            border-top-left-radius: 0;
+                            border-top-right-radius: 0;
+                        }
+
+                    .content {
+                        grid-row: 1;
+                    }
+                    
+                    .divider {
+                        grid-row: 2;
+                        /* Style your divider here */
+                    }
+
+                    #results {
+                        border-radius: 25px;
+                        grid-row: 3;
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust as needed */
+                        grid-gap: 20px; /* Adjust as needed */
+                    }
+
+
+
+
+
+
+
+
+
+/* RESPONSIVE LAYOUTS*/
+
+@media (max-width: 1024px) {
+    //Laptops
+    #top{
+        border-bottom-left-radius: 0;
+    }
+
+    #contentall {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #leftside {
+        display: none;
+    }
+
+    #columns {
+        width: 100%;
+    }
+
+    #bgSlender {
+        height: 150vh;
+        grid-column: span 2 ;
+    }
+
+    #bgTable {
+        width: 100%;
+        grid-column: span 2 ;
+    }
+}
+
+@media (max-width: 866px) {
+    #bgSlender {
+        height: 150vh;
+        grid-column: span 1 ;
+    }
+
+    #bgTable {
+        width: 100%;
+        grid-column: span 2 ;
+    }
+}
+
+//Tablet (768x628)
+@media (max-width: 768px) {
+    #content {
+        display: flex;
+        flex-direction: column;
+    }
+    #contentall {
+        display: flex;
+        flex-direction: column;
+    }
+    #leftside {
+        display: none;
+    }
+    #columns {
+        width: 100%;
+    }
+    #bgSlender {
+        height: 150vh;
+    }
+    #bgTable {
+        width: 100%;
+    }
+}
+
+@media (max-width: 615px) {
+    #top {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
+@media (max-width: 425px) {
+    #top {
+      width: 100%;
+      box-sizing: border-box; /* This makes sure padding and border are included in the element's total width */
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
