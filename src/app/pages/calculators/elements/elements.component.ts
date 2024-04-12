@@ -3,7 +3,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CompressionbeamshapesComponent } from '../../../shared/data/compressionbeamshapes/compressionbeamshapes.component';
 import { SharedVariable } from '../../../shared.service';
 import { CompressionComponent } from '../slenderness/compression.component';
-import { CommonModule } from '@angular/common';
+
 import { AnalysisTableRow } from './elements-table-row.interface';
 import { beamShape } from '../../../shared.service';
 import { ElasticBucklingService } from '../elastic-buckling/elastic-buckling.service';
@@ -11,8 +11,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-elements',
-  standalone: true,
-  imports: [CommonModule, CompressionComponent, CompressionbeamshapesComponent, ReactiveFormsModule, DragDropModule],
   templateUrl: './elements.component.html',
   styleUrl: './elements.component.scss'
 })

@@ -12,14 +12,7 @@ import { LeftsideComponent } from './shared/components/leftside/leftside.compone
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule, 
-    NavbarComponent, LeftsideComponent,
-    CompressionComponent, 
-    CompressionbeamshapesComponent, 
-    ElementsComponent, 
-    ElasticBucklingComponent, 
-  ],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

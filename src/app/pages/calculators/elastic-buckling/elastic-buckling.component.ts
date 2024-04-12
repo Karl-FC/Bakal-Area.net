@@ -9,8 +9,6 @@ declare var MathJax: any;
 
 @Component({
   selector: 'app-elastic-buckling',
-  standalone: true,
-  imports: [ReactiveFormsModule],
   templateUrl: './elastic-buckling.component.html',
   styleUrl: './elastic-buckling.component.scss'
 })

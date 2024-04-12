@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TensiondesignComponent } from './tensiondesign.component';
+import { TenAnalysisComponent } from './ten-analysis.component';
 
-describe('TensiondesignComponent', () => {
-  let component: TensiondesignComponent;
-  let fixture: ComponentFixture<TensiondesignComponent>;
+describe('TenAnalysisComponent', () => {
+  let component: TenAnalysisComponent;
+  let fixture: ComponentFixture<TenAnalysisComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TensiondesignComponent]
+      imports: [TenAnalysisComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TensiondesignComponent);
+    fixture = TestBed.createComponent(TenAnalysisComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

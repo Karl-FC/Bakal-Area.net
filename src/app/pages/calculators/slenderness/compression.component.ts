@@ -1,14 +1,11 @@
 import { Component, Renderer2, ElementRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { CompressionbeamshapesComponent } from '../../../shared/data/compressionbeamshapes/compressionbeamshapes.component';
 import { SharedVariable } from '../../../shared.service';
 import { style } from '@angular/animations';
 
 
 @Component({
   selector: 'app-compression',
-  standalone: true,
-  imports: [ReactiveFormsModule, CompressionbeamshapesComponent],
   templateUrl: './compression.component.html',
   styleUrl: './compression.component.scss',
 })
