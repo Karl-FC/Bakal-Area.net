@@ -1,6 +1,6 @@
   <div class="place-items-center">
   <form>
-    <!--Select Input for Fy-->
+    <!--Select Input for Fy (Disabled muna kasi di ko naulitan HAHAHAHA)-->
         <!--<input type="radio" id="dropdown" name="inputType" [value]="false" (click)="FyInputDrop()">
         <label for="dropdown">Select Steel Grade</label><br>
       <input type="radio" id="numerical" name="inputType" [value]="true" (click)="FyInputType()">
@@ -59,12 +59,13 @@
         <input type="number" id="AreaGross" name="AreaGross" value="AreaGross"
         [formControl]="sharedService.Ag" (input)="calcCompact()"><br><br>
   </form>
-    <!--Error Message-->
+
+    <!--Error Message (Beam)-->
     <div id="beamError" role="alert" class="alert alert-error" style="display: none;">
       <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
       <span>ERROR: Please select a beam</span>
     </div>
-    <!--Error Message-->
+    <!--Error Message (Variable)-->
     <div id="varError" role="alert" class="alert alert-error" style="display: none;">
       <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
       <span>ERROR: Please input all fields</span>

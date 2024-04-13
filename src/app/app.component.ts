@@ -48,7 +48,7 @@ export class AppComponent {
         this.header = 'Steel Bending Design Calculator';
         break;
       default:
-        this.header = 'Bakal-AREA.net';
+        this.header = 'Steel Design & Analysis Calculator';
     }
   }
   

@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SharedVariable } from '../../../shared.service';
-import { CompressionComponent } from '../../../pages/calculators/slenderness/compression.component';
 import { beamShape } from '../../../shared.service';
 
+
+
 @Component({
-  selector: 'app-compressionbeamshapes',
+  selector: 'app-beamshapes',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './compressionbeamshapes.component.html',
-  styleUrl: './compressionbeamshapes.component.scss'
+  templateUrl: './beamshapes.component.html',
+  styleUrl: './beamshapes.component.scss'
 })
-export class CompressionbeamshapesComponent implements OnInit {
+export class BeamshapesComponent implements OnInit {
   constructor(private http: HttpClient, private sharedService: SharedVariable) { }
 
   selectedA: number | null = null;
@@ -51,11 +52,11 @@ export class CompressionbeamshapesComponent implements OnInit {
       }
     };    
 
-    loadbeamshapesW() {
-      this.http.get<beamShape[]>('assets/db/AISC15-imperial-Wshapes.json').subscribe(data => {
+    loadBeamShapes() {
+      this.http.get<beamShape[]>('assets/db/AISC15-imperial.json').subscribe(data => {
         this.allBeamShapes = data;
         this.filteredBeamShapes = data;
-        console.log("loadbeamshapesW is working");
+        console.log("Loadbeamshapes is working");
       });
     }
     
@@ -124,7 +125,7 @@ export class CompressionbeamshapesComponent implements OnInit {
     
 
     ngOnInit(): void {
-      this.loadbeamshapesW();
+      this.loadBeamShapes();
       this.filterBeamShapes();
     }
       
