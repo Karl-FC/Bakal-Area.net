@@ -5,7 +5,6 @@ import { ElementsComponent } from '../elements/elements.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ElasticBucklingService } from './elastic-buckling.service';
 
-declare var MathJax: any;
 
 @Component({
   selector: 'app-elastic-buckling',
@@ -15,5 +14,6 @@ declare var MathJax: any;
   styleUrl: './elastic-buckling.component.scss'
 })
 export class ElasticBucklingComponent  {
-  
+  constructor(public elasticBucklingService: ElasticBucklingService) {}
+
 }

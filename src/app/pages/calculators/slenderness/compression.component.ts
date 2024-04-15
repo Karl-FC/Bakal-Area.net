@@ -110,22 +110,22 @@ export class CompressionComponent{
                 this.renderer.removeClass(BgCompactnessFlange, 'bg-success');
                 this.renderer.removeClass(BgCompactnessFlange, 'bg-warning');
                 this.renderer.removeClass(BgCompactnessFlange, 'bg-error');
-                this.renderer.setStyle(BgCompactnessFlange,'width', '200px');
-                this.renderer.setStyle(BgCompactnessWeb,'width', '200px');
+                this.renderer.setStyle(BgCompactnessFlange,'width', '180px');
+                this.renderer.setStyle(BgCompactnessWeb,'width', '180px');
 
                       if (this.flangeStatus === 'The flange is compact') {
                         this.renderer.addClass(BgCompactnessFlange, 'bg-success');
                         this.renderer.setProperty(ResultFlange, 'innerHTML', 'COMPACT');
-                        this.renderer.setStyle(ResultFlange,'font-size', '32px');
+                        this.renderer.setStyle(ResultFlange,'font-size', '28px');
 
                     } else if (this.flangeStatus === 'The flange is noncompact') {
                         this.renderer.addClass(BgCompactnessFlange, 'bg-warning');
                         this.renderer.setProperty(ResultFlange, 'innerHTML', 'NONCOMPACT');
-                        this.renderer.setStyle(ResultFlange,'font-size', '20px');
+                        this.renderer.setStyle(ResultFlange,'font-size', '18px');
                     } else if (this.flangeStatus === 'The flange is slender') {
                         this.renderer.addClass(BgCompactnessFlange, 'bg-error');
                         this.renderer.setProperty(ResultFlange, 'innerHTML', 'SLENDER');
-                        this.renderer.setStyle(ResultFlange,'font-size', '32px');
+                        this.renderer.setStyle(ResultFlange,'font-size', '28px');
                 }
               
                 this.renderer.setStyle(SubCompactnessWeb, 'display', 'none');
@@ -135,15 +135,15 @@ export class CompressionComponent{
                       if (this.WebStatus === 'The web is compact') {
                           this.renderer.addClass(BgCompactnessWeb, 'bg-success');
                           this.renderer.setProperty(ResultWeb, 'innerHTML', 'COMPACT');
-                          this.renderer.setStyle(ResultWeb,'font-size', '32px');
+                          this.renderer.setStyle(ResultWeb,'font-size', '28px');
                       } else if (this.WebStatus === 'The web is noncompact') {
                           this.renderer.addClass(BgCompactnessWeb, 'bg-warning');
                           this.renderer.setProperty(ResultWeb, 'innerHTML', 'NONCOMPACT');
-                          this.renderer.setStyle(ResultWeb,'font-size', '20px');
+                          this.renderer.setStyle(ResultWeb,'font-size', '18px');
                       } else if (this.WebStatus === 'The web is slender') {
                           this.renderer.addClass(BgCompactnessWeb, 'bg-error');
                           this.renderer.setProperty(ResultWeb, 'innerHTML', 'SLENDER');
-                          this.renderer.setStyle(ResultWeb,'font-size', '32px');
+                          this.renderer.setStyle(ResultWeb,'font-size', '28px');
                 }
       }
 

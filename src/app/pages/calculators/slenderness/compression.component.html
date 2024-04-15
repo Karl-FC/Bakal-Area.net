@@ -25,7 +25,7 @@
 
         <div id="FyNumType" style="display: block; z-index: 10;">
 
-        <label for="YieldStrengthType">Yield Strength, F<sub>y</sub> (in ksi):</label>
+        <label for="YieldStrengthType">Yield Stress, F<sub>y</sub> (in ksi):</label>
         <input type="number" id="YieldStrengthType" name="YieldStrength" value="50"
         [formControl]="Fy" ><br><br>
         </div>
@@ -71,15 +71,15 @@
       <span>ERROR: Please input all fields</span>
     </div>
       
-<div style="justify-content: center; display: flex;"> <br>
+<div style="justify-content: center; display: flex; overflow: visible;"> <br>
     <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary"> <!--Dito natin ilagay yun results haha-->  
-        <div id="BgCompactnessFlange" class="stat text-primary-content place-items-center" style="width: 200px;">
+        <div id="BgCompactnessFlange" class="stat text-primary-content place-items-center" style="overflow: visible;">
           <div class="stat-title">Flange slenderness</div>
           <div id="ResultCompactnessFlange" class="stat-value">N/A</div>
           <div id="SubCompactnessFlange" class="stat-desc">Input required</div>
         </div>
         
-        <div id="BgCompactnessWeb" class="stat text-primary-content place-items-center" style="width: 200px;">
+        <div id="BgCompactnessWeb" class="stat text-primary-content place-items-center" style="overflow: visible;">
           <div class="stat-title">Web slenderness</div>
           <div id="ResultCompactnessWeb" class="stat-value">N/A</div>
           <div id="SubCompactnessWeb" class="stat-desc">Input required</div>
