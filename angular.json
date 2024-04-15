@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/bakal-area",
+            "outputPath": "dist/bakal-areanet",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
