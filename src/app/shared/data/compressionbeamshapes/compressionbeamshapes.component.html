@@ -11,12 +11,10 @@
 </span>   
 
 
-<div class="tooltip tooltip-right tooltip-info" data-tip="Select W-shape from the dropdown">
 <select id="beamShapeDropdown" (change)="onBeamShapeSelected($event); calcCompact()">
     <option disabled selected>Select Beam Shape</option>
     <option *ngFor="let beamShape of filteredBeamShapes" 
     [value]="beamShape.AISC_Manual_Label">{{ beamShape.AISC_Manual_Label }}</option>
   </select>
-</div>
   
   

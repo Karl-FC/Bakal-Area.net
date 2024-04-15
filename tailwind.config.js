@@ -90,6 +90,20 @@ module.exports = {
         "warning": "#310046",
         "error": "#4B0304",
       },
+      three: {
+        ...require("daisyui/src/theming/themes")["dark"],
+        "primary": "#030F33",
+        "secondary": "#000",
+        "accent": "#2B0933",
+        "neutral": "#2A233D",
+        "base-50": "#23282E",
+        "base-100": "#17021A",
+        "info": "#02234D",
+        "success": "#102A5B",
+        "warning": "#310046",
+        "error": "#4B0304",
+        "base-content": "#8D79B3"
+      },
       shrek: {
         ...require("daisyui/src/theming/themes")["garden"],
         "primary": "#D3CCA5",

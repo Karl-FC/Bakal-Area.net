@@ -11,7 +11,8 @@
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow 
                     bg-neutral rounded-box w-52" >
-          <h1 style="font-size: 18px; 
+          <h1 (click)="reLoad()"
+          style="font-size: 18px; 
                     font-weight: 600;
                     padding:2px">Bakal-AREA.net</h1>
                 <li><a>Axial Tension</a>
@@ -103,6 +104,12 @@
                               <label class="label cursor-pointer gap-4">
                                 <span class="label-text">Midnight</span>
                                 <input type="radio" name="theme-radios" class="radio theme-controller" value="midnight"/>
+                              </label>
+                            </div>
+                            <div class="form-control">
+                              <label class="label cursor-pointer gap-4">
+                                <span class="label-text">3 AM</span>
+                                <input type="radio" name="theme-radios" class="radio theme-controller" value="three"/>
                               </label>
                             </div>
                             <div class="form-control">

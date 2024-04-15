@@ -27,30 +27,36 @@ export class AppComponent {
   header: string = 'Bakal-AREA.net';
 
   updateHeader() {
-    const path = this.route.snapshot.url[0].path;
-    switch (path) {
-      case 'Compression/Analysis':
-        this.header = 'Steel Compression Analysis Calculator';
-        break;
-      case 'Compression/Design':
-        this.header = 'Steel Compression Design Calculator';
-        break;
-      case 'Tension/Analysis':
-        this.header = 'Steel Tension Analysis Calculator';
-        break;
-      case 'Tension/Design':
-        this.header = 'Steel Tension Design Calculator';
-        break;
-      case 'Bending/Analysis':
-        this.header = 'Steel Bending Analysis Calculator';
-        break;
-      case 'Bending/Design':
-        this.header = 'Steel Bending Design Calculator';
-        break;
-      default:
-        this.header = 'Steel Design & Analysis Calculator';
+    if (this.route.snapshot.url[0]) {
+      const path = this.route.snapshot.url[0].path;
+      switch (path) {
+        case 'Compression/Analysis':
+          this.header = 'Steel Compression Analysis Calculator';
+          break;
+        case 'Compression/Design':
+          this.header = 'Steel Compression Design Calculator';
+          break;
+        case 'Tension/Analysis':
+          this.header = 'Steel Tension Analysis Calculator';
+          break;
+        case 'Tension/Design':
+          this.header = 'Steel Tension Design Calculator';
+          break;
+        case 'Bending/Analysis':
+          this.header = 'Steel Bending Analysis Calculator';
+          break;
+        case 'Bending/Design':
+          this.header = 'Steel Bending Design Calculator';
+          break;
+        default:
+          this.header = 'Steel Design & Analysis Calculator';
+      }
+    } else {
+      this.header = 'Steel Design & Analysis Calculator';
     }
   }
+  
+  
   
   
 

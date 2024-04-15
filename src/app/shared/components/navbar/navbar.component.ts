@@ -28,6 +28,8 @@ export class NavbarComponent {
     this.router.navigate([`${currentRoute}/Analysis`]);
   }
   
-  
+  reLoad() {
+    location.reload();
+  }
 
 }
