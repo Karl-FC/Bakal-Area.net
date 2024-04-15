@@ -15,6 +15,7 @@ import { beamShape } from '../../../shared.service';
 export class CompressionbeamshapesComponent implements OnInit {
   constructor(private http: HttpClient, private sharedService: SharedVariable) { }
 
+  onlyWbeams:boolean = true;
   selectedA: number | null = null;
   selectedRx: number | null = null;
   selectedType: string = '';
@@ -52,7 +53,8 @@ export class CompressionbeamshapesComponent implements OnInit {
     };    
 
     loadbeamshapesW() {
-      this.http.get<beamShape[]>('assets/db/AISC15-imperial-Wshapes.json').subscribe(data => {
+      const database = this.onlyWbeams ? 'assets/db/AISC15-imperial-Wshapes.json' : 'assets/db/AISC15-imperial.json';
+      this.http.get<beamShape[]>(database).subscribe(data => {
         this.allBeamShapes = data;
         this.filteredBeamShapes = data;
         console.log("loadbeamshapesW is working");
@@ -117,7 +119,10 @@ export class CompressionbeamshapesComponent implements OnInit {
       console.log("Selected beam shape is:", beamShape.AISC_Manual_Label);
     }
     
-    
+    onCheckboxChange() {
+      this.onlyWbeams = !this.onlyWbeams;
+      this.loadbeamshapesW();
+    }
     
 
 
