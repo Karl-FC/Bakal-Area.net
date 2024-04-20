@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Bakal-AREA.net
 
 ## Introduction
