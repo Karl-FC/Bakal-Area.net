@@ -1,38 +1,58 @@
 <div id="container">
-    <div id="tablediv"  style="margin: 20px;">
-        <div class="overflow-x-auto">
+  <span id="filter" class="form-control">
+    <label class="cursor-pointer label" >
+      <span class="label-text">Filter Beams</span>
+      <input type="checkbox" checked="checked" value="approWshape" class="checkbox checkbox-primary checkbox-xs" (change)="onCheckboxChange()"/>
+    </label>
+</span>
+    <div id="tablediv">
+        <div>
             <table class="table">
-              <thead>
+              <thead id="heading">
                 <tr class="bg-primary">
                   <th>Beam Shape</th>
-                  <th><div style="resize: horizontal;">Pu</div></th>
+                  <th><div style="resize: horizontal;">Factored Load (P<sub>u</sub>)</div></th>
+                  <th><div style="resize: horizontal;">Nominal Strength (P<sub>n</sub>)</div></th>
                   <th><div style="resize: horizontal;">LRFD Remarks</div></th>
-                  <th><div style="resize: horizontal;">Pa</div></th>
+                  <th><div style="resize: horizontal;">Max. Compressive Load (P<sub>a</sub>)</div></th>
+                  <th><div style="resize: horizontal;">Nominal Strength (P<sub>n</sub>)</div></th>
                   <th><div style="resize: horizontal;">ASD Remarks</div></th>
                   <th><div style="resize: horizontal;">Flange</div></th>
                   <th><div style="resize: horizontal;">Web</div></th>
                   <th><div style="resize: horizontal;">A</div></th>         
-                  <th><div style="resize: horizontal;">rx</div></th>
-                  <th><div style="resize: horizontal;">ry</div></th>
                   <th><div style="resize: horizontal;">&lambda;<sub>f</sub></div></th>
                   <th><div style="resize: horizontal;">&lambda;<sub>w</sub></div></th>
+                  <th><div style="resize: horizontal;">rx</div></th>
+                  <th><div style="resize: horizontal;">ry</div></th>
+                  <th><div style="resize: horizontal;">maxkLr</div></th>
+                  <th><div style="resize: horizontal;">Fe</div></th>
+                  <th><div style="resize: horizontal;">Fcr</div></th>
+                  <th><div style="resize: horizontal;">Pcr</div></th>
                 </tr>
               </thead>
               <tbody class="bg-neutral">
                 <tr class="hover" *ngFor="let beamShape of beamShapes$ | async">
-                    <td>{{ beamShape.AISC_Manual_Label }}</td>
-                    <td>{{ beamShape.PuLoad ? beamShape.PuLoad : 'N/A' }}</td>
-                    <td>{{ beamShape.LRFDstatus ? beamShape.LRFDstatus : 'N/A' }}</td>
-                    <td>{{ beamShape.PaLoad ? beamShape.PaLoad : 'N/A' }}</td>
-                    <td>{{ beamShape.ASDstatus ? beamShape.ASDstatus : 'N/A' }}</td>  
-                    <td>{{ beamShape.Fcondition ? beamShape.Fcondition : 'N/A'  }}</td>
-                    <td>{{ beamShape.Wcondition ? beamShape.Wcondition : 'N/A'  }}</td>                  
+                    <td style="font-weight: 500;">{{ beamShape.AISC_Manual_Label }}</td>
+                    <td>{{ beamShape.PuLoad ? beamShape.PuLoad : '-' }}</td>
+                    <td>{{ beamShape.PuLoad ? beamShape.PnLRFD : '-' }}</td>
+                    <td style="font-weight: 600;">{{ beamShape.LRFDstatus ? beamShape.LRFDstatus : '-' }}</td>
+                    <td>{{ beamShape.PaLoad ? beamShape.PaLoad : '-' }}</td>
+                    <td>{{ beamShape.PuLoad ? beamShape.PnASD : '-' }}</td>
+                    <td style="font-weight: 600;">{{ beamShape.ASDstatus ? beamShape.ASDstatus : '-' }}</td>  
+                    <td>{{ beamShape.Fcondition ? beamShape.Fcondition : '-'  }}</td>
+                    <td>{{ beamShape.Wcondition ? beamShape.Wcondition : '-'  }}</td>                  
                     <td>{{ beamShape.A }}</td>
-                    <td>{{ beamShape.rx }}</td>
-                    <td>{{ beamShape.ry }}</td>
                     <td>{{ beamShape['bf/2tf'] }}</td>
                     <td>{{ beamShape['h/tw'] }}</td>
+                    <td>{{ beamShape.rx }}</td>
+                    <td>{{ beamShape.ry }}</td>
+                    <td>{{ beamShape.maxkLr ? beamShape.maxkLr : '-'}}</td>
+                    <td>{{ beamShape.Fe ? beamShape.Fe : '-'}}</td>
+                    <td>{{ beamShape.Fcr ? beamShape.Fcr : '-' }}</td>
+                    <td>{{ beamShape.Pcr ? beamShape.Pcr : '-'}}</td>
                 </tr>
               </tbody>
             </table>
           </div>
+    </div>
+</div>

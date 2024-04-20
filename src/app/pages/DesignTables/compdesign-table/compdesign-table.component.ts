@@ -18,7 +18,9 @@ interface BeamShape {
   'bf/2tf': number;
   'h/tw': number;
   PuLoad: number;
+  PnLRFD: number;
   PaLoad: number;
+  PnASD: number;
   Fcondition: string;
   Wcondition: string;
   LRFDstatus: string;
@@ -34,12 +36,19 @@ interface BeamShape {
 })
 export class CompdesignTableComponent implements OnInit {
   beamShapes$ = this.updater.beamShapes$;
+  onlyWbeams:boolean = true;
 
   constructor(private updater: CompdesignTableService) {
     this.updater.updateTable$.subscribe(() => {
       this.updater.loadTable();
       console.log("updater worked on designtablecomponent");
     });
+  }
+
+  onCheckboxChange() {
+    this.onlyWbeams = !this.onlyWbeams;
+    this.updater.onlyWbeams=this.onlyWbeams
+    this.updater.loadTable();
   }
 
   ngOnInit() {

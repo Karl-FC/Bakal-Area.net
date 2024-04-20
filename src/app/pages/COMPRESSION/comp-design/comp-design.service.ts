@@ -14,7 +14,7 @@ export class CompDesignService {
   LL = new BehaviorSubject<number>(0);
 
   KFactor = new BehaviorSubject<number>(1);
-  maxKLr = new BehaviorSubject<number>(0);
+  maxkLr = new BehaviorSubject<number>(0);
   maxKL = new BehaviorSubject<number>(0);
 
   chosenElem = new BehaviorSubject<string>("ABC");

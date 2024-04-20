@@ -1,0 +1,40 @@
+#container {
+    max-width: 90vw;
+}
+
+#filter {
+    max-width: 200px;
+    padding: 10px;
+    font-weight: 500;
+}
+
+#filter label span {
+    margin-top: 5px;
+    font-size: 12pt;
+}
+
+#tablediv {
+    overflow: scroll;
+    margin-top: 2px;
+    padding: 5px;
+}
+
+/* RESPONSIVE LAYOUTS*/
+
+    @media (max-width: 1024px) {
+        //Laptops
+        #tablediv {
+            margin-top: 5px;
+            margin-left: 10px;
+            margin-right: -100px;    
+        }
+    }
+
+    //Tablet (768x628)
+    @media (max-width: 768px) {
+        #tablediv {
+            margin-top: 5px;
+            margin-left: 10px;
+            margin-right: -110px;    
+        }
+    }
