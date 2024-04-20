@@ -1,0 +1,130 @@
+
+<div class="flex-row">
+  <div>
+  <form>
+  <label for="DL">Dead Load:</label><br>
+      <input type="number" id="DL" name="DL" 
+      [formControl]="DL" value="0"> <br>
+      
+      <label for="LL">Live Load:</label><br>
+      <input type="number" id="LL" name="LL" 
+      [formControl]="LL" value="0"> <br>
+      
+      <label for="YieldStrength">Yield Stress, F<sub>y</sub> (in ksi):</label>
+      <div class="tooltip tooltip-info" 
+                data-tip="The maximum stress a material can withstand before it begins to deform plastically. See References for specifications of different steel types">
+                        <button style="transform: scale(0.7); vertical-align: top; margin-right: -5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                            </svg>                                          
+                        </button>
+                </div><br>
+                <input type="number" id="YieldStrength" name="YieldStrength" value="50"
+                [formControl]="Fy"> <br>
+      
+                <label for="ModulusE">Modulus of Elasticity:</label>
+                <div class="tooltip tooltip-info" 
+                data-tip="AKA Young's Modulus. The modulus of elasticity for structural steel is typically taken as 29,000 to 30,000 ksi (kips per square inch) ">
+                        <button style="transform: scale(0.7); vertical-align: top; margin-right: -5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                            </svg>                                          
+                        </button>
+                </div><br>
+                <input type="number" id="ModulusE" name="ModulusE" value="29000"
+          [formControl]="E" ><br><br>
+                
+
+    </form>
+  </div>
+</div>
+
+
+  <div class="place-items-center">
+  <br>
+  <span style="display: flex; align-items: center;">
+    <h1 style="font-size: 20px; margin-right: 10px;">Table of Elements</h1>
+    <div class="tooltip tooltip-info" 
+        data-tip="Input the individual elements by stating the its x and y-axes, condition, and length. Afterwhich press calculate">
+                <button style="transform: scale(0.7); vertical-align: top; margin-right: -5px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>                                          
+                </button>
+    </div>
+  </span>   
+
+  <div id="container">
+      <div id="tablediv"  style="margin: 20px;">
+          <div class="bg-neutral overflow-x-auto">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Governs?</th>
+                    <th>Element</th>
+                    <th><div style="resize: horizontal;">Length (in ft)</div></th>
+                    <th><div style="resize: horizontal;">k</div></th>
+                    <th><div style="resize: horizontal;">kL</div></th>
+                    <th style="color: red;"></th> <!-- Bagong column para sa "remove button" -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of LargestKL; let i = index" >
+                    <td>{{i+1}}</td>
+                    <td>
+                      <input type="radio" [value]="i" 
+                      [checked]="selectedRowIndex === i" 
+                      (change)="selectedRowIndex = i; onRowSelect(i)">
+                    </td>
+                    <td style="overflow-wrap: break-word;">{{row.element}}</td>
+                    <td style="overflow-wrap: break-word;">{{row.elemLength}}</td>
+                    <td style="overflow-wrap: break-word;">{{row.KFactor}}</td>
+                    <td style="overflow-wrap: break-word;">{{row.kL}}</td>
+                    <td>
+                      <button (click)="removeRow(i)">Remove</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+    <div id="addRow">
+      <form>
+        <input type="radio" id="xelement" name="element" [value]="false"
+            [formControl]="element" >
+            <label for="element">x-axis</label> <br>
+        <input type="radio" id="yelement" name="element" [value]="true"
+            [formControl]="element" > 
+            <label for="element">y-axis</label> <br>
+        
+        <label for="KFactor">Support Condition:</label><br>
+        <select name="KFactor" [formControl]="KFactor">
+            <label for="KFactor" id="KFactor">Select K</label>
+          <option value=0.65>Fixed-Fixed</option>
+          <option value=0.8>Pinned-Fixed</option>
+          <option value=1.2>Roller-Fixed</option>
+          <option value=1>Pinned-Pinned</option>
+          <option value=2.1>Free-Fixed</option>
+          <option value=2>Roller-Pinned</option>
+        </select><br><br>
+
+      <label for="elemLength">Length</label><br>
+      <input type="number" id="elemLength" name="elemLength" 
+      [formControl]="elemLength" value="1"> <br>
+    </form>
+    <br><br>
+        <div id="addRowdiv" class="stats stats-vertical text-primary-content lg:stats-horizontal shadow bg-info">
+      <button (click)="addRow()">Add Element</button>
+          </div>
+
+          <button (click)="refreshTable()">Refresh Table</button>
+
+
+      <!--ERROR MESSAGES-->
+          <!--No beam-->
+          
+    </div>
+    </div>
+  </div>
+    </div> 

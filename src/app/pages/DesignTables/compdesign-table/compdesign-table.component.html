@@ -1,0 +1,38 @@
+<div id="container">
+    <div id="tablediv"  style="margin: 20px;">
+        <div class="overflow-x-auto">
+            <table class="table">
+              <thead>
+                <tr class="bg-primary">
+                  <th>Beam Shape</th>
+                  <th><div style="resize: horizontal;">Pu</div></th>
+                  <th><div style="resize: horizontal;">LRFD Remarks</div></th>
+                  <th><div style="resize: horizontal;">Pa</div></th>
+                  <th><div style="resize: horizontal;">ASD Remarks</div></th>
+                  <th><div style="resize: horizontal;">Flange</div></th>
+                  <th><div style="resize: horizontal;">Web</div></th>
+                  <th><div style="resize: horizontal;">A</div></th>         
+                  <th><div style="resize: horizontal;">rx</div></th>
+                  <th><div style="resize: horizontal;">ry</div></th>
+                  <th><div style="resize: horizontal;">&lambda;<sub>f</sub></div></th>
+                  <th><div style="resize: horizontal;">&lambda;<sub>w</sub></div></th>
+                </tr>
+              </thead>
+              <tbody class="bg-neutral">
+                <tr class="hover" *ngFor="let beamShape of beamShapes$ | async">
+                    <td>{{ beamShape.AISC_Manual_Label }}</td>
+                    <td>{{ beamShape.PuLoad ? beamShape.PuLoad : 'N/A' }}</td>
+                    <td>{{ beamShape.LRFDstatus ? beamShape.LRFDstatus : 'N/A' }}</td>
+                    <td>{{ beamShape.PaLoad ? beamShape.PaLoad : 'N/A' }}</td>
+                    <td>{{ beamShape.ASDstatus ? beamShape.ASDstatus : 'N/A' }}</td>  
+                    <td>{{ beamShape.Fcondition ? beamShape.Fcondition : 'N/A'  }}</td>
+                    <td>{{ beamShape.Wcondition ? beamShape.Wcondition : 'N/A'  }}</td>                  
+                    <td>{{ beamShape.A }}</td>
+                    <td>{{ beamShape.rx }}</td>
+                    <td>{{ beamShape.ry }}</td>
+                    <td>{{ beamShape['bf/2tf'] }}</td>
+                    <td>{{ beamShape['h/tw'] }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 import { CompressionComponent } from '../../calculators/slenderness/compression.component';
@@ -8,6 +8,9 @@ import { CompressionbeamshapesComponent } from '../../../shared/data/compression
 import { ElementsComponent } from '../../calculators/elements/elements.component';
 import { ElasticBucklingComponent } from '../../calculators/elastic-buckling/elastic-buckling.component';
 import { LeftsideComponent } from '../../../shared/components/leftside/leftside.component';
+import { CompdesignTableComponent } from '../../DesignTables/compdesign-table/compdesign-table.component';
+import { CompdesignLoadsComponent } from '../../calculators/compdesign-loads/compdesign-loads.component';
+import { CompdesignTableService } from '../../DesignTables/compdesign-table.service';
 
 @Component({
   selector: 'app-comp-design',
@@ -18,10 +21,12 @@ import { LeftsideComponent } from '../../../shared/components/leftside/leftside.
     CompressionbeamshapesComponent, 
     ElementsComponent, 
     ElasticBucklingComponent, 
+    CompdesignTableComponent,
+    CompdesignLoadsComponent,
   ],
   templateUrl: './comp-design.component.html',
   styleUrl: './comp-design.component.scss'
 })
-export class CompDesignComponent {
-
-}
+export class CompDesignComponent {  
+    
+  }

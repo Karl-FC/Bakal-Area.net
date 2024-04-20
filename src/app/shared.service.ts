@@ -8,10 +8,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SharedVariable {
   chosenBeamShape: BehaviorSubject<beamShape | null> = 
-      new BehaviorSubject<beamShape | null>(null);
+  new BehaviorSubject<beamShape | null>(null);
   chosenBeamShapeLabel = new BehaviorSubject<string>('');
   KFactor = new BehaviorSubject<number>(1);
   maxKLr = new BehaviorSubject<number>(0);
+  maxKL = new BehaviorSubject<number>(0);
 
     Ag: FormControl = new FormControl(null);
     Load: FormControl = new FormControl(null);
