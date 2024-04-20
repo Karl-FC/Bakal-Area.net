@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/bakal-areanet",
+    "public": "dist/bakal-areanet/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

@@ -2,11 +2,28 @@
 <div class="flex-row">
   <div>
   <form>
-  <label for="DL">Dead Load:</label><br>
+    <h1 style="font-size: 24px; margin-right: 10px; margin-top: -30px; padding-bottom: 5px;">Compression Design</h1>
+  <label for="DL">Dead Load:</label>
+        <div class="tooltip tooltip-info" 
+        data-tip="Consist of the weight of all materials of construction incorporated into the building or other structure, including but not limited to walls, floors, roofs, ceilings, stairways, built-in partitions, finishes, cladding and other similarly incorporated architectural and structural items, and fixed service equipment, including the weight of cranes.">
+                <button style="transform: scale(0.7); vertical-align: top; margin-right: -5px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>                                          
+                </button>
+      </div><br>
       <input type="number" id="DL" name="DL" 
       [formControl]="DL" value="0"> <br>
       
-      <label for="LL">Live Load:</label><br>
+      <label for="LL">Live Load:</label>
+          <div class="tooltip tooltip-info" 
+        data-tip="The maximum loads expected by the intended use or occupancy but in no case shall be less than the loads required by this section.">
+                <button style="transform: scale(0.7); vertical-align: top; margin-right: -5px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>                                          
+                </button>
+    </div><br>
       <input type="number" id="LL" name="LL" 
       [formControl]="LL" value="0"> <br>
       
@@ -45,7 +62,7 @@
   <span style="display: flex; align-items: center;">
     <h1 style="font-size: 20px; margin-right: 10px;">Table of Elements</h1>
     <div class="tooltip tooltip-info" 
-        data-tip="Input the individual elements by stating the its x and y-axes, condition, and length. Afterwhich press calculate">
+        data-tip="Input the individual elements by stating the its x and y-axes, condition, and length. After pressing 'Add Element', choose which element governs the weight of the column. This is often the one with the largest kLr value of the y-axis ">
                 <button style="transform: scale(0.7); vertical-align: top; margin-right: -5px;">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
@@ -63,7 +80,7 @@
                     <th></th>
                     <th>Governs?</th>
                     <th>Element</th>
-                    <th><div style="resize: horizontal;">Length (in ft)</div></th>
+                    <th><div style="resize: horizontal;">Length (in.)</div></th>
                     <th><div style="resize: horizontal;">k</div></th>
                     <th><div style="resize: horizontal;">kL</div></th>
                     <th style="color: red;"></th> <!-- Bagong column para sa "remove button" -->
@@ -98,15 +115,23 @@
             [formControl]="element" > 
             <label for="element">y-axis</label> <br>
         
-        <label for="KFactor">Support Condition:</label><br>
+        <br><label for="KFactor">Support Condition:</label>
+                <div class="tooltip tooltip-info" 
+                data-tip="Each element may have different conditions that affect how the buckling of the column behaves. See references (Table C-A-7.1) for the recommended values of K depending on the support condition">
+                        <button style="transform: scale(0.7); vertical-align: top; margin-right: -5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                            </svg>                                          
+                        </button>
+            </div><br>
         <select name="KFactor" [formControl]="KFactor">
             <label for="KFactor" id="KFactor">Select K</label>
-          <option value=0.65>Fixed-Fixed</option>
-          <option value=0.8>Pinned-Fixed</option>
-          <option value=1.2>Roller-Fixed</option>
-          <option value=1>Pinned-Pinned</option>
-          <option value=2.1>Free-Fixed</option>
-          <option value=2>Roller-Pinned</option>
+          <option value=0.65>a. Fixed-Fixed</option>
+          <option value=0.8>b. Pinned-Fixed</option>
+          <option value=1.2>c. Roller-Fixed</option>
+          <option value=1>d. Pinned-Pinned</option>
+          <option value=2.1>e. Free-Fixed</option>
+          <option value=2>f. Roller-Pinned</option>
         </select><br><br>
 
       <label for="elemLength">Length</label><br>
@@ -114,11 +139,16 @@
       [formControl]="elemLength" value="1"> <br>
     </form>
     <br><br>
-        <div id="addRowdiv" class="stats stats-vertical text-primary-content lg:stats-horizontal shadow bg-info">
-      <button (click)="addRow()">Add Element</button>
+    <div style="justify-content: center; display: flex; flex-direction: column;">
+          <div id="addRowdiv" class="stats stats-vertical text-primary-content lg:stats-horizontal shadow bg-info">
+        <button id="addElem" (click)="addRow()">Add Element</button>
+            </div>
+              <br>
+            <div id="Refreshdiv" class="stats stats-vertical text-primary-content lg:stats-horizontal shadow bg-info">
+              <button id="RefreshBtn" (click)="refreshTable()">Refresh Table</button>
+                  </div>
           </div>
-
-          <button (click)="refreshTable()">Refresh Table</button>
+          
 
 
       <!--ERROR MESSAGES-->
