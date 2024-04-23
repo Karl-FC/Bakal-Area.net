@@ -20,7 +20,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 export class ElementsComponent {
   selectedBeamShape: beamShape | null = null; 
   
-constructor( private sharedService: SharedVariable, private SharedVariable: ElasticBucklingService) {}
+constructor( public sharedService: SharedVariable, 
+            private SharedVariable: ElasticBucklingService) {}
 
   AnalysisRows: { 
     element: string, 

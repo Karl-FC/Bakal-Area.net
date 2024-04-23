@@ -136,6 +136,8 @@ body {
     }
     #bgSlender {
         height: 150vh;
+        box-sizing: border-box;
+        padding-left: 10%;
     }
     #bgTable {
         width: 100%;
@@ -147,14 +149,25 @@ body {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
     }
+
+    #bgSlender {
+        height: 135vh;
+        box-sizing: border-box;
+        padding-left: 10%;
+    }
 }
 
 @media (max-width: 425px) {
     #top {
       width: 100%;
-      box-sizing: border-box; /* This makes sure padding and border are included in the element's total width */
+      box-sizing: border-box; /* makes sure padding and border are included in the element's total width */
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
     }
-}
 
+    #bgSlender {
+        height: 135vh;
+        width: 100vw;
+        box-sizing: border-box;
+    }
+}

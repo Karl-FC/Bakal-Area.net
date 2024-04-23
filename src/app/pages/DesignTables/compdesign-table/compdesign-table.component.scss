@@ -1,5 +1,7 @@
 #container {
     max-width: 90vw;
+    box-sizing: border-box;
+    
 }
 
 #filter {
@@ -16,7 +18,7 @@
 #tablediv {
     overflow: scroll;
     margin-top: 2px;
-    padding: 5px;
+    margin-left: -50px;
 }
 
 /* RESPONSIVE LAYOUTS*/
@@ -35,6 +37,12 @@
         #tablediv {
             margin-top: 5px;
             margin-left: 10px;
-            margin-right: -110px;    
+            margin-right: -110px;  
+        }
+
+        #container {
+            max-width: 50vw;
+            box-sizing: border-box;
+            
         }
     }

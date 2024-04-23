@@ -1,3 +1,11 @@
+#summary{
+    padding: 5%;
+}
+
+#summarySquared {
+    padding:15px
+}
+
 h1, h2, h3, h4, h5 {
     font-weight:600;
 }
@@ -20,3 +28,16 @@ p, h4, h5, h6 {
     padding-left: 15px;
 }
 
+/*@media (max-width: 1300px) {
+        #summary{
+            padding: 10%;
+            box-sizing: border-box;
+            width: 100vw;
+        }
+}*/
+
+@media (max-width: 615) {
+    #summary{
+        padding: 30px;
+    }
+}

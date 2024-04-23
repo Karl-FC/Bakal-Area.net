@@ -45,5 +45,9 @@ export class CompDesignService {
   displayASDResult: string = '';
   result: string = '';
 
+  noReloadPls(event: Event) {
+    event.preventDefault();
+  }
   
+
 }

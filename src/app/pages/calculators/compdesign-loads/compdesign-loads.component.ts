@@ -20,8 +20,8 @@ export class CompdesignLoadsComponent {
   @Output() updateTableEvent = new EventEmitter<void>();
 
   constructor( private sharedService: SharedVariable, 
-    private SharedElements: CompDesignService,
-  private updater: CompdesignTableService) {}
+    public SharedElements: CompDesignService,
+    private updater: CompdesignTableService) {}
 
   
   LargestKL: { 

@@ -32,12 +32,13 @@ Fy = new BehaviorSubject<number>(0);
     WebStatus: string = 'Web Status';
 
 
-    
-
-
-    
  
     constructor() { }
+
+
+    noReloadPls(event: Event) {
+      event.preventDefault();
+    }
 
   }
 
