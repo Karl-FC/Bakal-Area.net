@@ -6,6 +6,7 @@ body {
 #top{
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     padding: 10px;
 }
 
@@ -37,16 +38,13 @@ body {
                 grid-gap: 20px; /* margins */
             }
 
-                        #bgTable {
-                            grid-column: span 3; /* Adjust as needed */
-                        }
-
                         #bgSlender {
-                            grid-column: span 2;
+                            grid-column: span 5;
                             height: 120vh;
+                            padding-top: 0;
                             padding: 30px;
                             border-top-left-radius: 0;
-                            border-top-right-radius: 0;
+                            border-top-right-radius: 15px;
                         }
 
                     .content {
@@ -62,8 +60,6 @@ body {
                         border-radius: 25px;
                         grid-row: 3;
                         display: grid;
-                        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust as needed */
-                        grid-gap: 20px; /* Adjust as needed */
                     }
 
 
@@ -97,25 +93,17 @@ body {
 
     #bgSlender {
         height: 150vh;
-        grid-column: span 2 ;
+        grid-column: span 4 ;
     }
 
-    #bgTable {
-        width: 100%;
-        grid-column: span 2 ;
-    }
 }
 
 @media (max-width: 866px) {
     #bgSlender {
         height: 150vh;
-        grid-column: span 1 ;
+        grid-column: span 3 ;
     }
 
-    #bgTable {
-        width: 100%;
-        grid-column: span 2 ;
-    }
 }
 
 //Tablet (768x628)
@@ -139,9 +127,7 @@ body {
         box-sizing: border-box;
         padding-left: 10%;
     }
-    #bgTable {
-        width: 100%;
-    }
+
 }
 
 @media (max-width: 615px) {

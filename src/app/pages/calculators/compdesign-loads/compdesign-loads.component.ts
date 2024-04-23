@@ -8,11 +8,14 @@ import { beamShape } from '../../../shared.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CompDesignService } from '../../COMPRESSION/comp-design/comp-design.service';
 import { CompdesignTableService } from '../../DesignTables/compdesign-table.service';
+import { ErrorAlertService } from '../../../shared/components/error-alert/error-alert.service';
+import { ErrorAlertComponent } from '../../../shared/components/error-alert/error-alert.component';
+
 
 @Component({
   selector: 'app-compdesign-loads',
   standalone: true,
-  imports: [CommonModule, CompressionComponent, CompressionbeamshapesComponent, ReactiveFormsModule, DragDropModule],
+  imports: [CommonModule, CompressionComponent, CompressionbeamshapesComponent, ReactiveFormsModule, ErrorAlertComponent],
   templateUrl: './compdesign-loads.component.html',
   styleUrl: './compdesign-loads.component.scss'
 })
@@ -21,7 +24,8 @@ export class CompdesignLoadsComponent {
 
   constructor( private sharedService: SharedVariable, 
     public SharedElements: CompDesignService,
-    private updater: CompdesignTableService) {}
+    private updater: CompdesignTableService,
+    private errAlert: ErrorAlertService) {}
 
   
   LargestKL: { 
@@ -85,6 +89,29 @@ addRow() {
   let Fy = Number(this.Fy.value);
       this.SharedElements.Fy.next(Fy);
 
+
+
+
+//ERROR MESSAGES
+      //No Length
+      if (!DL || !LL || !E || !Fy) {
+        const elemError = document.getElementById('elemError');
+        console.log("Inputs not complete");
+        this.errAlert.errorAlert('no input');
+        return;
+        };
+        
+      if (!elemLength || !KFactor || !kL) {
+          const elemError = document.getElementById('elemError');
+          console.log("Inputs not complete");
+          this.errAlert.errorAlert('no input');
+          return;
+          };
+
+
+
+
+
   if (this.LargestKL && this.LargestKL !== null) {
     this.LargestKL.push({
       element: this.element.value ? 'y' : 'x',
@@ -105,7 +132,7 @@ addRow() {
       this.maxKL = kL;
       console.log("Max kL updated to " + this.SharedElements.maxKL.value)
       //this.SharedVariable.FeSolve();
-}
+          }
 
   }
 

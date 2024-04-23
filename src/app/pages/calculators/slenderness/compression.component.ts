@@ -3,12 +3,13 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CompressionbeamshapesComponent } from '../../../shared/data/compressionbeamshapes/compressionbeamshapes.component';
 import { SharedVariable } from '../../../shared.service';
 import { style } from '@angular/animations';
-
+import { ErrorAlertComponent } from '../../../shared/components/error-alert/error-alert.component';
+import { ErrorAlertService } from '../../../shared/components/error-alert/error-alert.service';
 
 @Component({
   selector: 'app-compression',
   standalone: true,
-  imports: [ReactiveFormsModule, CompressionbeamshapesComponent],
+  imports: [ReactiveFormsModule, CompressionbeamshapesComponent, ErrorAlertComponent],
   templateUrl: './compression.component.html',
   styleUrl: './compression.component.scss',
 })
@@ -16,7 +17,8 @@ import { style } from '@angular/animations';
 export class CompressionComponent{
   constructor(private renderer: Renderer2, 
               private el: ElementRef, 
-              public sharedService: SharedVariable) { }
+              public sharedService: SharedVariable,
+            private errAlert: ErrorAlertService) { }
 
     
     E = new FormControl(this.sharedService.E, { updateOn: 'blur' });
@@ -61,7 +63,6 @@ export class CompressionComponent{
  this.sharedService.E.next(E);
  this.sharedService.Fy.next(Fy);
 
-
           let F_Lamda = parseFloat((<HTMLInputElement>document.getElementById('LamdaFlange')).value);
           let W_Lamda = parseFloat((<HTMLInputElement>document.getElementById('LamdaWeb')).value);
               console.log("Modulus of Elasticity is " + E);
@@ -69,6 +70,28 @@ export class CompressionComponent{
               console.log("bf/tf or Lamda F is " + F_Lamda);
               console.log("htw or Lamda W is " + W_Lamda);
         
+
+//ERROR MESSAGE//
+            
+            //No E o /fy
+            if (!E || !Fy) {
+              const elemError = document.getElementById('elemError');
+              console.log("No E was inputed");
+              this.errAlert.errorAlert('noBeam');
+              return;
+              };
+
+            //No Ag, lamba f or w
+            if (!AgValue || !F_Lamda || !W_Lamda) {
+              const elemError = document.getElementById('elemError');
+              console.log("No Ag was inputed");
+              this.errAlert.errorAlert('noBeam');
+              return;
+              };
+
+
+
+
         //Checking Slenderness//    
         let F_LamdaP = 0.38 * Math.sqrt(E / Fy);
         let F_LamdaR = 1.0 * Math.sqrt(E / Fy);
@@ -145,6 +168,10 @@ export class CompressionComponent{
                           this.renderer.setProperty(ResultWeb, 'innerHTML', 'SLENDER');
                           this.renderer.setStyle(ResultWeb,'font-size', '28px');
                 }
+
+
+
+
       }
 
 

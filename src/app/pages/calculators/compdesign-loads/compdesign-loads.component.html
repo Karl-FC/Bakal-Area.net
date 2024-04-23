@@ -1,8 +1,9 @@
 
-<div class="flex-row">
+<div id="itemsinput" class="flex-row bg-neutral">
   <div>
-  <form>
+  <form id="variableForms">
     <h1 style="font-size: 24px; margin-right: 10px; margin-top: -30px; padding-bottom: 5px;">Compression Design</h1>
+    <div class="columnthing">
   <label for="DL">Dead Load:</label>
         <div class="tooltip tooltip-info" 
         data-tip="Consist of the weight of all materials of construction incorporated into the building or other structure, including but not limited to walls, floors, roofs, ceilings, stairways, built-in partitions, finishes, cladding and other similarly incorporated architectural and structural items, and fixed service equipment, including the weight of cranes.">
@@ -26,7 +27,8 @@
     </div><br>
       <input type="number" id="LL" name="LL" 
       [formControl]="LL" value="0"> <br>
-      
+    </div>
+    <div class="columnthing">
       <label for="YieldStrength">Yield Stress, F<sub>y</sub> (in ksi):</label>
       <div class="tooltip tooltip-info" 
                 data-tip="The maximum stress a material can withstand before it begins to deform plastically. See References for specifications of different steel types">
@@ -50,7 +52,7 @@
                 </div><br>
                 <input type="number" id="ModulusE" name="ModulusE" value="29000"
           [formControl]="E" ><br><br>
-                
+             </div>   
 
     </form>
   </div>
@@ -152,7 +154,7 @@
 
 
       <!--ERROR MESSAGES-->
-          <!--No beam-->
+          <app-error-alert id="elemError" style="display: none;" />
           
     </div>
     </div>

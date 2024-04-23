@@ -8,11 +8,14 @@ import { AnalysisTableRow } from './elements-table-row.interface';
 import { beamShape } from '../../../shared.service';
 import { ElasticBucklingService } from '../elastic-buckling/elastic-buckling.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ErrorAlertComponent } from '../../../shared/components/error-alert/error-alert.component';
+import { ErrorAlertService } from '../../../shared/components/error-alert/error-alert.service';
+
 
 @Component({
   selector: 'app-elements',
   standalone: true,
-  imports: [CommonModule, CompressionComponent, CompressionbeamshapesComponent, ReactiveFormsModule, DragDropModule],
+  imports: [CommonModule, CompressionComponent, CompressionbeamshapesComponent, ReactiveFormsModule, DragDropModule, ErrorAlertComponent],
   templateUrl: './elements.component.html',
   styleUrl: './elements.component.scss'
 })
@@ -21,7 +24,8 @@ export class ElementsComponent {
   selectedBeamShape: beamShape | null = null; 
   
 constructor( public sharedService: SharedVariable, 
-            private SharedVariable: ElasticBucklingService) {}
+            private SharedVariable: ElasticBucklingService,
+          private errAlert: ErrorAlertService) {}
 
   AnalysisRows: { 
     element: string, 
@@ -61,9 +65,25 @@ constructor( public sharedService: SharedVariable,
             if (!selectedBeamShape) {
               const elemError = document.getElementById('elemError');
               console.log("No beam shape has selected");
-              if (elemError) elemError.style.display = 'block';
+              this.errAlert.errorAlert('noBeam');
               return;
-              }
+              };
+
+            //No Length
+            if (!this.insertLength()) {
+              const elemError = document.getElementById('elemError');
+              console.log("No length was inputed");
+              this.errAlert.errorAlert('noL');
+              return;
+              };
+
+            //No Support
+            if (!this.KFactor.value) {
+              const elemError = document.getElementById('elemError');
+              console.log("No support condition was inputed");
+              this.errAlert.errorAlert('no Supp Condition');
+              return;
+              };
 
   const radiusGyration = this.element.value ? 
   Number(selectedBeamShape.ry) : Number(selectedBeamShape.rx);
@@ -104,6 +124,7 @@ constructor( public sharedService: SharedVariable,
   insertLength() {
     let L = parseFloat((<HTMLInputElement>document.getElementById('elemLength')).value);
     console.log("Lenght is " + L);
+    return L;
 
   }
 

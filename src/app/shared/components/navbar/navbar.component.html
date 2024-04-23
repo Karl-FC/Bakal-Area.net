@@ -9,9 +9,11 @@
             stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
         </div>
+
+
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow 
                     bg-neutral rounded-box w-52" >
-          <h1 (click)="reLoad()"
+          <h1 (click)="reLoad($event)"
           style="font-size: 18px; 
                     font-weight: 600;
                     padding:2px">Bakal-AREA.net</h1>
@@ -32,13 +34,35 @@
                     </ul></li>
                 <li><a>Settings</a>
                   <ul class="p-2">
-                    <li><label for="my_modal_7">Theme</label></li>
+                    <li><label for="theme_modal">Theme</label></li>
                     <li><a>About us</a></li>
                   </ul></li>
         </ul>
       </div>
-      <a class="btn btn-ghost text-xl">Bakal-AREA.net</a>
+      <a (click)="togglemenu($event)" class="btn btn-ghost text-xl">Bakal-AREA.net</a>
     </div>
+    <!--
+    <div id="dropmenu">
+    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow 
+                    bg-neutral rounded-box w-52" >
+          <h1 (click)="reLoad($event)"
+          style="font-size: 18px; 
+                    font-weight: 600;
+                    padding:2px">Bakal-AREA.net</h1>
+                <li><a>References</a>
+                  <ul class="p-2">
+                    <li><label for="my_modal_7">Theme</label></li>
+                  </ul></li>
+
+                <li><a>Settings</a>
+                  <ul class="p-2">
+                    <li><label for="theme_modal">Theme</label></li>
+                    <li><a>About us</a></li>
+                  </ul></li>
+        </ul>
+      </div>-->
+
+
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li>
@@ -70,6 +94,9 @@
             </li>
       </ul>
     </div>
+
+
+
     <div class="navbar-end">
       <label class="swap swap-rotate">
   
@@ -113,10 +140,34 @@
   </div>
 -->
 
+
+
+
+
+
+
+
+
+
+
+ <!--REFERENCESSS-->
+
+
+
+
+
+
+
+
+
+
+
+
+
   <!--SETTINGS-->
 
       <!--Themes-->
-          <input type="checkbox" id="my_modal_7" class="modal-toggle" />
+          <input type="checkbox" id="theme_modal" class="modal-toggle" />
             <div class="modal" role="dialog">
               <div class="modal-box">
                 <h3 class="text-lg font-bold">Themes</h3>
@@ -175,5 +226,5 @@
                               </label>
                             </div>
               </div>
-              <label class="modal-backdrop" for="my_modal_7">Close</label>
+              <label class="modal-backdrop" for="theme_modal">Close</label>
             </div>

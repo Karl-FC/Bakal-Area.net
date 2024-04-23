@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 
 
@@ -13,7 +13,9 @@ import { Router, ActivatedRoute, RouterModule, RouterOutlet } from '@angular/rou
 
 export class NavbarComponent {
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, 
+    private route: ActivatedRoute,
+    private renderer: Renderer2) { }
 
   goToDesign() {
     let currentRoute = this.route.snapshot.url[0].path;
@@ -28,8 +30,15 @@ export class NavbarComponent {
     this.router.navigate([`${currentRoute}/Analysis`]);
   }
   
-  reLoad() {
+  reLoad(event: Event) {
+    event.preventDefault();
     location.reload();
   }
 
+  togglemenu(event: Event) {
+    event.stopPropagation();
+
+    let dropmenu = document.getElementById("dropmenu")
+    this.renderer.setStyle(dropmenu,'display', 'block');
+  }
 }

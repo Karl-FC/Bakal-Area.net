@@ -1,5 +1,5 @@
 #container {
-    max-width: 90vw;
+    max-width: 83vw;
     box-sizing: border-box;
     
 }
@@ -18,17 +18,23 @@
 #tablediv {
     overflow: scroll;
     margin-top: 2px;
-    margin-left: -50px;
+    padding: 30px;
+    width: 100%;
 }
 
 /* RESPONSIVE LAYOUTS*/
 
     @media (max-width: 1024px) {
         //Laptops
+
+        #container {
+            max-width: 100vw;
+        }
         #tablediv {
             margin-top: 5px;
-            margin-left: 10px;
-            margin-right: -100px;    
+            padding-left: 10px;
+            box-sizing: border-box;
+            width: 100%;    
         }
     }
 
@@ -36,12 +42,14 @@
     @media (max-width: 768px) {
         #tablediv {
             margin-top: 5px;
-            margin-left: 10px;
-            margin-right: -110px;  
+            margin-left: 0px;
+            box-sizing: border-box; 
+            padding: 0px;
+            width: 100vw;
         }
 
         #container {
-            max-width: 50vw;
+            max-width: 80vw;
             box-sizing: border-box;
             
         }
