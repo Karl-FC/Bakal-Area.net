@@ -7,7 +7,7 @@ import { CompDesignRows } from './compdesign-table-properties.interface';
 import { HttpClient } from '@angular/common/http';
 import { CompDesignService } from '../../COMPRESSION/comp-design/comp-design.service';
 import { CompdesignLoadsComponent } from '../../calculators/compdesign-loads/compdesign-loads.component';
-import { CompdesignTableService } from '../compdesign-table.service';
+import { CompdesignTableService } from './compdesign-table.service';
 
 interface BeamShape {
   AISC_Manual_Label: string;
