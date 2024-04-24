@@ -10,7 +10,7 @@ import { ElasticBucklingComponent } from '../../calculators/elastic-buckling/ela
 import { LeftsideComponent } from '../../../shared/components/leftside/leftside.component';
 import { CompdesignTableComponent } from '../../DesignTables/compdesign-table/compdesign-table.component';
 import { CompdesignLoadsComponent } from '../../calculators/compdesign-loads/compdesign-loads.component';
-import { CompdesignTableService } from '../../DesignTables/compdesign-table.service';
+import { CompdesignTableService } from '../../DesignTables/compdesign-table/compdesign-table.service';
 
 @Component({
   selector: 'app-comp-design',

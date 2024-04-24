@@ -1,0 +1,70 @@
+<div id="container">
+    <span id="filter" class="form-control">
+      <label class="cursor-pointer label" >
+        <span class="label-text">Filter Beams</span><div class="tooltip tooltip-info" 
+        data-tip="Filter Beams: Filter the table to show only appropriate beams (W-shapes)">
+                <button style="transform: scale(0.7); vertical-align: top; margin-right: 40px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>                                          
+                </button>
+    </div>
+        <input type="checkbox" checked="checked" value="approWshape" class="checkbox checkbox-primary checkbox-xs" (change)="onCheckboxChange()"/>
+      </label>
+      
+  </span>
+  
+  
+      <div id="tablediv">
+          <div>
+              <table class="table">
+                <thead id="heading">
+                  <tr class="bg-primary">
+                    <th >Beam Shape</th>
+                    <th ><div style="resize: horizontal;">Weight</div></th>
+                    <th><div style="resize: horizontal;">Zx</div></th>
+                    <th><div style="resize: horizontal;">Factored Ultimate Load Moment (M<sub>u</sub>)</div></th>
+                    <th><div style="resize: horizontal;">Nominal Moment Strength (M<sub>n</sub>S<sub>b</sub>)</div></th>
+                    <th><div style="resize: horizontal;">LRFD Remarks</div></th>
+                    <th><div style="resize: horizontal;">Required Strength (M<sub>a</sub>)</div></th>
+                    <th><div style="resize: horizontal;">Nominal Flexural Strength (M<sub>n</sub>/O<sub>b</sub>)</div></th>
+                    <th><div style="resize: horizontal;">ASD Remarks</div></th>
+                    <th><div style="resize: horizontal;">Ix</div></th>
+                    <th><div style="resize: horizontal;">Sx</div></th>    
+                    <th><div style="resize: horizontal;">Flange</div></th>
+                    <th><div style="resize: horizontal;">Web</div></th>     
+                    <th><div style="resize: horizontal;">&lambda;<sub>f</sub></div></th>
+                    <th><div style="resize: horizontal;">&lambda;<sub>w</sub></div></th>
+                    <th><div style="resize: horizontal;">Wu</div></th>
+                    <th><div style="resize: horizontal;">Wa</div></th>
+                    <th><div style="resize: horizontal;">Zu</div></th>
+                    <th><div style="resize: horizontal;">Za</div></th>
+                  </tr>
+                </thead>
+                <tbody class="bg-neutral">
+                  <tr class="hover" *ngFor="let beamShape of beamShapes$ | async">
+                      <td style="font-weight: 500;">{{ beamShape.AISC_Manual_Label }}</td>
+                      <td>{{ beamShape.W }}</td>
+                      <td>{{ beamShape.Zx }}</td>
+                      <td>{{ beamShape.MuDemand ? beamShape.MuDemand : '-' }}</td>
+                      <td>{{ beamShape.MuCapacity ? beamShape.MuCapacity : '-' }}</td>
+                      <td style="font-weight: 600;">{{ beamShape.LRFDstatus ? beamShape.LRFDstatus : '-' }}</td>
+                      <td>{{ beamShape.MaDemand ? beamShape.MaDemand : '-' }}</td>
+                      <td>{{ beamShape.MaCapacity ? beamShape.MaCapacity : '-' }}</td>
+                      <td style="font-weight: 600;">{{ beamShape.ASDstatus ? beamShape.ASDstatus : '-' }}</td>
+                      <td>{{ beamShape.Ix}}</td>  
+                      <td>{{ beamShape.Sx}}</td>  
+                      <td>{{ beamShape.Fcondition ? beamShape.Fcondition : '-'  }}</td>
+                      <td>{{ beamShape.Wcondition ? beamShape.Wcondition : '-'  }}</td>                  
+                      <td>{{ beamShape['bf/2tf'] }}</td>
+                      <td>{{ beamShape['h/tw'] }}</td>
+                      <td>{{ beamShape.Wu }}</td>
+                      <td>{{ beamShape.Wa }}</td>
+                      <td>{{ beamShape.ZU }}</td>
+                      <td>{{ beamShape.ZA }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+      </div>
+  </div>

@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { beamShape } from '../../../shared.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CompDesignService } from '../../COMPRESSION/comp-design/comp-design.service';
-import { CompdesignTableService } from '../../DesignTables/compdesign-table.service';
+import { CompdesignTableService } from '../../DesignTables/compdesign-table/compdesign-table.service';
 import { ErrorAlertService } from '../../../shared/components/error-alert/error-alert.service';
 import { ErrorAlertComponent } from '../../../shared/components/error-alert/error-alert.component';
 
