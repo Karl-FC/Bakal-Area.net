@@ -3,29 +3,11 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CompressionbeamshapesComponent } from '../../../shared/data/compressionbeamshapes/compressionbeamshapes.component';
 import { SharedVariable } from '../../../shared.service';
 import { CommonModule } from '@angular/common';
-import { CompDesignRows } from './compdesign-table-properties.interface';
 import { HttpClient } from '@angular/common/http';
 import { CompDesignService } from '../../COMPRESSION/comp-design/comp-design.service';
 import { CompdesignLoadsComponent } from '../../calculators/compdesign-loads/compdesign-loads.component';
-import { CompdesignTableService } from './compdesign-table.service';
+import { CompdesignTableService, BeamShape } from './compdesign-table.service';
 
-interface BeamShape {
-  AISC_Manual_Label: string;
-  Fy: number;
-  A: number;
-  rx: number;
-  ry: number;
-  'bf/2tf': number;
-  'h/tw': number;
-  PuLoad: number;
-  PnLRFD: number;
-  PaLoad: number;
-  PnASD: number;
-  Fcondition: string;
-  Wcondition: string;
-  LRFDstatus: string;
-  ASDstatus: string;
-}
 
 @Component({
   selector: 'app-compdesign-table',

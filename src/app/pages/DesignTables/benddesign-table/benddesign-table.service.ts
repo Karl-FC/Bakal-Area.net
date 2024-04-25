@@ -12,7 +12,7 @@ import { BendDesignComponent } from '../../BENDING/bend-design/bend-design.compo
 import { BenddesignLoadsComponent } from '../../calculators/benddesign-loads/benddesign-loads.component';
 import { BendDesignService } from '../../BENDING/bend-design/bend-design.service';
 
-interface BeamShape {
+export interface BeamShape {
   AISC_Manual_Label: string;
   W: number;
   Wu: number;
@@ -52,6 +52,9 @@ interface BeamShape {
   Lamda_Pw: number;
   Lamda_Rw: number;
   beamCase: number;
+  A: number;
+
+
 }
 
 @Injectable({

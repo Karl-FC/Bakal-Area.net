@@ -6,29 +6,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
 
-import { BenddesignTableService } from './benddesign-table.service';
-
-interface BeamShape {
-  AISC_Manual_Label: string;
-  Fy: number;
-  Zx: number;
-  Sx: number;
-  Ix: number;
-  A: number;
-  kc: number;
-  rx: number;
-  ry: number;
-  'bf/2tf': number;
-  'h/tw': number;
-  MuLoad: number;
-  MnLRFD: number;
-  MaLoad: number;
-  MnASD: number;
-  Fcondition: string;
-  Wcondition: string;
-  LRFDstatus: string;
-  ASDstatus: string;
-}
+import { BenddesignTableService, BeamShape} from './benddesign-table.service';
 
 @Component({
   selector: 'app-Benddesign-table',

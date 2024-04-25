@@ -10,7 +10,7 @@ import { CompdesignTableComponent } from './compdesign-table.component';
 import { BehaviorSubject } from 'rxjs';
 import { BeamshapesComponent } from '../../../shared/data/beamshapes/beamshapes.component';
 
-interface BeamShape {
+export interface BeamShape {
   AISC_Manual_Label: string;
   Fy: number;
   A: number;
