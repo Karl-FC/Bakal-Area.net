@@ -40,3 +40,23 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+src/assets/db/imperialW14-16.json
+src/assets/db/imperialW4-8.csv
+src/assets/db/imperialW10.csv
+src/assets/db/imperialW12.csv
+src/assets/db/imperialW14-16.csv
+src/assets/db/imperialW18.csv
+src/assets/db/imperialW21.csv
+src/assets/db/imperialW24.csv
+src/assets/db/imperialW27.csv
+src/assets/db/imperialW33.csv
+src/assets/db/imperialW40.csv
+src/assets/db/imperialW44.csv
+src\assets\db\AISCimperial.csv
+src\assets\db\AISCimperial.xlsx
+src\assets\db\AISCmetric.csv
+src\assets\db\AISCmetric.xlsx
+src\assets\db\AISC15-imperial-Wshapes.json.bak
+src\assets\db\aisc-shapes-database-v15.0.xlsx
+src/assets/db/imperialW14.csv
+src/assets/db/imperialW16.csv

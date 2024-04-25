@@ -1,18 +1,28 @@
 <div id="container">
-    <span id="filter" class="form-control">
-      <label class="cursor-pointer label" >
-        <span class="label-text">Filter Beams</span><div class="tooltip tooltip-info" 
-        data-tip="Filter Beams: Filter the table to show only appropriate beams (W-shapes)">
-                <button style="transform: scale(0.7); vertical-align: top; margin-right: 40px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-                    </svg>                                          
-                </button>
-    </div>
-        <input type="checkbox" checked="checked" value="approWshape" class="checkbox checkbox-primary checkbox-xs" (change)="onCheckboxChange()"/>
+    <form><span id="filter" class="form-control">
+      <label id="bFilterContainer" class="cursor-pointer label" >
+        <span class="label-text">Filter</span>
+        <span>
+            <select id="beamsFilter" name="beamsFilter" [formControl]="beamFilters" (change)="onFilterChange()">
+            <option selected value=1>All Wshapes</option>
+             <option value=2>W4-8</option>
+             <option value=3>W10</option>
+             <option value=4>W12</option>
+             <option value=5>W14</option>
+             <option value=6>W16</option>
+             <option value=7>W18</option>
+             <option value=8>W21</option>
+             <option value=9>W24</option>
+            <option value=10>W27</option>
+            <option value=11>W33</option>
+            <option value=12>W40</option>
+            <option value=13>W44</option>
+            <option value=14>All beam shapes (NOT RECOMMENDED)</option>
+        </select><br><br>
+        </span>
       </label>
-      
-  </span>
+      </span>
+    </form>
   
   
       <div id="tablediv">

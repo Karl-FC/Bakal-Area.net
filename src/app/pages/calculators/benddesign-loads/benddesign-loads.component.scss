@@ -16,11 +16,13 @@ form h1 {
     display: flex;
 
 }
+        .columnthing {
+        flex: 1;
 
-.columnthing {
-flex: 1;
+        }
 
-}
+        
+
 
 #addElem{
     padding: 15px;
@@ -38,4 +40,34 @@ flex: 1;
 
 #addRow{
     box-sizing: border-box;
+}
+
+@media (max-width: 850px) {
+    #DL, #LL,
+            #elemLength, 
+            #YieldStrength, 
+            #ModulusE,
+            #beamConditions {
+                max-width: 60%;
+            }
+}
+
+
+
+@media (max-width: 768px) {
+
+    form h1 {
+        margin-left: 0px;
+    }
+
+    #variableForms {
+        display: block;
+
+    }
+            .columnthing {
+            flex: none;
+
+            }
+            
+            
 }

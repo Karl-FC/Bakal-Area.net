@@ -44,7 +44,7 @@ export interface BeamShape {
 export class CompdesignTableService {
   private _beamShapes = new BehaviorSubject<BeamShape[]>([]);
   beamShapes$ = this._beamShapes.asObservable();
-  onlyWbeams:boolean = true;
+  beamFilter: BehaviorSubject<number> = new BehaviorSubject(1);
   maxkLr:number = 0;
   
   constructor(private sharedElement: CompDesignService,
@@ -120,8 +120,46 @@ export class CompdesignTableService {
     }
 
 
+    setBeamFilter(filter: number) {
+      this.beamFilter.next(filter);
+      this.loadTable();
+      console.log("changing filter to " + filter)
+    }
+
     loadTable() {
-      const database = this.onlyWbeams ? 'assets/db/AISC15-imperial-Wshapes.json' : 'assets/db/AISC15-imperial.json';
+      //Beam Filter
+      console.log("LOADING TABLE WITH FILTER = " + this.beamFilter)
+      let database: string = 'assets/db/AISC15-imperial-Wshapes.json';
+                if (this.beamFilter.value == 1) {
+                    database = 'assets/db/AISC15-imperial-Wshapes.json';}
+                  else  if (this.beamFilter.value == 2) {
+                    database = 'assets/db/imperial_W4-8.json';}
+                  else  if (this.beamFilter.value == 3) {
+                    database = 'assets/db/imperial_W10.json';}
+                  else  if (this.beamFilter.value == 4) {
+                    database = 'assets/db/imperial_W12.json';}
+                  else  if (this.beamFilter.value == 5) {
+                    database = 'assets/db/imperial_W14.json';}
+                  else  if (this.beamFilter.value == 6) {
+                    database = 'assets/db/imperial_W16.json';}
+                  else  if (this.beamFilter.value == 7) {
+                    database = 'assets/db/imperial_W18.json';}
+                  else  if (this.beamFilter.value == 8) {
+                    database = 'assets/db/imperial_W21.json';}
+                  else  if (this.beamFilter.value == 9) {
+                    database = 'assets/db/imperial_W24.json';}
+                  else  if (this.beamFilter.value == 10) {
+                    database = 'assets/db/imperial_W27.json';}
+                  else  if (this.beamFilter.value == 11) {
+                    database = 'assets/db/imperial_W33.json';}
+                  else  if (this.beamFilter.value == 12) {
+                    database = 'assets/db/imperial_W40.json';}
+                  else  if (this.beamFilter.value == 13) {
+                    database = 'assets/db/imperial_W44.json';}
+                  else  if (this.beamFilter.value == 14) {
+                    database = 'assets/db/AISC15-imperial.json';}
+
+
       this.http.get<BeamShape[]>(database).subscribe(data => {
         // For each beam shape, calculate status then ilalagay sa beamShape na array
                 data.forEach(beamShape => {

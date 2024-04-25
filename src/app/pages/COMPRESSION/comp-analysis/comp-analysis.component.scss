@@ -65,66 +65,6 @@ body {
 
                     }
 
-                    
-
-
-
-
-
-
-
-/* RESPONSIVE LAYOUTS*/
-/*
-@media (max-width: 1300px) {
-    #results {
-        border-radius: 25px;
-        grid-row: 3;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        grid-gap: 20px;
-        width: 100vw;
-    }
-
-    #calculations {
-        //display: flex;
-        //flex-wrap: nowrap;
-       // overflow: hidden;
-        z-index: 0;
-        width: 100vw;
-    }
-
-    .content {
-        grid-row: 1;
-        width: 100vw;
-    }
-
-    #bgSlender {
-        grid-column: span 2;
-        height: 120vh;
-        padding: 30px;
-        box-sizing: border-box;
-        width: 100vw;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        box-sizing: border-box;
-    }
-
-    #bgTable {
-        grid-column: span 3;
-        box-sizing: border-box;
-        width: 100vw;
-        box-sizing: border-box;
-    }
-
-    #content {
-        grid-row: 1;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        grid-gap: 20px; //margins
-        width: 100vw;
-    }
-}*/
-
 
 @media (max-width: 1024px) {
     //Laptops

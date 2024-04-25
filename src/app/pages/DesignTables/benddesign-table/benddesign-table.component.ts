@@ -4,6 +4,7 @@ import { CompressionbeamshapesComponent } from '../../../shared/data/compression
 import { SharedVariable } from '../../../shared.service';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 
 import { BenddesignTableService, BeamShape} from './benddesign-table.service';
@@ -15,9 +16,11 @@ import { BenddesignTableService, BeamShape} from './benddesign-table.service';
   templateUrl: './benddesign-table.component.html',
   styleUrl: './benddesign-table.component.scss'
 })
+
+
 export class BenddesignTableComponent implements OnInit {
   beamShapes$ = this.updater.beamShapes$;
-  onlyWbeams:boolean = true;
+  beamFilters = new FormControl('');
 
   constructor(private updater: BenddesignTableService) {
     this.updater.updateTable$.subscribe(() => {
@@ -26,11 +29,18 @@ export class BenddesignTableComponent implements OnInit {
     });
   }
   
-  onCheckboxChange() {
-    this.onlyWbeams = !this.onlyWbeams;
-    this.updater.onlyWbeams=this.onlyWbeams
-    this.updater.loadTable();
-  }
+  onFilterChange() {
+    let beamFilters = Number(this.beamFilters.value);
+    this.updater.beamFilter.next(beamFilters);
+    if (this.beamFilters.value !== null) {
+        this.updater.setBeamFilter(Number(this.beamFilters.value));
+    }
+    // or assign a default value if this.beamFilters.value is null
+    else {
+        this.updater.setBeamFilter(0); // replace 0 with your default value
+    }
+}
+  
 
   ngOnInit() {
     this.updater.loadTable();
