@@ -27,28 +27,28 @@
   
       <div id="tablediv">
           <div>
-              <table class="table">
+              <table matSort (matSortChange)="this.sortData($event)" class="table">
                 <thead id="heading">
                   <tr class="bg-primary">
-                    <th >Beam Shape</th>
-                    <th ><div style="resize: horizontal;">Weight</div></th>
-                    <th><div style="resize: horizontal;">Zx</div></th>
-                    <th><div style="resize: horizontal;">Factored Ultimate Load Moment (M<sub>u</sub>)</div></th>
-                    <th><div style="resize: horizontal;">Nominal Moment Strength (M<sub>n</sub>S<sub>b</sub>)</div></th>
-                    <th><div style="resize: horizontal;">LRFD Remarks</div></th>
-                    <th><div style="resize: horizontal;">Required Strength (M<sub>a</sub>)</div></th>
-                    <th><div style="resize: horizontal;">Nominal Flexural Strength (M<sub>n</sub>/O<sub>b</sub>)</div></th>
-                    <th><div style="resize: horizontal;">ASD Remarks</div></th>
-                    <th><div style="resize: horizontal;">Ix</div></th>
-                    <th><div style="resize: horizontal;">Sx</div></th>    
-                    <th><div style="resize: horizontal;">Flange</div></th>
-                    <th><div style="resize: horizontal;">Web</div></th>     
-                    <th><div style="resize: horizontal;">&lambda;<sub>f</sub></div></th>
-                    <th><div style="resize: horizontal;">&lambda;<sub>w</sub></div></th>
+                    <th mat-sort-header="AISC_Manual_Label">Beam Shape</th>
+                    <th mat-sort-header="W"><div style="resize: horizontal;">Weight</div></th>
+                    <th mat-sort-header="Zx"><div style="resize: horizontal;">Z<sub>x</sub></div></th>
+                    <th><div style="resize: horizontal;">Z<sub>assumed (LRFD)</sub></div></th>
+                    <th mat-sort-header="MuDemand"><div style="resize: horizontal;">Factored Ultimate Load Moment (M<sub>u</sub>)</div></th>
+                    <th mat-sort-header="MuCapacity"><div style="resize: horizontal;">Nominal Moment Strength (M<sub>n</sub>S<sub>b</sub>)</div></th>
+                    <th mat-sort-header="LRFDstatus"><div style="resize: horizontal;">LRFD Remarks</div></th>
+                    <th><div style="resize: horizontal;">Z<sub>assumed (ASD)</sub></div></th>
+                    <th mat-sort-header="MaDemand"><div style="resize: horizontal;">Required Strength (M<sub>a</sub>)</div></th>
+                    <th mat-sort-header="MaCapacity"><div style="resize: horizontal;">Nominal Flexural Strength (M<sub>n</sub>/O<sub>b</sub>)</div></th>
+                    <th mat-sort-header="ASDstatus"><div style="resize: horizontal;">ASD Remarks</div></th>
+                    <th mat-sort-header="Ix"><div style="resize: horizontal;">I<sub>x</sub>></div></th>
+                    <th mat-sort-header="Sx"><div style="resize: horizontal;">S<sub>x</sub></div></th>    
+                    <th mat-sort-header="Fcondition"><div style="resize: horizontal;">Flange</div></th>
+                    <th mat-sort-header="Wcondition"h><div style="resize: horizontal;">Web</div></th>     
+                    <th mat-sort-header="bf2tf"><div style="resize: horizontal;">&lambda;<sub>f</sub></div></th>
+                    <th mat-sort-header="htw"><div style="resize: horizontal;">&lambda;<sub>w</sub></div></th>
                     <th><div style="resize: horizontal;">Wu</div></th>
                     <th><div style="resize: horizontal;">Wa</div></th>
-                    <th><div style="resize: horizontal;">Zu</div></th>
-                    <th><div style="resize: horizontal;">Za</div></th>
                   </tr>
                 </thead>
                 <tbody class="bg-neutral">
@@ -56,9 +56,11 @@
                       <td style="font-weight: 500;">{{ beamShape.AISC_Manual_Label }}</td>
                       <td>{{ beamShape.W }}</td>
                       <td>{{ beamShape.Zx }}</td>
+                      <td>{{ beamShape.ZU }}</td>
                       <td>{{ beamShape.MuDemand ? beamShape.MuDemand : '-' }}</td>
                       <td>{{ beamShape.MuCapacity ? beamShape.MuCapacity : '-' }}</td>
                       <td style="font-weight: 600;">{{ beamShape.LRFDstatus ? beamShape.LRFDstatus : '-' }}</td>
+                      <td>{{ beamShape.ZA }}</td>
                       <td>{{ beamShape.MaDemand ? beamShape.MaDemand : '-' }}</td>
                       <td>{{ beamShape.MaCapacity ? beamShape.MaCapacity : '-' }}</td>
                       <td style="font-weight: 600;">{{ beamShape.ASDstatus ? beamShape.ASDstatus : '-' }}</td>
@@ -70,8 +72,6 @@
                       <td>{{ beamShape['h/tw'] }}</td>
                       <td>{{ beamShape.Wu }}</td>
                       <td>{{ beamShape.Wa }}</td>
-                      <td>{{ beamShape.ZU }}</td>
-                      <td>{{ beamShape.ZA }}</td>
                   </tr>
                 </tbody>
               </table>

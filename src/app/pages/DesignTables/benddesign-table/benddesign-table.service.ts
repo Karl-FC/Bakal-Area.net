@@ -12,6 +12,8 @@ import { BendDesignComponent } from '../../BENDING/bend-design/bend-design.compo
 import { BenddesignLoadsComponent } from '../../calculators/benddesign-loads/benddesign-loads.component';
 import { BendDesignService } from '../../BENDING/bend-design/bend-design.service';
 
+import { Sort,MatSortModule } from '@angular/material/sort';
+
 export interface BeamShape {
   AISC_Manual_Label: string;
   W: number;
@@ -61,14 +63,17 @@ export interface BeamShape {
   providedIn: 'root'
 })
 export class BenddesignTableService {
-  private _beamShapes = new BehaviorSubject<BeamShape[]>([]);
+  public _beamShapes = new BehaviorSubject<BeamShape[]>([]);
   beamShapes$ = this._beamShapes.asObservable();
   beamFilter: BehaviorSubject<number> = new BehaviorSubject(1);
 
   
-  constructor(private sharedElement: BendDesignService,
-     private http: HttpClient) {}
+  constructor(public sharedElement: BendDesignService,
+    public http: HttpClient) {}
+     
 
+
+     
     calculateStatus(beamShape: BeamShape) {
 
       //Mga variables sa pagsolve sa analysis  
@@ -345,9 +350,7 @@ setBeamFilter(filter: number) {
       Wcondition: beamShape.Wcondition
     };
   }
-  
-  
+    
+
 
 }
-
-

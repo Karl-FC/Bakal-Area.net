@@ -42,12 +42,12 @@ export interface BeamShape {
   providedIn: 'root'
 })
 export class CompdesignTableService {
-  private _beamShapes = new BehaviorSubject<BeamShape[]>([]);
+  public _beamShapes = new BehaviorSubject<BeamShape[]>([]);
   beamShapes$ = this._beamShapes.asObservable();
   beamFilter: BehaviorSubject<number> = new BehaviorSubject(1);
   maxkLr:number = 0;
   
-  constructor(private sharedElement: CompDesignService,
+  constructor(public sharedElement: CompDesignService,
      private http: HttpClient) {}
 
     calculateStatus(beamShape: BeamShape) {
