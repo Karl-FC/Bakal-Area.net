@@ -8,6 +8,7 @@ import { CompAnalysisComponent } from './app/pages/COMPRESSION/comp-analysis/com
 import { CompDesignComponent } from './app/pages/COMPRESSION/comp-design/comp-design.component';
 import { TenAnalysisComponent } from './app/pages/TENSION/ten-analysis/ten-analysis.component';
 import { TenDesignComponent } from './app/pages/TENSION/ten-design/ten-design.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -44,7 +45,7 @@ bootstrapApplication(AppComponent, {
           {path: 'Bending/Design', 
           loadComponent: () => import('./app/pages/BENDING/bend-design/bend-design.component')
               .then(c => c.BendDesignComponent)},
-        ])
+        ]), provideAnimationsAsync()
     ]
 })
 .catch((err) => console.error(err));
