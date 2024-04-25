@@ -43,7 +43,7 @@ body {
                         
                         #bgSlender {
                             grid-column: span 2;
-                            height: 120vh;
+                            height: 920px;
                             padding: 30px;
                             border-top-left-radius: 0;
                             border-top-right-radius: 0;
@@ -62,6 +62,7 @@ body {
                         border-radius: 25px;
                         grid-row: span 3;
                         display: grid;
+                        margin-bottom: 50px;
 
                     }
 
@@ -86,7 +87,6 @@ body {
     }
 
     #bgSlender {
-        height: 150vh;
         grid-column: span 2 ;
     }
 
@@ -98,14 +98,25 @@ body {
 
 @media (max-width: 866px) {
     #bgSlender {
-        height: 150vh;
         grid-column: span 1 ;
+        height: 950px;
     }
 
     #bgTable {
         width: 100%;
         grid-column: span 2 ;
     }
+
+    .divider {
+        width: 90vw;
+    }
+}
+
+@media (max-width: 815px) {
+    #bgSlender {
+        height: 980px;
+    }
+
 }
 
 //Tablet (768x628)
@@ -125,7 +136,6 @@ body {
         width: 100%;
     }
     #bgSlender {
-        height: 150vh;
         box-sizing: border-box;
         padding-left: 10%;
     }
@@ -141,7 +151,7 @@ body {
     }
 
     #bgSlender {
-        height: 135vh;
+        height: 950px;
         box-sizing: border-box;
         padding-left: 10%;
     }
@@ -156,8 +166,13 @@ body {
     }
 
     #bgSlender {
-        height: 135vh;
         box-sizing: border-box;
+        width: 100vw;
+    }
+
+    #results {
+        width: 100vw;
+        
     }
 }
 
