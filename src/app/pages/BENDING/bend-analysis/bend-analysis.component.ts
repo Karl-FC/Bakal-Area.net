@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SharedVariable } from '../../../shared.service';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 import { CompressionComponent } from '../../calculators/slenderness/compression.component';
@@ -16,7 +17,13 @@ import { LeftsideComponent } from '../../../shared/components/leftside/leftside.
   templateUrl: './bend-analysis.component.html',
   styleUrl: './bend-analysis.component.scss'
 })
-export class BendAnalysisComponent {
+export class BendAnalysisComponent implements OnInit {  
 
+
+    constructor(private sharedService: SharedVariable) {
+    }
   
+    ngOnInit() {
+      this.sharedService.mainTitle = 'Analysis Calculator for Bending';
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 import { CompressionComponent } from '../../calculators/slenderness/compression.component';
@@ -11,10 +11,13 @@ import { LeftsideComponent } from '../../../shared/components/leftside/leftside.
 import { CompdesignTableComponent } from '../../DesignTables/compdesign-table/compdesign-table.component';
 import { CompdesignLoadsComponent } from '../../calculators/compdesign-loads/compdesign-loads.component';
 import { CompdesignTableService } from '../../DesignTables/compdesign-table/compdesign-table.service';
+import { TitleComponent } from '../../../shared/components/title/title.component';
+import { SharedVariable } from '../../../shared.service';
 
 @Component({
   selector: 'app-comp-design',
   standalone: true,
+  providers: [TitleComponent],
   imports: [RouterOutlet, FormsModule, CommonModule, 
     NavbarComponent, LeftsideComponent,
     CompressionComponent, 
@@ -22,11 +25,18 @@ import { CompdesignTableService } from '../../DesignTables/compdesign-table/comp
     ElementsComponent, 
     ElasticBucklingComponent, 
     CompdesignTableComponent,
-    CompdesignLoadsComponent,
+    CompdesignLoadsComponent, TitleComponent
   ],
   templateUrl: './comp-design.component.html',
   styleUrl: './comp-design.component.scss'
 })
-export class CompDesignComponent {  
-    
+export class CompDesignComponent implements OnInit {  
+
+
+  constructor(private sharedService: SharedVariable) {
   }
+
+  ngOnInit() {
+    this.sharedService.mainTitle = 'Design Calculator for Axial Compression';
+  }
+}

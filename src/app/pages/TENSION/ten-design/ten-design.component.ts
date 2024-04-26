@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SharedVariable } from '../../../shared.service';
 
 @Component({
   selector: 'app-ten-design',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
   templateUrl: './ten-design.component.html',
   styleUrl: './ten-design.component.scss'
 })
-export class TenDesignComponent {
+export class TenDesignComponent implements OnInit {  
 
+
+  constructor(private sharedService: SharedVariable) {
+  }
+
+  ngOnInit() {
+    this.sharedService.mainTitle = 'Design Calculator for Axial Tension';
+  } 
 }

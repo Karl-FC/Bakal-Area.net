@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedVariable {
+  mainTitle: string = 'huhu';
   chosenBeamShape: BehaviorSubject<beamShape | null> = 
   new BehaviorSubject<beamShape | null>(null);
   chosenBeamShapeLabel = new BehaviorSubject<string>('');
