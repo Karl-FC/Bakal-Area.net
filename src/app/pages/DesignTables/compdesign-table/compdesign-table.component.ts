@@ -68,6 +68,8 @@ export class CompdesignTableComponent implements OnInit {
       switch (sort.active) {
         case 'AISC_Manual_Label':
               return compare(a.AISC_Manual_Label, b.AISC_Manual_Label, isAsc);
+        case 'W':
+              return compare(a.W, b.W, isAsc);
         case 'PuLoad':
           return compare(a.PuLoad, b.PuLoad, isAsc);
         case 'PnLRFD':
@@ -78,8 +80,6 @@ export class CompdesignTableComponent implements OnInit {
           return compare(a.PaLoad, b.PaLoad, isAsc);
         case 'PnASD':
           return compare(a.PnASD, b.PnASD, isAsc);
-        case 'LRFDstatus':
-          return compare(a.LRFDstatus, b.LRFDstatus, isAsc);
         case 'ASDstatus':
           return compare(a.ASDstatus, b.ASDstatus, isAsc);
         case 'Fcondition':

@@ -31,11 +31,12 @@
               <thead id="heading" style="position: sticky; top: 0;">
                 <tr class="bg-primary" style="position: sticky; top: 0;"> <!--Di gumagana sticky awits-->
                   <th mat-sort-header="AISC_Manual_Label">Beam Shape</th>
+                  <th mat-sort-header="W">W</th>
                   <th mat-sort-header="PuLoad"><div style="resize: horizontal;">Factored Load (P<sub>u</sub>)</div></th>
-                  <th mat-sort-header="PnLRFD"><div style="resize: horizontal;">Nominal Strength (P<sub>n</sub>)</div></th>
+                  <th mat-sort-header="PnLRFD"><div style="resize: horizontal;">Nominal Strength (&Phi;<sub>c</sub>P<sub>n</sub>)</div></th>
                   <th mat-sort-header="LRFDstatus"><div style="resize: horizontal;">LRFD Remarks</div></th>
                   <th mat-sort-header="PaLoad"><div style="resize: horizontal;">Max. Compressive Load (P<sub>a</sub>)</div></th>
-                  <th mat-sort-header="PnASD"><div style="resize: horizontal;">Nominal Strength (P<sub>n</sub>)</div></th>
+                  <th mat-sort-header="PnASD"><div style="resize: horizontal;">Nominal Strength (P<sub>n</sub>/&Omega;<sub>b</sub>)</div></th>
                   <th mat-sort-header="ASDstatus"><div style="resize: horizontal;">ASD Remarks</div></th>
                   <th mat-sort-header="Fcondition"><div style="resize: horizontal;">Flange</div></th>
                   <th mat-sort-header="Wcondition"><div style="resize: horizontal;">Web</div></th>
@@ -44,20 +45,21 @@
                   <th mat-sort-header='h/tw'><div style="resize: horizontal;">&lambda;<sub>w</sub></div></th>
                   <th mat-sort-header="rx"><div style="resize: horizontal;">r<sub>x</sub></div></th>
                   <th mat-sort-header="ry"><div style="resize: horizontal;">r<sub>y</sub></div></th>
-                  <th mat-sort-header="maxkLr"><div style="resize: horizontal;">maxkLr</div></th>
+                  <th mat-sort-header="maxkLr"><div style="resize: horizontal;">Column Slenderness (KL/r)</div></th>
                   <th mat-sort-header="Fe"><div style="resize: horizontal;">F<sub>e</sub></div></th>
-                  <th mat-sort-header="Fcr"><div style="resize: horizontal;">F<sub>cr</sub>></div></th>
+                  <th mat-sort-header="Fcr"><div style="resize: horizontal;">F<sub>cr</sub></div></th>
                   <th mat-sort-header="Pcr"><div style="resize: horizontal;">P<sub>cr</sub></div></th>
                 </tr>
               </thead>
               <tbody class="bg-neutral">
                 <tr class="hover" *ngFor="let beamShape of beamShapes$ | async">
-                    <td style="font-weight: 500;">{{ beamShape.AISC_Manual_Label }}</td>
+                    <td  style="font-weight: 500;">{{ beamShape.AISC_Manual_Label }}</td>
+                    <td class="bg-accent">{{ beamShape.W }}</td>
                     <td>{{ beamShape.PuLoad ? beamShape.PuLoad : '-' }}</td>
-                    <td>{{ beamShape.PuLoad ? beamShape.PnLRFD : '-' }}</td>
+                    <td class="bg-accent">{{ beamShape.PuLoad ? beamShape.PnLRFD : '-' }}</td>
                     <td style="font-weight: 600;">{{ beamShape.LRFDstatus ? beamShape.LRFDstatus : '-' }}</td>
                     <td>{{ beamShape.PaLoad ? beamShape.PaLoad : '-' }}</td>
-                    <td>{{ beamShape.PuLoad ? beamShape.PnASD : '-' }}</td>
+                    <td class="bg-accent">{{ beamShape.PuLoad ? beamShape.PnASD : '-' }}</td>
                     <td style="font-weight: 600;">{{ beamShape.ASDstatus ? beamShape.ASDstatus : '-' }}</td>  
                     <td>{{ beamShape.Fcondition ? beamShape.Fcondition : '-'  }}</td>
                     <td>{{ beamShape.Wcondition ? beamShape.Wcondition : '-'  }}</td>                  

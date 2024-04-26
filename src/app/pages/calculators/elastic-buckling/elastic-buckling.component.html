@@ -1,62 +1,167 @@
 <div id="summary">
-    <h1>Computations</h1>
+    <h1 class="formulaheader">Results</h1>
     <div id="summarySquared">
-        <h2>Euler Elastic Buckling (F<sub>e</sub>)</h2>
-        F<sub>e</sub> = 
-        <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-            <span>π<sup>2</sup>E</span>
-            <span style="border-top:1px solid">(kL/r)<sup>2</sup></span>
-            </span>
-            <br><br>
 
-        <h6>{{ elasticBucklingService.FeResult }}</h6>
-            <br><br><br>
-    
-        <h2>F critical</h2>
-        F<sub>cr</sub> = [0.658 <sup>
-                <span>F<sub>y</sub></span>/F<sub>e</sub></sup>
-                ]F<sub>y</sub>
-                <br><br>
-    
-            <br>
-            F<sub>cr</sub> = 0.877Fe
-            <br><br>
-        <h6>{{ elasticBucklingService.FcrResult }}</h6>
-            <br><br><br>
-    
-        <h2>Pn</h2>
-        P<sub>cr</sub> = F<sub>cr</sub>A<sub>g</sub>
-            <br><br>
-        P<sub>cr</sub> = P<sub>n</sub>
-            <br><br>
-        P<sub>n</sub> = F<sub>cr</sub>A<sub>g</sub>
-            <br>
-        <h6>{{ elasticBucklingService.PcrResult }}</h6>
-            <br><br><br>
-    
-        <h3>LRFD</h3>
-            <br>
-        P<sub>u</sub> = ∅P<sub>n</sub>
-            <br>
-        <h4>{{ elasticBucklingService.LRFDResult }}</h4>
-            <br><br><br>
-    
-        <h3>ASD</h3>
-            <br>
-        P<sub>a</sub>=
+<!--STEP 1: Fe-->    
+        <div class="collapse bg-neutral collapse-arrow">
+            <input type="checkbox" /> 
+            <div class="collapse-title text-xl font-medium">
+                    Elastic Critical Buckling (F<sub>e</sub>)
+            </div>
+        <div class="collapse-content"> 
+                    <div class="equation">
+                            F<sub>e</sub> = 
+                            <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                <span>π<sup>2</sup>E</span>
+                                <span style="border-top:1px solid">(KL/r)<sup>2</sup></span>
+                                </span>
+                    </div>
+                                <br>
+                    <div class="solution" *ngIf="elasticBucklingService.FeResult">
+                             = 
+                            <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                <span>(π<sup>2</sup>)({{this.elasticBucklingService.sharedService.E.value}})</span>
+                                <span style="border-top:1px solid">({{this.elasticBucklingService.sharedService.maxKLr.value}})<sup>2</sup></span>
+                                </span>
+                    </div>
+                        <h5 class="answer">{{ elasticBucklingService.FeResult }}</h5>
+            </div>
+        </div>
+<br>
+<!--STEP 2: Fcr-->
+        <div class="collapse bg-neutral collapse-arrow">
+                <input type="checkbox" /> 
+                <div class="collapse-title text-xl font-medium">
+                    Critical Stress (F<sub>cr</sub>)
+                </div>
+        <div class="collapse-content"> 
+                <!--INFO fr-->        
+                    <div id="Fechecker" class="infoquote">
+                            <p>if (KL/r) &le; 4&radic;(<span>E</span>/F<sub>y</sub>),
+                                    then F<sub>cr</sub> = [0.658 <sup>
+                                        <span>F<sub>y</sub></span>/F<sub>e</sub></sup>
+                                        ]F<sub>y</sub>
+                                <br><br>
+                                if (KL/r) &gt; 4&radic;(<span>E</span>/F<sub>y</sub>),
+                                    then F<sub>cr</sub> = 0.877F<sub>e</sub>
+                                </p><br><br>  
+                    </div>  
+                    <div class="solution" *ngIf="elasticBucklingService.sharedService.maxKLr.value">
+                        <p style="margin-left: -40%;">Column Slenderness (KL/r) = {{elasticBucklingService.sharedService.maxKLr.value.toFixed(3)}}
+                            </p><br>
+                        <p style="margin-left: -30%;">
+                            4.17&radic;(<span>E</span>/F<sub>y</sub>) = 4.17&radic;[({{elasticBucklingService.sharedService.E.value}})({{elasticBucklingService.sharedService.Fy.value}})
+                            = {{elasticBucklingService.Fcheck.toFixed(3)}}
+                        </p>
+
+                    </div>
+                                        
+                    
+                <!--Less than 4.17-->        
+                <div id="lessthan" 
+                *ngIf="elasticBucklingService.FeCheckIsLess==1">
+                <p style="margin-left: 10%; font-style: italic;">KL/r is lesser or equal, therefore:</p><br>    
+                    <div class="equation">
+                                    F<sub>cr</sub> = [0.658 <sup>
+                                        <span>F<sub>y</sub></span>/F<sub>e</sub></sup>
+                                        ]F<sub>y</sub>
+                                        <br><br>
+                    </div>
+                    <div class="solution">
+                                = [0.658 <sup>
+                                    <span>{{this.elasticBucklingService.sharedService.Fy.value}}</span>/{{this.elasticBucklingService.Fe.toFixed(3)}}</sup>
+                                    ]{{this.elasticBucklingService.sharedService.Fy.value}}
+                    </div>
+                </div>
+                                        
+                <!--greater than 4.17--> 
+                <div id="greaterthan"
+                *ngIf="elasticBucklingService.FeCheckIsLess==2">
+                <p style="font-style: italic;">KL/r is greater, therefore:</p><br>        
+                    <div class="equation">
+                                    F<sub>cr</sub> = 0.877F<sub>e</sub>
+                                        <br><br>
+                    </div>
+                    <div class="solution">
+                                    = (0.877)({{this.elasticBucklingService.Fe.toFixed(3)}})
+                    </div>
+                </div>
+                        
+            <h5 class="answer">{{ elasticBucklingService.FcrResult }}</h5>
+                            
+                            
+        </div>
+        </div>
+        
+<br>   
+<!--STEP 3: Pcr-->    
+<div class="collapse bg-neutral collapse-arrow">
+    <input type="checkbox" /> 
+    <div class="collapse-title text-xl font-medium">
+            Nominal Strength (P<sub>n</sub>)
+    </div>
+<div class="collapse-content"> 
+            <div class="equation">
+                    P<sub>n</sub> = F<sub>cr</sub>A<sub>g</sub>
+            </div>
+                        
+            <div class="solution" *ngIf="elasticBucklingService.PcrResult"><br>
+                     = 
+                     ({{elasticBucklingService.Fcr.toFixed(3)}})({{elasticBucklingService.sharedService.Ag.value}})
+            </div>
+                <h5 class="answer">{{ elasticBucklingService.PcrResult }}</h5>
+    </div>
+</div><br>            
+
+<!--STEP 4-1: LRFD-->    
+<div class="collapse bg-neutral collapse-arrow">
+    <input type="checkbox" /> 
+    <div class="collapse-title text-xl font-medium">
+            Load and Resistance Factor Design (LRFD)
+    </div>
+<div class="collapse-content"> 
+            <div class="equation">
+                    Design Strength = &Phi;<sub>c</sub>P<sub>n</sub>
+            </div>
+                        
+            <div class="solution" *ngIf="elasticBucklingService.LRFDResult"><br>
+                     = (0.9)({{elasticBucklingService.Pcr.toFixed(3)}})
+            </div>
+                <h5 class="answer">{{ elasticBucklingService.LRFDResult }}</h5>
+    </div>
+</div><br> 
+
+<!--STEP 4-2: ASD-->    
+<div class="collapse bg-neutral collapse-arrow">
+    <input type="checkbox" /> 
+    <div class="collapse-title text-xl font-medium">
+            Allowable Strength Design (ASD)
+    </div>
+<div class="collapse-content"> 
+            <div class="equation">
+                Allowable Strength = 
                 <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
                     <span>P<sub>n</sub></span>
                     <span style="border-top:1px solid">Ω</span>
                     </span>
-            <br>
-        <h4 style="display: none;">{{ elasticBucklingService.ASDResult }}</h4>
-            <br><br><br>
-    
-        <br><br>
-        <p>{{ elasticBucklingService.result }}</p>
-            <br><br><br>
-    
-        <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary">
+            </div>
+                        
+            <div class="solution" *ngIf="elasticBucklingService.LRFDResult"><br>=
+                <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                    <span>{{elasticBucklingService.Pcr.toFixed(3)}}</span>
+                    <span style="border-top:1px solid">1.67</span>
+                    </span>
+            </div>
+                <h5 class="answer">{{ elasticBucklingService.ASDResult }}</h5>
+    </div>
+</div><br> 
+
+
+
+
+<!--FINAL FINAL ANSWER-->
+    <div id="finalanswer">
+        <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary" >
             <!-- LRFD Results -->  
             <div id="BgLRFD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
                 <div class="stat-title" style="font-size: 24px; font-weight: 600;">LRFD</div>
@@ -72,4 +177,6 @@
             </div>
         </div>
     </div>
+
 </div>
+

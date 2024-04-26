@@ -4,16 +4,23 @@ import { CompressionComponent } from '../slenderness/compression.component';
 import { ElementsComponent } from '../elements/elements.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ElasticBucklingService } from './elastic-buckling.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-elastic-buckling',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './elastic-buckling.component.html',
   styleUrl: './elastic-buckling.component.scss'
 })
 export class ElasticBucklingComponent  {
-  constructor(public elasticBucklingService: ElasticBucklingService) {}
+  constructor(public elasticBucklingService: ElasticBucklingService,
+    private el: ElementRef,
+    private renderer: Renderer2
+  ) {}
+
+
+
 
 }

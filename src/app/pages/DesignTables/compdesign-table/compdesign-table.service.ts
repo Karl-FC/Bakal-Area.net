@@ -36,6 +36,7 @@ export interface BeamShape {
   Lamda_Rf: number;
   Lamda_Pw: number;
   Lamda_Rw: number;
+  W: number;
 }
 
 @Injectable({
