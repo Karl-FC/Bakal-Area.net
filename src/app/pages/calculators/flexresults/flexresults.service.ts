@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SharedVariable } from '../../../shared.service';
+import { SharedVariable, beamShape } from '../../../shared.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component, Renderer2, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   providedIn: 'root'
 })
 export class FlexresultsService {
-  constructor(public sharedService: SharedVariable) { }
+  constructor(public sharedService: SharedVariable  ) { }
 
   Fe: number = 0
   Fcheck: number = 0
@@ -28,10 +28,25 @@ export class FlexresultsService {
   PnASD: number = 0;
   FeCheckIsLess:number = 0;
 
+  areaTop: number = 0;
+  areaBot: number = 0;
+  PNA: number = 0;
+  PNAfrombelow: number = 0;
+  Area: number = 0;
+  dnot: number = 0; // depth minus flanges
+  Z: number = 0;
+  Mp: number = 0;
+  MuLRFD: number = 0;
+  MaASD: number = 0;
+
+  PNAresults: string = '';
+  ZResults: string = '';
+  MpResults: string = '';
+
   Centroid(){
     console.log("~~~~SOLVING FOR CENTROID~~~~~")
     let E = this.sharedService.E.value;
-    let Fy = this.sharedService.Fy.value;
+    let Fy = this.sharedService.Fyield.value;
     let d = this.sharedService.d.value;
     let bf = this.sharedService.bf.value;
     let tf = this.sharedService.tf.value
@@ -42,150 +57,119 @@ export class FlexresultsService {
       if (this.sharedService.isSymmetry == true) {
         let bf2 = this.sharedService.bf.value;
         let tf2 = this.sharedService.tf.value;
-      } else {
+
+        this.dnot = d-(2*tf);
+        this.PNA = this.dnot/2
+        this.PNAfrombelow = this.PNA
+        this.areaTop = this.sharedService.Ag.value;
+        this.areaBot = this.areaTop
+
+
+                    //Plastic Modulus, Zx
+                        //Zx = AcYc + AtYt
+                      let leftSide = (bf*tf)*(this.PNA+ (tf/2)) + (this.PNA*(tw))*(this.PNA/2)
+                          console.log('leftSide is ' + leftSide)
+                          console.log('leftSide = (' + bf + '*' + tf + ')*(' + this.PNA + '+ (' + tf + '/2)) + (' + this.PNA + '*(' + tf + '))*(' + this.PNA + '/2) = ' + leftSide);
+                      let Zassumed = 2*leftSide
+                          this.Z = Zassumed
+                          this.ZResults = 'Zx = ' + Zassumed
+                          console.log(this.ZResults)
+
+
+
+
+        } else 
+
+          {         let bf2 = this.sharedService.bf2.value;
+                    let tf2 = this.sharedService.tf2.value;
+                    let dnot = d-tf-tf2;
+                    this.dnot = dnot
+
+                    console.log(`bf = ${bf}`);
+                    console.log(`tf = ${tf}`);
+                    console.log(`bf2 = ${bf2}`);
+                    console.log(`tf2 = ${tf2}`);
+                    console.log(`dnot = ${dnot}`);
+                    console.log(`tw = ${tw}`);
+
+                      /* Ac = At
+                            (bf*tf) + x(tf) = (bf2*tf2) + [dnot-x] [tw]
+                            x = (bf2*tf2 - bf*tf + dnot*tw) / (tf + tw) */
+                            
+                  let numerator = (bf2*tf2)-(bf*tf)+(dnot*tw)
+                  let denominator = 2*tw
+                  let PNA = numerator/denominator
+                      console.log(`(${bf2}*${tf2})-(${bf}*${tf})+(${dnot}*${tw})`);
+                      console.log('PNA is ' + PNA)
+                      this.PNA = PNA
+                      this.PNAresults = "x = " + PNA
+                  let PNAfrombelow = dnot-PNA
+                      console.log('PNA from below is ' + PNAfrombelow)
+                      this.PNAfrombelow = PNAfrombelow
+
+
+                      //Area
+                      this.areaTop = (bf*tf) + (this.PNA*tw)
+                      this.areaBot = (bf2*tf2) + ((this.dnot-this.PNA)*(tw))
+
+                      console.log('areaTop is ' + this.areaTop)
+                      console.log('areaBot is ' + this.areaBot)
+                      this.Area = this.areaTop + this.areaBot
+                        console.log('Area is ' + this.areaBot)
+
+
+                      //Plastic Modulus, Zx
+                          //Zx = AcYc + AtYt
+                        let leftSide = (bf*tf)*(this.PNA+ (tf/2)) + (this.PNA*(tf))*(this.PNA/2)
+                          console.log('leftSide is ' + leftSide)
+                        let rightSide = (bf2*tf2)*(this.PNAfrombelow + (tf2/2)) + (tw*this.PNAfrombelow)*(this.PNAfrombelow/2)
+                        console.log('rightSide is ' + rightSide)
+                            console.log('leftSide = (' + bf + '*' + tf + ')*(' + this.PNA + '+ (' + tf + '/2)) + (' + this.PNA + '*(' + tf + '))*(' + this.PNA + '/2) = ' + leftSide);
+                            console.log('rightSide = (' + bf2 + '*' + tf2 + ')*(' + this.PNAfrombelow + ' + (' + tf2 + '/2)) + (' + tw + '*' + this.PNAfrombelow + ')*(' + this.PNAfrombelow + '/2) = ' + rightSide);
+                        let Zassumed = leftSide + rightSide
+                            this.Z = Zassumed
+                            this.ZResults = 'Zx = ' + Zassumed
+                            console.log(this.ZResults)
+                    
+          
+        }
         
-        let bf2 = this.sharedService.bf2.value;
-        let tf2 = this.sharedService.tf2.value;
-        let dnot = d-tf-tf2;
 
-        console.log(`bf = ${bf}`);
-        console.log(`tf = ${tf}`);
-        console.log(`bf2 = ${bf2}`);
-        console.log(`tf2 = ${tf2}`);
-        console.log(`dnot = ${dnot}`);
-        console.log(`tw = ${tw}`);
 
-          /* Ac = At
-                (bf*tf) + x(tf) = (bf2*tf2) + [dnot-x] [tw]
-                x = (bf2*tf2 - bf*tf + dnot*tw) / (tf + tw) */
-      let numerator = (bf2*tf2)-(bf*tf)+(dnot*tw)
-      let denominator = 2*tw
-      let Xcentroid = numerator/denominator
-      console.log(`(${bf2}*${tf2})-(${bf}*${tf})+(${dnot}*${tw})`);
-      console.log('centroid is ' + Xcentroid)
+        //Plastic Moment, Mp
+        let Mp = Fy*this.Z
+        console.log('(' + Fy + ')* ' + this.Z)
+        this.Mp = Mp
+        console.log('Mp = ' + Mp)
+        this.MpResults = 'Mp = ' + this.Mp;
+        let unit = 1/12
 
-    }
+        //LRFD
+        let Ro = 0.9
+        let MuLRFD = Ro*Mp*unit
+        this.MuLRFD = MuLRFD
+        let displayMuLRFD = MuLRFD.toFixed(3);
+          if (MuLRFD) {(this.LRFDResult = "Mu = " + MuLRFD),
+      (this.displayLRFDResult = displayMuLRFD)};
 
       
-
+    //ASD
+        let Om = 1.67
+        let MaASD = (Mp*unit)/Om
+        this.MaASD = MaASD
+        let displayMaASD = MaASD.toFixed(3);
+        if (MaASD) {(this.ASDResult = "Ma = " + MaASD),
+      (this.displayASDResult = displayMaASD)
 
   }
 
 
 
 
-  FeSolve() {
-    console.log("~~~~FE SOLVE~~~~~")
-    //4.71 * Sqrt(E/Fy)
+ }
 
-    let E = this.sharedService.E.value;
-    let Fy = this.sharedService.Fy.value;
-    let maxKLr = this.sharedService.maxKLr.value;
-    let Ag = this.sharedService.Ag.value;
-    let Load = this.sharedService.Load.value
-    
-    
-    let Fcheck = 4.71* (Math.sqrt(E/Fy))
-    this.Fcheck = Fcheck
-    console.log("4.71 * Sqrt(E/Fy) is " + Fcheck)
-    console.log("E is " + E + ", Fy is " + Fy + "HAHAHAHAH")
-
-    //Fe:
-    let Fe = (Math.pow(Math.PI, 2) * E) / Math.pow(maxKLr, 2);
-    if (Fe) {this.FeResult = "Fe = " + Fe};
-    this.Fe = Fe
-    console.log("Fe= (PI^2E)/ (MaxKLr)^2 " + Fe)
-    console.log("Fe= (" + (Math.pow(Math.PI, 2)) + " * " + E + ")/ (" + maxKLr + ")^2 " + Fe)
-      console.log("THEREFORE, Fe is " + Fe)
-      console.log ("Max KLr is " + maxKLr)
-
-//Solutions if Fe is > or < 4.71 chuchu
-    //Ito kung Fe is less than or equal 4.71 something
-    if (Fe <= Fcheck) {
-            this.FeCheckIsLess = 1;
-            console.log("Fe is less than" + Fcheck + ", so 0.658 gagamitin")
-            let Fcr = (Math.pow(0.658, (Fy/Fe)) ) * (Fy)
-            console.log("let Fcr = (0.658^ (Fe/Fy) * Fy", "Fcr = (0.658^ (" + Fe + " / " + Fy + ") * " + Fy)
-            console.log("Fcr is " + Fcr)
-            if (Fcr) {this.FcrResult = "Fcr = " + Fcr};
-            this.Fcr = Fcr
-
-         
-            //SOLVING PCR
-                  let Pcr = Fcr*Ag;
-                  this.Pcr = Pcr
-                  console.log("Pcr = Fcr*Ag, Pcr= " + Fcr + " * " + Ag)
-                  console.log ("Pcr is " + Pcr)
-                  if (Pcr) {this.PcrResult = "Pn =" + Pcr};
-            
-                //LRFD
-                let Ro = 0.9
-                let PuLRFD = Ro*Pcr
-                this.PnLRFD = PuLRFD
-                let displayPuLRFD = PuLRFD.toFixed(3);
-                  console.log ("Pu is " + PuLRFD + "while load is " + Load)
-                  if (PuLRFD) {(this.LRFDResult = "Pu = " + PuLRFD),
-                (this.displayLRFDResult = displayPuLRFD)};
-
-
-              
-            //ASD
-                let Om = 1.67
-                let PuASD = Pcr/Om
-                this.PnASD = PuASD
-                let displayPuASD = PuASD.toFixed(3);
-                console.log ("Pa is " + PuASD)
-                if (PuASD) {(this.ASDResult = "Pa = " + PuASD),
-                (this.displayASDResult = displayPuASD)};
-
-
-
-       //Ito naman kung greater than: 
-      } else {
-            this.FeCheckIsLess = 2;
-            console.log("Fe is greater than" + Fcheck + ", so 0.0.877Fe gagamitin") 
-            let Fcr = 0.877 * Fe
-            console.log("let Fcr = 0.877 * Fe", "Fcr = 0.877 * " + Fe)
-            console.log("Fcr is " + Fcr)
-            if (Fcr) {this.FcrResult = "Fcr = " + Fcr};
-
-                  //SOLVING PCR
-                  let Pcr = Fcr*Ag;
-                  this.Pcr = Pcr
-                  console.log("Pcr = Fcr*Ag, Pcr= " + Fcr + " * " + Ag)
-                  console.log ("Pcr is " + Pcr);
-                  if (Pcr) {this.PcrResult = "Pn =" + Pcr};
-
-              //LRFD
-                  let Ro = 0.9
-                  let PuLRFD = Ro*Pcr
-                  this.PnLRFD = PuLRFD
-                  let displayPuLRFD = PuLRFD.toFixed(3);
-                    console.log ("Pu is " + PuLRFD + "while load is " + Load)
-                    if (PuLRFD) {(this.LRFDResult = "Pu = " + PuLRFD),
-                (this.displayLRFDResult = displayPuLRFD)};
-
-                
-              //ASD
-                  let Om = 1.67
-                  let PuASD = Pcr/Om
-                  this.PnASD = PuASD
-                  let displayPuASD = PuASD.toFixed(3);
-                  console.log ("Pa is " + PuASD + "while load is " + Load)
-                  if (PuASD) {(this.ASDResult = "Pa = " + PuASD),
-                (this.displayASDResult = displayPuASD)
-              };
-
-                  /*  //CHECKING
-                    if (PuASD > Load) {console.log ("Selected Beam is SAFE"); 
-                    this.result = "Selected Beam is SAFE";}
-                    else {console.log ("Selected Beam is UNSAFE")
-                    this.result = "Selected Beam is UNSAFE"} */
-                  }
-
-      //
       
-  }
+
 
 }
 

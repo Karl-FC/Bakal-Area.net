@@ -1,3 +1,12 @@
+<div id="beamdropdown">
+<app-compressionbeamshapes /> <!--DROPDOWNNNN-->
+<br></div>
+
+<div id="subtitleReplacement" style="display: none;">
+    <h1 style="font-size: 20px; margin-right: 10px;">For Singly-Symmetric Sections</h1>
+<br><br></div>
+
+
 <div id="itemsinput" class="flex-row bg-neutral">
 <div>
     <form>
@@ -15,7 +24,7 @@
                             </button>
                     </div><br>
             <input type="number" id="YieldStrengthType" name="YieldStrength" value="50"
-            [formControl]="Fy" >
+            [formControl]="sharedService.Fyield" >
             </div><br>
 
             
@@ -34,76 +43,60 @@
                     [formControl]="E" >
                     </div><br>
 
+                <div id="AreaGross">
+                    <label for="AreaGross">AreaGross, A<sub>g</sub></label><br>
+                    <input type="number" id="AreaGross" name="AreaGross" value="AreaGross"
+                    [formControl]="sharedService.Ag"><br></div>     
+
                     <span class="form-control">
                         <label class="cursor-pointer label">
-                            <span class="label-text" style="font-weight: 500;">Beam has symmetrical flange?</span>
+                            <span class="label-text" style="font-weight: 500;">Doubly-Symmetric Section</span>
                             <input type="checkbox" checked="checked" value="approWshape" class="checkbox checkbox-primary checkbox-xs" (change)="SymmetryChange()"/>
                         </label>
-                    </span>     
-
-                
+                    </span> 
+                                    
         </div>
+ 
         <div class="columnthing">
-                <!--BEAM PROPERTIES-->
-                        <label for="AreaGross">AreaGross, A<sub>g</sub></label><br>
-                            <input type="number" id="AreaGross" name="AreaGross" value="AreaGross"
-                            [formControl]="sharedService.Ag" (input)="calcBend()"><br>
+                    <!--BEAM PROPERTIES-->
 
-                        <label for="LamdaFlange">
-                                <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                <span>b<sub>f</sub></span>
-                                <span style="border-top:1px solid">2t<sub>f</sub></span>
-                                </span>
-                        or &lambda;<sub>f</sub>:</label><br>
-                        <input type="number" id="LamdaFlange" name="LamdaFlange" value="LamdaFlange"
-                        [formControl]="sharedService.bf2tf" (input)="calcBend()"><br>
-                        
-                        <label for="LamdaWeb">
-                            <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                            <span>h</span>
-                            <span style="border-top:1px solid">t<sub>w</sub></span>
-                            </span>
-                        or &lambda;<sub>w</sub>:</label><br>
-                        <input type="number" id="LamdaWeb" name="LamdaWeb" value="LamdaWeb"
-                        [formControl]="sharedService.htw" (input)="calcBend()"><br><br>
-
-
-        
-            </div>   
-        <div class="columnthing">
                     <label for="baseFlange">
                             Flange width, b<sub>f</sub>:</label><br>
                     <input type="number" id="baseFlange" name="baseFlange" value="baseFlange"
-                    [formControl]="sharedService.bf" (input)="calcBend()"><br>
+                    [formControl]="sharedService.bf"><br>
 
                             <label for="thiccFlange">
                                 Flange thickness, t<sub>f</sub>:</label><br>
                         <input type="number" id="thiccFlange" name="thiccFlange" value="thiccFlange"
-                        [formControl]="sharedService.tf" (input)="calcBend()"><br>
+                        [formControl]="sharedService.tf"><br>
 
                         <label for="thiccWeb">
                             Web thickness, t<sub>w</sub>:</label><br>
                     <input type="number" id="thiccWeb" name="thiccWeb" value="thiccWeb"
-                    [formControl]="sharedService.tw" (input)="calcBend()"><br>
+                    [formControl]="sharedService.tw"><br>
 
                     <label for="depth">
                         Depth:</label><br>
                 <input type="number" id="depth" name="depth" value="depth"
-                [formControl]="sharedService.d" (input)="calcBend()"><br>
+                [formControl]="sharedService.d"><br>
                 </div><br>
-    </div>
 
-                        <div class="columnthing" id="secondFlanges" style="display: none;">
+
+        <div class="columnthing" id="secondFlanges" style="display: none;">
                             <label for="baseFlange">
                                 Second Flange width, b<sub>f</sub>:</label><br>
                             <input type="number" id="baseFlangeSecond" name="baseFlangeSecond" value="baseFlangeSecond"
-                            [formControl]="sharedService.bf2" (input)="calcBend()"><br>
+                            [formControl]="sharedService.bf2"><br>
                         
                             <label for="thiccFlange">
                                 Second Flange thickness, t<sub>f</sub>:</label><br>
                             <input type="number" id="thiccFlangeSecond" name="thiccFlangeSecond" value="thiccFlangeSecond"
-                            [formControl]="sharedService.tf2" (input)="calcBend()"><br>
-                        </div><br>
+                            [formControl]="sharedService.tf2"><br>
+
+                        </div>
+    </div>
+
+                        <br>
     </form>
 </div>
 </div>
@@ -114,22 +107,6 @@
   
 <app-error-alert id="errAlert" style="display: none;" />
         
-  <div style="justify-content: center; display: flex; overflow: visible;"> <br>
-      <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary"> <!--Dito natin ilagay yun results haha-->  
-          <div id="BgCompactnessFlange" class="stat text-primary-content place-items-center" style="overflow: visible;">
-            <div class="stat-title">Flange slenderness</div>
-            <div id="ResultCompactnessFlange" class="stat-value">N/A</div>
-            <div id="SubCompactnessFlange" class="stat-desc">Input required</div>
-          </div>
-          
-          <div id="BgCompactnessWeb" class="stat text-primary-content place-items-center" style="overflow: visible;">
-            <div class="stat-title">Web slenderness</div>
-            <div id="ResultCompactnessWeb" class="stat-value">N/A</div>
-            <div id="SubCompactnessWeb" class="stat-desc">Input required</div>
-          </div>
-    </div>
-  </div>
-  <br>
     <div style="justify-content: center; display: flex;">
       <div class="stats stats-vertical text-primary-content lg:stats-horizontal shadow bg-info">
       <button id="calculate" type="button" (mousedown)="calcBend()">Calculate</button> 

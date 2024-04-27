@@ -38,6 +38,7 @@ export class SharedVariable {
     E = new BehaviorSubject<number>(0);
     Fy = new BehaviorSubject<number>(0);
 
+    Fyield: FormControl = new FormControl(null);
     Ag: FormControl = new FormControl(null);
     Load: FormControl = new FormControl(null);
 
@@ -52,6 +53,7 @@ export class SharedVariable {
         isSymmetry: boolean = true;
         bf2: FormControl = new FormControl(null); //base ng flange
         tf2: FormControl = new FormControl(null); //thickness ng flange
+        bf2tf2: FormControl = new FormControl(null); //Lambda flange ng pangalawang flange
 
 
 

@@ -6,110 +6,117 @@
         <div class="collapse bg-neutral collapse-arrow">
             <input type="checkbox" /> 
             <div class="collapse-title text-xl font-medium">
-                    Centroid (x)
+                    Plastic Modulus (Z<sub>x</sub>)
             </div>
         <div class="collapse-content"> 
                     <!--Check muna kung symmetrical o hinde-->
-                            <div id="assymetry">
+                            <div id="assymetry" *ngIf="this.FlexresultsService.sharedService.isSymmetry==false">
+                                <div id="Fechecker" class="infoquote" *ngIf="this.FlexresultsService.PNAresults">
+                                    <p>d = {{this.FlexresultsService.sharedService.d.value}}
+                                    <br>
+                                    d - (tf + tf2) = ({{this.FlexresultsService.sharedService.tf.value}} + {{this.FlexresultsService.sharedService.tf2.value}})
+                                    <br>
+                                    d = {{this.FlexresultsService.dnot}}
+                                        </p><br><br>  
+                                </div> 
                                         <p style="margin-left: 10%; font-style: italic;">Beam has asymmetrical flanges, therefore:</p><br>    
                                             <div class="equation">
                                                             A<sub>C</sub> = A<sub>T</sub>
                                             </div>
-                                            <div class="solution">
-                                                            
+                                            <div class="solution" *ngIf="this.FlexresultsService.PNAresults">
+                                                    ({{this.FlexresultsService.sharedService.bf.value}}*{{this.FlexresultsService.sharedService.tf.value}})
+                                                     + x({{this.FlexresultsService.sharedService.tf.value}}) = 
+                                                     ({{this.FlexresultsService.sharedService.bf2.value}}*{{this.FlexresultsService.sharedService.tf2.value}}) 
+                                                     + [{{this.FlexresultsService.dnot}}-x] [{{this.FlexresultsService.sharedService.tw.value}}]
                                             </div>
-                                        </div>
+                                            
+                                <h5 class="answer"> {{this.FlexresultsService.PNAresults}} </h5>
 
-                        <h5 class="answer"> elasticBucklingService.FeResult </h5>
+                                <div class="solution" *ngIf="this.FlexresultsService.PNAresults">
+                                    {{this.FlexresultsService.dnot}} - {{this.FlexresultsService.PNA.toFixed(2)}} = {{this.FlexresultsService.PNAfrombelow.toFixed(2)}}
+                            </div><br>
+                                            <div class="equation">
+                                                            Z<sub>x</sub> = A<sub>C</sub>Y<sub>C</sub> + A<sub>T</sub>Y<sub>T</sub>
+                                            </div>
+                                            <div class="solution" *ngIf="this.FlexresultsService.PNAresults">
+                                                 = ({{this.FlexresultsService.sharedService.bf.value}})({{this.FlexresultsService.sharedService.tf.value}})({{this.FlexresultsService.PNA.toFixed(2)}} + 
+                                                        <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                            <span>{{this.FlexresultsService.sharedService.tf.value}}</span>
+                                                            <span style="border-top:1px solid">2</span>
+                                                            </span>
+                                                 ) + {{this.FlexresultsService.PNA.toFixed(2)}}({{this.FlexresultsService.sharedService.tf.value}})(
+                                                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                        <span>{{this.FlexresultsService.PNA.toFixed(2)}}</span>
+                                                        <span style="border-top:1px solid">2</span>
+                                                        </span>
+                                                 ) + {{this.FlexresultsService.sharedService.bf2.value}}({{this.FlexresultsService.sharedService.tf2.value}})
+                                                 ({{this.FlexresultsService.PNAfrombelow.toFixed(2)}} + 
+                                                        <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                            <span>{{this.FlexresultsService.sharedService.tf2.value}}</span>
+                                                            <span style="border-top:1px solid">2</span>
+                                                            </span>) + {{this.FlexresultsService.sharedService.tw.value}}({{this.FlexresultsService.PNAfrombelow.toFixed(2)}})
+                                                            (<span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                                <span>{{this.FlexresultsService.PNAfrombelow.toFixed(2)}}</span>
+                                                                <span style="border-top:1px solid">2</span>
+                                                                </span>)
+                                            </div>
+                                            
+                                <h5 class="answer"> {{this.FlexresultsService.ZResults}} </h5>
+
+                        </div>
+
+                        <div id="symmetrical" *ngIf="this.FlexresultsService.sharedService.isSymmetry==true">  
+                            <div class="equation">
+                                            Z<sub>x</sub> = A<sub>C</sub>Y<sub>C</sub> + A<sub>T</sub>Y<sub>T</sub>
+                            </div>
+                            <div class="solution" *ngIf="this.FlexresultsService.PNAresults">
+                                 = 2[({{this.FlexresultsService.sharedService.tf.value}})({{this.FlexresultsService.sharedService.bf.value}})
+                                 ({{this.FlexresultsService.PNA}} + 
+                                 <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                    <span>{{this.FlexresultsService.sharedService.tf.value}}</span>
+                                    <span style="border-top:1px solid">2</span>
+                                    </span>
+                                 ) + ({{this.FlexresultsService.PNA}})({{this.FlexresultsService.sharedService.tw.value}}(
+                                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                        <span>{{this.FlexresultsService.PNA}}</span>
+                                        <span style="border-top:1px solid">2</span>
+                                        </span>
+                                 ))
+                                 ]
+                            </div>
+                            
+                <h5 class="answer"> {{this.FlexresultsService.ZResults}} </h5>
+            </div>
+
+
+
+
+
+
+                        
             </div>
         </div>
 <br>
-<!--STEP 2: Fcr-->
-        <div class="collapse bg-neutral collapse-arrow">
+<!--STEP 2: Mp-->
+            <div class="collapse bg-neutral collapse-arrow">
                 <input type="checkbox" /> 
                 <div class="collapse-title text-xl font-medium">
-                    Critical Stress (F<sub>cr</sub>)
+                        Plastic Moment (M<sub>p</sub>)
                 </div>
-        <div class="collapse-content"> 
-                <!--INFO fr-->        
-                    <div id="Fechecker" class="infoquote">
-                            <p>if (KL/r) &le; 4&radic;(<span>E</span>/F<sub>y</sub>),
-                                    then F<sub>cr</sub> = [0.658 <sup>
-                                        <span>F<sub>y</sub></span>/F<sub>e</sub></sup>
-                                        ]F<sub>y</sub>
-                                <br><br>
-                                if (KL/r) &gt; 4&radic;(<span>E</span>/F<sub>y</sub>),
-                                    then F<sub>cr</sub> = 0.877F<sub>e</sub>
-                                </p><br><br>  
-                    </div>  
-                    <div class="solution">
-                        <p style="margin-left: -40%;">Column Slenderness (KL/r) = elasticBucklingService.sharedService.maxKLr.value.toFixed(3)
-                            </p><br>
-                        <p style="margin-left: -30%;">
-                            4.17&radic;(<span>E</span>/F<sub>y</sub>) = 4.17&radic;[(elasticBucklingService.sharedService.E.value)(elasticBucklingService.sharedService.Fy.value)
-                            = elasticBucklingService.Fcheck.toFixed(3)
-                        </p>
-
-                    </div>
-                                        
-                    
-                <!--Less than 4.17-->        
-                <div id="lessthan" 
-                >
-                <p style="margin-left: 10%; font-style: italic;">KL/r is lesser or equal, therefore:</p><br>    
-                    <div class="equation">
-                                    F<sub>cr</sub> = [0.658 <sup>
-                                        <span>F<sub>y</sub></span>/F<sub>e</sub></sup>
-                                        ]F<sub>y</sub>
-                                        <br><br>
-                    </div>
-                    <div class="solution">
-                                = [0.658 <sup>
-                                    <span>this.elasticBucklingService.sharedService.Fy.value</span>/this.elasticBucklingService.Fe.toFixed(3)</sup>
-                                    ]this.elasticBucklingService.sharedService.Fy.value
-                    </div>
+            <div class="collapse-content"> 
+                        <div class="equation">
+                                M<sub>p</sub> = F<sub>y</sub>Z<sub>x</sub>
+                        </div>
+                                    
+                        <div class="solution" *ngIf="this.FlexresultsService.MpResults"><br>
+                                = ({{this.FlexresultsService.sharedService.Fy.value}})({{this.FlexresultsService.Z.toFixed(2)}})
+                        </div>
+                            <h5 class="answer"> {{this.FlexresultsService.MpResults}} </h5>
                 </div>
-                                        
-                <!--greater than 4.17--> 
-                <div id="greaterthan"
-                >
-                <p style="font-style: italic;">KL/r is greater, therefore:</p><br>        
-                    <div class="equation">
-                                    F<sub>cr</sub> = 0.877F<sub>e</sub>
-                                        <br><br>
-                    </div>
-                    <div class="solution">
-                                    = (0.877)(this.elasticBucklingService.Fe.toFixed(3))
-                    </div>
-                </div>
-                        
-            <h5 class="answer"> elasticBucklingService.FcrResult </h5>
-                            
-                            
         </div>
-        </div>
-        
-<br>   
-<!--STEP 3: Pcr-->    
-<div class="collapse bg-neutral collapse-arrow">
-    <input type="checkbox" /> 
-    <div class="collapse-title text-xl font-medium">
-            Nominal Strength (P<sub>n</sub>)
-    </div>
-<div class="collapse-content"> 
-            <div class="equation">
-                    P<sub>n</sub> = F<sub>cr</sub>A<sub>g</sub>
-            </div>
-                        
-            <div class="solution"><br>
-                     = 
-                     (elasticBucklingService.Fcr.toFixed(3))(elasticBucklingService.sharedService.Ag.value)
-            </div>
-                <h5 class="answer"> elasticBucklingService.PcrResult </h5>
-    </div>
-</div><br>            
+<br>           
 
-<!--STEP 4-1: LRFD-->    
+<!--STEP 3-1: LRFD-->    
 <div class="collapse bg-neutral collapse-arrow">
     <input type="checkbox" /> 
     <div class="collapse-title text-xl font-medium">
@@ -117,40 +124,40 @@
     </div>
 <div class="collapse-content"> 
             <div class="equation">
-                    Design Strength = &Phi;<sub>c</sub>P<sub>n</sub>
+                    Bending Capacity = &Phi;<sub>b</sub>M<sub>n</sub>
             </div>
                         
-            <div class="solution" ><br>
-                     = (0.9)(elasticBucklingService.Pcr.toFixed(3))
+            <div class="solution" *ngIf="this.FlexresultsService.LRFDResult"><br>
+                     = (0.9)({{this.FlexresultsService.Mp}})(1ft/12in)
             </div>
-                <h5 class="answer"> elasticBucklingService.LRFDResult </h5>
+                <h5 class="answer">{{this.FlexresultsService.LRFDResult}}</h5>
     </div>
-</div><br> 
+</div><br>
 
-<!--STEP 4-2: ASD-->    
-<div class="collapse bg-neutral collapse-arrow">
-    <input type="checkbox" /> 
-    <div class="collapse-title text-xl font-medium">
-            Allowable Strength Design (ASD)
-    </div>
-<div class="collapse-content"> 
-            <div class="equation">
-                Allowable Strength = 
-                <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                    <span>P<sub>n</sub></span>
-                    <span style="border-top:1px solid">Ω</span>
-                    </span>
-            </div>
-                        
-            <div class="solution" ><br>=
-                <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                    <span>elasticBucklingService.Pcr.toFixed(3)</span>
-                    <span style="border-top:1px solid">1.67</span>
-                    </span>
-            </div>
-                <h5 class="answer"> elasticBucklingService.ASDResult </h5>
-    </div>
-</div><br> 
+<!--STEP 3-2: ASD-->    
+    <div class="collapse bg-neutral collapse-arrow">
+        <input type="checkbox" /> 
+        <div class="collapse-title text-xl font-medium">
+                Allowable Strength Design (ASD)
+        </div>
+    <div class="collapse-content"> 
+                <div class="equation">
+                    Bending Capacity = 
+                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                        <span>M<sub>n</sub></span>
+                        <span style="border-top:1px solid">Ω</span>
+                        </span>
+                </div>
+                            
+                <div class="solution" *ngIf="this.FlexresultsService.ASDResult"><br>=
+                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                        <span>{{this.FlexresultsService.Mp}}(1ft/12in)</span>
+                        <span style="border-top:1px solid">1.67</span>
+                        </span>
+                </div>
+                    <h5 class="answer"> {{this.FlexresultsService.ASDResult}} </h5>
+        </div>
+    </div><br> 
 
 
 
@@ -161,15 +168,15 @@
             <!-- LRFD Results -->  
             <div id="BgLRFD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
                 <div class="stat-title" style="font-size: 24px; font-weight: 600;">LRFD</div>
-                <div id="LRFDResult" class="stat-value"> elasticBucklingService.displayLRFDResult </div>
-                <div id="LRFDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">&Phi;<sub>c</sub>P<sub>n</sub></div>
+                <div id="LRFDResult" class="stat-value"> {{this.FlexresultsService.displayLRFDResult}} </div>
+                <div id="LRFDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">&Phi;<sub>b</sub>M<sub>n</sub></div>
             </div>
             
             <!-- ASD Results -->
             <div id="BgASD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
                 <div class="stat-title" style="font-size: 24px; font-weight: 600;">ASD</div>
-                <div id="ASDResult" class="stat-value"> elasticBucklingService.displayASDResult </div>
-                <div id="ASDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">P<sub>n</sub>/&Omega;</div>
+                <div id="ASDResult" class="stat-value"> {{this.FlexresultsService.displayASDResult}} </div>
+                <div id="ASDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">M<sub>n</sub>/&Omega;</div>
             </div>
         </div>
     </div>

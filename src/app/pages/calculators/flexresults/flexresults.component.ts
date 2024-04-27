@@ -13,4 +13,6 @@ import { CommonModule } from '@angular/common';
 export class FlexresultsComponent {
   constructor(public FlexresultsService: FlexresultsService) {}
 
+
+  
 }
