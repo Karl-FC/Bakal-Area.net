@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import { AnalysisTableRow } from './pages/calculators/elements/elements-table-row.interface';
 import { BehaviorSubject } from 'rxjs';
 
@@ -7,35 +7,56 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedVariable {
-  mainTitle: string = 'huhu';
+  mainTitle: string = 'Bakal-AREA.net';
+  subTitle: string = 'Loading...';
   chosenBeamShape: BehaviorSubject<beamShape | null> = 
   new BehaviorSubject<beamShape | null>(null);
   chosenBeamShapeLabel = new BehaviorSubject<string>('');
-  KFactor = new BehaviorSubject<number>(1);
-  maxKLr = new BehaviorSubject<number>(0);
-  maxKL = new BehaviorSubject<number>(0);
 
-    Ag: FormControl = new FormControl(null);
-    Load: FormControl = new FormControl(null);
-    bf2tf: FormControl = new FormControl(null);
-    htw: FormControl = new FormControl(null);
-    
+  
+
+  //KLR TABLE
+    KFactor = new BehaviorSubject<number>(1);
+    maxKLr = new BehaviorSubject<number>(0);
+    maxKL = new BehaviorSubject<number>(0);
+
     rx: FormControl = new FormControl(null);
     ry: FormControl = new FormControl(null);
+    
 
-    E = new BehaviorSubject<number>(0);
-Fy = new BehaviorSubject<number>(0);
+  //SLENDERNESS CHECK
+    bf2tf: FormControl = new FormControl(null);
+    htw: FormControl = new FormControl(null);
 
     F_Lamda: number = 0; 
     W_Lamda: number = 0; 
-
+    
     flangeStatus: string = 'Flange Status';
     WebStatus: string = 'Web Status';
+
+  //ESSENTIALS
+    E = new BehaviorSubject<number>(0);
+    Fy = new BehaviorSubject<number>(0);
+
+    Ag: FormControl = new FormControl(null);
+    Load: FormControl = new FormControl(null);
+
+    
+  //FINDING CENTROID
+  d: FormControl = new FormControl(null); //depth
+    bf: FormControl = new FormControl(null); //base ng flange
+    tw: FormControl = new FormControl(null); //thickness ng web
+    tf: FormControl = new FormControl(null); //thickness ng flange
+
+        //Pag di symmetrical
+        isSymmetry: boolean = true;
+        bf2: FormControl = new FormControl(null); //base ng flange
+        tf2: FormControl = new FormControl(null); //thickness ng flange
+
 
 
  
     constructor() { }
-
 
     noReloadPls(event: Event) {
       event.preventDefault();

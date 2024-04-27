@@ -1,0 +1,87 @@
+
+//COMPACT CHECK
+#ResultCompactnessWeb #ResultCompactnessFlange {
+    font-size: 200pt;
+    font-weight: 500;
+}
+
+
+#calculate{
+padding: 15px;
+padding-left: 30px;
+padding-right: 30px;
+font-weight: 700;
+font-size: 18px;
+}
+
+//INPUTS
+
+#itemsinput{
+    border-top-right-radius: 75px;
+    border-bottom-right-radius: 75px;
+    padding-top: 40px;
+    padding-left: 60px;
+    margin-top: -30px;
+    margin-left: -30px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+
+    form h1 {
+        margin-left: -20px;
+    }
+
+    #variableForms {
+        display: flex;
+
+    }
+            .columnthing {
+            flex: 1;
+
+            }
+                    
+
+
+#addElem{
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+#RefreshBtn{
+    padding: 20px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#addRow{
+    box-sizing: border-box;
+}
+
+
+@media (max-width: 870px) {
+
+    #itemsinput{
+        padding-top: 40px;
+        padding-left: 60px;
+        margin-top: -30px;
+        margin-left: -30px;
+        box-sizing: border-box;
+    }
+    
+    form h1 {
+        margin-left: 0px;
+    }
+
+    #variableForms {
+        display: block;
+
+    }
+            .columnthing {
+            flex: none;
+
+            }
+
+}

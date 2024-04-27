@@ -10,7 +10,6 @@ import { ElasticBucklingComponent } from '../../calculators/elastic-buckling/ela
 import { LeftsideComponent } from '../../../shared/components/leftside/leftside.component';
 import { SharedVariable } from '../../../shared.service';
 
-
 @Component({
   selector: 'app-comp-analysis',
   standalone: true,
@@ -19,7 +18,7 @@ import { SharedVariable } from '../../../shared.service';
     CompressionComponent, 
     CompressionbeamshapesComponent, 
     ElementsComponent, 
-    ElasticBucklingComponent, 
+    ElasticBucklingComponent
   ],
   templateUrl: './comp-analysis.component.html',
   styleUrl: './comp-analysis.component.scss'
@@ -32,5 +31,6 @@ export class CompAnalysisComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.mainTitle = 'Analysis Calculator for Axial Compression';
+    this.sharedService.subTitle = 'Slenderness Check';
   }
 }

@@ -13,7 +13,7 @@ import { beamShape } from '../../../shared.service';
   styleUrl: './compressionbeamshapes.component.scss'
 })
 export class CompressionbeamshapesComponent implements OnInit {
-  constructor(private http: HttpClient, private sharedService: SharedVariable) { }
+  constructor(private http: HttpClient, public sharedService: SharedVariable) { }
 
   onlyWbeams:boolean = true;
   selectedA: number | null = null;
@@ -110,6 +110,22 @@ export class CompressionbeamshapesComponent implements OnInit {
                   // Get ry
                   this.sharedService.ry.setValue(selectedBeamShape.ry);
                   console.log("rY is:", selectedBeamShape.ry);
+
+                  // Get d
+                  this.sharedService.d.setValue(selectedBeamShape.d);
+                  console.log("d is:", selectedBeamShape.d);
+
+                  // Get bf
+                  this.sharedService.bf.setValue(selectedBeamShape.bf);
+                  console.log("bf is:", selectedBeamShape.bf);
+
+                  // Get tf
+                  this.sharedService.tf.setValue(selectedBeamShape.tf);
+                  console.log("tf is:", selectedBeamShape.tf);
+
+                  // Get tw
+                  this.sharedService.tw.setValue(selectedBeamShape.tw);
+                  console.log("tw is:", selectedBeamShape.tw);
                   
         }
       }
