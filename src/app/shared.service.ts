@@ -13,7 +13,21 @@ export class SharedVariable {
   new BehaviorSubject<beamShape | null>(null);
   chosenBeamShapeLabel = new BehaviorSubject<string>('');
 
-  
+  //ESSENTIALS
+    E = new BehaviorSubject<number>(0);
+    Fy = new BehaviorSubject<number>(0);
+
+    Fyield: FormControl = new FormControl(null);
+    Ag: FormControl = new FormControl(null);
+    Load: FormControl = new FormControl(null);
+    d: FormControl = new FormControl(null); //depth
+
+  //TENSION
+    t: FormControl = new FormControl(null);
+    b: FormControl = new FormControl(null);
+    SteelShapeSelect: number = 0; 
+    boltDiameter: FormControl = new FormControl(null);
+
 
   //KLR TABLE
     KFactor = new BehaviorSubject<number>(1);
@@ -35,17 +49,11 @@ export class SharedVariable {
     flangeStatus: string = 'Flange Status';
     WebStatus: string = 'Web Status';
 
-  //ESSENTIALS
-    E = new BehaviorSubject<number>(0);
-    Fy = new BehaviorSubject<number>(0);
 
-    Fyield: FormControl = new FormControl(null);
-    Ag: FormControl = new FormControl(null);
-    Load: FormControl = new FormControl(null);
 
     
   //FINDING CENTROID
-  d: FormControl = new FormControl(null); //depth
+    
     bf: FormControl = new FormControl(null); //base ng flange
     tw: FormControl = new FormControl(null); //thickness ng web
     tf: FormControl = new FormControl(null); //thickness ng flange

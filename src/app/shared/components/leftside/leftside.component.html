@@ -7,9 +7,20 @@
         <!-- Sidebar content -->
           <h1>Resources</h1>
           <br>
-                <!-- Open the modal using ID.showModal() method -->
-                <!-- Open the modal using ID.showModal() method -->
-          <div id="refShapeSpecs">
+                <div id="refShearLag">
+                  <button class="btn bg-neutral" onclick="AISC_ShearLag.showModal()">Shear Lag Factor for Tension Members</button>
+                  <dialog id="AISC_ShearLag" class="modal">
+                    <div class="modal-box bg-secondary">
+                      <figure><img src='assets/images/Table D3.1.png' alt="AISC Table D3.1"> </figure>
+                    </div>
+                    <form method="dialog" class="modal-backdrop">
+                      <button>close</button>
+                    </form>
+                  </dialog>
+                </div>
+<br><br>
+          
+                <div id="refShapeSpecs">
                   <button class="btn bg-neutral" onclick="AISC_Specs.showModal()">Specifications for Various Structural Shapes</button>
                   <dialog id="AISC_Specs" class="modal">
                     <div class="modal-box bg-secondary">

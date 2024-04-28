@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { AnalysisTableRow } from './elements-table-row.interface';
 import { beamShape } from '../../../shared.service';
 import { ElasticBucklingService } from '../elastic-buckling/elastic-buckling.service';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ErrorAlertComponent } from '../../../shared/components/error-alert/error-alert.component';
 import { ErrorAlertService } from '../../../shared/components/error-alert/error-alert.service';
 
@@ -15,7 +14,7 @@ import { ErrorAlertService } from '../../../shared/components/error-alert/error-
 @Component({
   selector: 'app-elements',
   standalone: true,
-  imports: [CommonModule, CompressionComponent, CompressionbeamshapesComponent, ReactiveFormsModule, DragDropModule, ErrorAlertComponent],
+  imports: [CommonModule, CompressionComponent, CompressionbeamshapesComponent, ReactiveFormsModule, ErrorAlertComponent],
   templateUrl: './elements.component.html',
   styleUrl: './elements.component.scss'
 })

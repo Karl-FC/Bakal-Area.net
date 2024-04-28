@@ -1,4 +1,6 @@
 <div id="navbar" class="navbar bg-accent" style="z-index: 100;">
+
+<!--NAVBAR START (MOBILE)------------------------------------------------------------------------->  
     <div class="navbar-start">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -11,6 +13,7 @@
         </div>
 
 
+    <!--NAVBAR DROPDOWN (MOBILE)------------------------------------------------------------------------->
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow 
                     bg-neutral rounded-box w-52" >
           <h1 (click)="reLoad($event)"
@@ -32,6 +35,11 @@
                     <li><a class="nav-link" routerLinkActive="active" routerLink="/Bending/Analysis">Analyzer</a></li>
                     <li><a class="nav-link" routerLinkActive="active" routerLink="/Bending/Design">Designer</a></li>
                     </ul></li>
+              <li><a>Shear</a>
+                  <ul class="p-2">
+                    <li><a class="nav-link">Analyzer</a></li>
+                    <li><a class="nav-link">Designer</a></li>
+                    </ul></li>
                 <li><a>Settings</a>
                   <ul class="p-2">
                     <li><label for="theme_modal">Theme</label></li>
@@ -39,28 +47,13 @@
                   </ul></li>
         </ul>
       </div>
-      <a (click)="togglemenu($event)" class="btn btn-ghost text-xl">Bakal-AREA.net</a>
+      <a (click)="reLoad($event)" class="btn btn-ghost text-xl">Bakal-AREA.net</a>
     </div>
-    <!--
-    <div id="dropmenu">
-    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow 
-                    bg-neutral rounded-box w-52" >
-          <h1 (click)="reLoad($event)"
-          style="font-size: 18px; 
-                    font-weight: 600;
-                    padding:2px">Bakal-AREA.net</h1>
-                <li><a>References</a>
-                  <ul class="p-2">
-                    <li><label for="my_modal_7">Theme</label></li>
-                  </ul></li>
+    
 
-                <li><a>Settings</a>
-                  <ul class="p-2">
-                    <li><label for="theme_modal">Theme</label></li>
-                    <li><a>About us</a></li>
-                  </ul></li>
-        </ul>
-      </div>-->
+
+
+<!--NAVBAR CENTER (PC)------------------------------------------------------------------------->
 
 
     <div class="navbar-center hidden lg:flex">
@@ -92,23 +85,62 @@
               </ul>
             </details>
             </li>
+        <li>
+            <details>
+              <summary>Shear</summary>
+              <ul class="p-2" style="z-index: 999;">
+                <li><a class="nav-link">Analyzer</a></li>
+                <li><a class="nav-link">Designer</a></li>
+              </ul>
+            </details>
+            </li>
       </ul>
     </div>
 
-
+<!--NAVBAR END (both?)------------------------------------------------------------------------->
 
     <div class="navbar-end">
-      <label class="swap swap-rotate">
-  
-        <!-- this hidden checkbox controls the state -->
-        <input type="checkbox" class="theme-controller" value="midnight" />
-        
-        <!-- sun icon -->
-        <svg class="swap-off fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
-        
-        <!-- moon icon -->
-        <svg class="swap-on fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
-      </label>
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+          <div class="w-10 rounded-full">
+            <img alt="Tailwind CSS Navbar component" src="https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png" />
+          </div>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          <div class="hidePC">
+          <h1 (click)="reLoad($event)"
+          style="font-size: 18px; 
+                    font-weight: 600;
+                    padding:2px">Bakal-AREA.net</h1>
+                <li><a>Axial Tension</a>
+                      <ul class="p-2">
+                        <li><a class="nav-link" routerLinkActive="active" routerLink="/Tension/Analysis">Analyzer</a></li>
+                        <li><a class="nav-link" routerLinkActive="active" routerLink="/Tension/Design">Designer</a></li>
+                        </ul></li>
+                <li><a>Axial Compression</a>
+                    <ul class="p-2">
+                      <li><a class="nav-link" routerLinkActive="active" routerLink="/Compression/Analysis">Analyzer</a></li>
+                      <li><a class="nav-link" routerLinkActive="active" routerLink="/Compression/Design">Designer</a></li>
+                      </ul></li>
+              <li><a>Bending</a>
+                  <ul class="p-2">
+                    <li><a class="nav-link" routerLinkActive="active" routerLink="/Bending/Analysis">Analyzer</a></li>
+                    <li><a class="nav-link" routerLinkActive="active" routerLink="/Bending/Design">Designer</a></li>
+                    </ul></li>
+              <li><a>Shear</a>
+                  <ul class="p-2">
+                    <li><a class="nav-link">Analyzer</a></li>
+                    <li><a class="nav-link">Designer</a></li>
+                    </ul></li>
+                  </div>
+                <li><a>Settings</a>
+                  <ul class="p-2">
+                    <li><label for="theme_modal">Theme</label></li>
+                    <li><a>About us</a></li>
+                  </ul></li>
+        </ul>
+      </div>
+      </div>
 
             <!--Right click
 

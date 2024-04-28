@@ -1,0 +1,155 @@
+#beamdropdown{
+    padding: 30px;
+    padding-left: 20%;
+
+}
+
+
+#content {
+        grid-row: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Adjust as needed */
+        grid-gap: 0px; /* margins */
+    }
+
+                #bgTable {
+                    grid-column: span 3; /* Adjust as needed */
+                }
+                
+                #bgSlender {
+                    grid-column: span 2;
+                    
+                    height: 920px;
+                    padding: 30px;
+                    padding-left: 40px;
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                }
+
+            .content {
+                grid-row: 1;
+            }
+            
+            .divider {
+                grid-row: 2;
+                /* Style your divider here */
+            }
+
+            #results {
+                border-radius: 25px;
+                grid-row: span 3;
+                display: grid;
+                margin-bottom: 50px;
+
+            }
+
+
+@media (max-width: 1024px) {
+    //Laptops
+    #top{
+        border-bottom-left-radius: 0;
+    }
+
+    #contentall {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #leftside {
+        display: none;
+    }
+
+    #columns {
+        width: 100%;
+    }
+
+    #bgSlender {
+        grid-column: span 2 ;
+    }
+
+    #bgTable {
+        width: 100%;
+        grid-column: span 2 ;
+    }
+}
+
+@media (max-width: 866px) {
+    #bgSlender {
+        grid-column: span 1 ;
+        height: 950px;
+    }
+
+    #bgTable {
+        width: 100%;
+        grid-column: span 2 ;
+    }
+
+    .divider {
+        width: 90vw;
+    }
+}
+
+@media (max-width: 815px) {
+    #bgSlender {
+        height: 980px;
+    }
+
+}
+
+//Tablet (768x628)
+@media (max-width: 768px) {
+    #content {
+        display: flex;
+        flex-direction: column;
+    }
+    #contentall {
+        display: flex;
+        flex-direction: column;
+    }
+    #leftside {
+        display: none;
+    }
+    #columns {
+        width: 100%;
+    }
+    #bgSlender {
+        box-sizing: border-box;
+        padding-left: 10%;
+    }
+    #bgTable {
+        width: 100%;
+    }
+}
+
+@media (max-width: 615px) {
+    #top {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    #bgSlender {
+        height: 950px;
+        box-sizing: border-box;
+        padding-left: 10%;
+    }
+}
+
+@media (max-width: 425px) {
+    #top {
+      width: 100%;
+      box-sizing: border-box; /* This makes sure padding and border are included in the element's total width */
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    #bgSlender {
+        box-sizing: border-box;
+        width: 100vw;
+    }
+
+    #results {
+        width: 100vw;
+        
+    }
+}
+
