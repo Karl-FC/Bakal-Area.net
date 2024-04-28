@@ -158,6 +158,8 @@ export class CompdesignTableService {
                   else  if (this.beamFilter.value == 13) {
                     database = 'assets/db/imperial_W44.json';}
                   else  if (this.beamFilter.value == 14) {
+                    database = 'assets/db/AISC15-imperial-Ibeams.json';}
+                  else  if (this.beamFilter.value == 15) {
                     database = 'assets/db/AISC15-imperial.json';}
 
 

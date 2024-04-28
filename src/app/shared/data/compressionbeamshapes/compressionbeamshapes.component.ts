@@ -53,7 +53,7 @@ export class CompressionbeamshapesComponent implements OnInit {
     };    
 
     loadbeamshapesW() {
-      const database = this.onlyWbeams ? 'assets/db/AISC15-imperial-Wshapes.json' : 'assets/db/AISC15-imperial.json';
+      const database = this.onlyWbeams ? 'assets/db/AISC15-imperial-Wshapes.json' : 'assets/db/AISC15-imperial-Ibeams.json';
       this.http.get<beamShape[]>(database).subscribe(data => {
         this.allBeamShapes = data;
         this.filteredBeamShapes = data;
@@ -126,6 +126,10 @@ export class CompressionbeamshapesComponent implements OnInit {
                   // Get tw
                   this.sharedService.tw.setValue(selectedBeamShape.tw);
                   console.log("tw is:", selectedBeamShape.tw);
+
+                  // Get Sx
+                  this.sharedService.Sx.setValue(selectedBeamShape.Sx);
+                  console.log("Sx is:", selectedBeamShape.Sx);
                   
         }
       }
