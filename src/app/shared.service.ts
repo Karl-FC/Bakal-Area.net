@@ -28,8 +28,9 @@ export class SharedVariable {
     bf2tf: FormControl = new FormControl(null);
     htw: FormControl = new FormControl(null);
 
-    F_Lamda: number = 0; 
-    W_Lamda: number = 0; 
+
+    F_LamdaP: number = 0; 
+    F_LamdaR: number = 0; 
     
     flangeStatus: string = 'Flange Status';
     WebStatus: string = 'Web Status';
@@ -48,6 +49,7 @@ export class SharedVariable {
     bf: FormControl = new FormControl(null); //base ng flange
     tw: FormControl = new FormControl(null); //thickness ng web
     tf: FormControl = new FormControl(null); //thickness ng flange
+    Sx: FormControl = new FormControl(null);
 
         //Pag di symmetrical
         isSymmetry: boolean = true;

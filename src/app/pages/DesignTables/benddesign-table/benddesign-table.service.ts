@@ -173,20 +173,23 @@ export class BenddesignTableService {
                         console.log("beamShape.MuCapacity, Fy, ZU, Zx:::   " + beamShape.MuCapacity + " , " + beamShape.Fy + " , " + beamShape.ZU + " , " + beamShape.Zx)
                      console.log("FLANGE IS " + beamShape.Fcondition)
                     }
+                    
                   else if (beamShape.Fcondition == "NONCOMPACT") {
                     console.log("FLANGE IS " + beamShape.Fcondition)
-                    let MpLRFD = (Fy*ZU* (1/12) )
-                        
+                    let MpLRFD = (Fy*ZU* (1/12) )  
                     let MpASD = (Fy*ZA* (1/12) )
+                    
                       let FySx = (0.7*Fy*Sx);
                       let part2 = (((beamShape['bf/2tf'])-pf) / (rf-pf));
                       let productLRFD = (MpLRFD-FySx) * part2;
                       let productASD = (MpASD-FySx) * part2;
                     
-                      console.log("MuCapacity, Fy, ZU::   " + MuCapacity + " , " + Fy + " , " + ZU)
                     MuCapacity = MpLRFD - productLRFD;
+                      console.log("MuCapacity, Fy, ZU::   " + MuCapacity + " , " + Fy + " , " + ZU)
                     MaCapacity = MpASD - productASD;
+                      console.log("MaCapacity, Fy, ZU::   " + MaCapacity + " , " + Fy + " , " + ZU)
                     }
+
                   else if (beamShape.Fcondition == "SLENDER") {
                     console.log("FLANGE IS " + beamShape.Fcondition) 
                     MuCapacity = (0.9*Fy*ZU)/12;
@@ -250,7 +253,9 @@ setBeamFilter(filter: number) {
                   else  if (this.beamFilter.value == 13) {
                     database = 'assets/db/imperial_W44.json';}
                   else  if (this.beamFilter.value == 14) {
-                    database = 'assets/db/AISC15-imperial.json';}
+                    database = 'assets/db/AISC15-imperial-Ibeams.json';}
+                  else  if (this.beamFilter.value == 15) {
+                    database = 'assets/db/AISC15-imperial.json';}  
 
       
       
