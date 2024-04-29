@@ -1,0 +1,144 @@
+<div class="collapse bg-base-100 collapse-plus">
+    <input type="checkbox" class="peer" /> 
+<div class="collapse-title peer-checked:bg-secondary text-xl font-medium">         
+    Shear Lag Factor
+    </div>
+<div class="collapse-content bg-secondary peer-checked:bg-secondary">  
+    <div id="shearLag">
+      <label for="shearLag">Shear Lag Factor, U: </label>
+        <select class="select w-full max-w-xs" [(ngModel)]="shearCase" (change)="shearNoNeedCalc(1)">
+          <option disabled selected>See references for Shear Lag Factors</option>
+          <option value="1">Case 1</option>
+          <option value="2">Case 2</option>
+          <option value="3">Case 3</option>
+          <option value="4">Case 4</option>
+          <option value="5">Case 5</option>
+          <option value="6">Case 6</option>
+          <option value="7">Case 7</option>
+          <option value="8">Case 8</option>
+        </select><br>
+      </div><br>
+
+      <div>
+        <div class="equation" *ngIf="shearCase==1 || shearCase==0 || shearCase==3">
+            U = 1.0
+                </div>
+
+        <div style="display: flex;" *ngIf="shearCase==2">
+            <div class="columnthing">
+                    <div class="equation">
+                        U = 1 -
+                        <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                            <span>x̄</span>
+                            <span style="border-top:1px solid; font-style: italic;">l</span>
+                            </span>
+                            </div>
+                    <div class="solution" *ngIf="eccentricity && connectLength"><br>= 1 -
+                        <span style="display:inline-flex;flex-direction:column;vertical-align:middle;"> 
+                            <span>{{this.eccentricity}}</span>
+                            <span style="border-top:1px solid">{{this.connectLength}}</span>
+                            </span>
+                            </div>
+                        <h5 class="answer"*ngIf="eccentricity && connectLength"> U = 
+                            <input type="text" class="input input-ghost" [(ngModel)]="sharedService.shearLagFactor" />
+
+                        </h5>
+            </div>
+            <div class="columnthing">
+                    <div>
+                        <label for="eccentricity">Eccentricity of connection, x̄</label><br>
+                        <input type="number" [(ngModel)]="eccentricity" (input)="shearCalc()"
+                        id="eccentricity" name="eccentricity" value="eccentricity"
+                        ><br><br>
+                        </div>
+                    <div>
+                        <label for="connectLength">Length of connection, <span style="font-style: italic;">l</span></label><br>
+                        <input type="number" [(ngModel)]="connectLength" (input)="shearCalc()"
+                        id="connectLength" name="connectLength" value="connectLength"
+                        ><br><br>
+                        </div>
+            </div>
+        </div>
+        <div style="display: flex;" *ngIf="shearCase==4 || shearCase==5 || shearCase==6">
+            <div class="columnthing">
+                        <h5 class="answer"> U = 
+                            <input type="text" class="input" [(ngModel)]="sharedService.shearLagFactor" />
+
+                        </h5>
+            </div>
+        </div>
+        <div *ngIf="shearCase==7">
+                    <label class="cursor-pointer label">
+                        <span>Flange connected with three or more fasteners per line in the direction of loading</span>
+                        <input type="radio" name="radio-case7" value=1 [(ngModel)]="CaseSeven" (click)="shearCase7Calc()"
+                         class="radio radio-xs radio-base-content" checked />
+                    </label>
+                    <label class="cursor-pointer label">
+                    <span>Web connected with four or more fasteners per line in the direction of loading</span>
+                    <input type="radio" name="radio-case7" value=2 [(ngModel)]="CaseSeven" (click)="shearNoNeedCalc(0.7)" class="radio radio-xs radio-base-content" checked />
+                    </label>
+            <div style="display: flex;" *ngIf="CaseSeven">
+                    <div class="columnthing" *ngIf="CaseSeven==1">
+                            <div class="solution" *ngIf="this.twothirdD"><br>
+                                <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                    <span>2</span>
+                                    <span style="border-top:1px solid;">3</span>
+                                    </span> d = {{this.twothirdD}}
+                                    </div>
+                            
+                                <h5 class="answer" *ngIf="this.twothirdD"> U = 
+                                    <input type="text" class="input input-ghost" [(ngModel)]="sharedService.shearLagFactor" />
+                                </h5>
+                    </div>
+                    <div class="columnthing" *ngIf="CaseSeven==1">
+                            <div class="infoquote">
+                            <p>if b<sub>f</sub> &ge; 2d/3,
+                                    then U = 0.90
+                                <br><br>
+                            <p>if b<sub>f</sub> &lt; 2d/3, 
+                                    then U = 0.85
+                                <br><br>    
+                                    </div> 
+                    </div>
+        </div>
+                    <div class="equation" *ngIf="shearCase==7 && CaseSeven==2">
+                        U = 0.7
+                            </div>
+    </div>
+
+    <div *ngIf="shearCase==8">
+                    <label class="cursor-pointer label">
+                        <span>Four or more fasteners per line of loading</span>
+                        <input type="radio" name="radio-case7" value=1 [(ngModel)]="CaseEight"  (click)="shearNoNeedCalc(0.8)"
+                         class="radio radio-xs radio-base-content" checked />
+                    </label>
+                    <label class="cursor-pointer label">
+                    <span>Three fasteners per line in the direction of loading</span>
+                    <input type="radio" name="radio-case7" value=2 [(ngModel)]="CaseEight" 
+                    class="radio radio-xs radio-base-content" (click)="shearNoNeedCalc(0.6)" />
+                    </label>
+
+            <div class="equation" *ngIf="shearCase==8 && CaseEight==1">
+                U = 0.8
+                    </div>
+            <div class="equation" *ngIf="shearCase==8 && CaseEight==2">
+                U = 0.6
+                    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+  </div>
+</div>

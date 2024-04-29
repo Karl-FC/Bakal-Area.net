@@ -3,19 +3,13 @@
 <div id="contains" class="bg-neutral">
 <!--STEP 1: Fe-->    
 <br>
-  <div class="collapse bg-base-100 collapse-plus">
-            <input type="checkbox" class="peer" /> 
-        <div class="collapse-title peer-checked:bg-secondary text-xl font-medium">         
-            Shear Lag Factor, U
-            </div>
-        <div class="collapse-content bg-secondary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">  
-            <div id="boltDiameter">
-                <label for="boltDiameter">Bolt diameter, d<sub>b</sub></label>
-                <input type="number" id="boltDiameter" name="boltDiameter" value="boltDiameter"
-                [formControl]="sharedService.boltDiameter"><br><br>
-              </div>
-          </div>
-  </div><br>
+<app-shearlag />
+  <br>
+
+
+
+
+
 
   <div class="collapse bg-base-100 collapse-plus">
             <input type="checkbox" class="peer" /> 

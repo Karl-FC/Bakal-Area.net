@@ -27,6 +27,8 @@ export class SharedVariable {
     b: FormControl = new FormControl(null);
     SteelShapeSelect: number = 0; 
     boltDiameter: FormControl = new FormControl(null);
+    shearLagFactor: number = 1; 
+    
 
 
   //KLR TABLE

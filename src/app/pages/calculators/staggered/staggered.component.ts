@@ -8,11 +8,12 @@ import { beamShape } from '../../../shared.service';
 import { ElasticBucklingService } from '../elastic-buckling/elastic-buckling.service';
 import { ErrorAlertComponent } from '../../../shared/components/error-alert/error-alert.component';
 import { ErrorAlertService } from '../../../shared/components/error-alert/error-alert.service';
+import { ShearlagComponent } from '../shearlag/shearlag.component';
 
 @Component({
   selector: 'app-staggered',
   standalone: true,
-  imports: [CommonModule, CompressionComponent, CompressionbeamshapesComponent,
+  imports: [CommonModule, CompressionComponent, ShearlagComponent,
      ReactiveFormsModule, ErrorAlertComponent, FormsModule],
   templateUrl: './staggered.component.html',
   styleUrl: './staggered.component.scss'
@@ -25,7 +26,6 @@ export class StaggeredComponent {
             private errAlert: ErrorAlertService) {}
   
   isExpanded:string = ''
-
 
 
     AnalysisRows: { 
@@ -42,7 +42,7 @@ export class StaggeredComponent {
   
 
 
-
+      
 
 
 

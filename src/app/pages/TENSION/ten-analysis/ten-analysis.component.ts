@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedVariable } from '../../../shared.service';
 import { StaggeredComponent } from '../../calculators/staggered/staggered.component';
 import { TensionbeamshapesComponent } from '../../../shared/data/tensionbeamshapes/tensionbeamshapes.component';
-import { NetareaComponent } from '../../../netarea/netarea.component';
+import { NetareaComponent } from '../../calculators/netarea/netarea.component';
 
 @Component({
   selector: 'app-ten-analysis',

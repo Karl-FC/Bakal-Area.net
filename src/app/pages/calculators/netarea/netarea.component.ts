@@ -1,11 +1,11 @@
 import { Component, Renderer2, ElementRef } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedVariable } from '../shared.service';
-import { ErrorAlertComponent } from '../shared/components/error-alert/error-alert.component';
-import { ErrorAlertService } from '../shared/components/error-alert/error-alert.service';
+import { SharedVariable } from '../../../shared.service';
+import { ErrorAlertComponent } from '../../../shared/components/error-alert/error-alert.component';
+import { ErrorAlertService } from '../../../shared/components/error-alert/error-alert.service';
 import { CommonModule } from '@angular/common';
-import { FlexresultsService } from '../pages/calculators/flexresults/flexresults.service';
-import { TensionbeamshapesComponent } from '../shared/data/tensionbeamshapes/tensionbeamshapes.component';
+import { FlexresultsService } from '../flexresults/flexresults.service';
+import { TensionbeamshapesComponent } from '../../../shared/data/tensionbeamshapes/tensionbeamshapes.component';
 
 @Component({
   selector: 'app-netarea',

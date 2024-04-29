@@ -40,12 +40,12 @@ export class TensionbeamshapesComponent implements OnInit {
                 else if (this.SteelShape == 2) {
                   database = 'assets/db/AISC15-imperial-Ibeams.json';}
 
-
+      if (this.SteelShape != 3 && this.SteelShape != 0) {
       this.http.get<beamShape[]>(database).subscribe(data => {
         this.allBeamShapes = data;
         this.filteredBeamShapes = data;
         console.log("LoadSteelShapes is working");
-      });
+      });}
     }
     
     calcCompact(): void {
