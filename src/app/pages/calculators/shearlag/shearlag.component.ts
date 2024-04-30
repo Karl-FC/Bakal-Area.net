@@ -38,6 +38,10 @@ export class ShearlagComponent {
         this.shearLag = caseCase
         this.sharedService.shearLagFactor = this.shearLag
         console.log('Shear lag is ' + this.shearLag + ', shearlagfactor namen = ' + this.sharedService.shearLagFactor)
+        if (this.CaseSeven==1) {
+          this.shearCase7Calc()
+        }
+
   }
 
     shearCase7Calc() {

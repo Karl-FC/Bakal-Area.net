@@ -1,0 +1,461 @@
+<div id="summary">
+    <h1 class="formulaheader">Results</h1>
+    <div id="summarySquared">
+
+<!--STEP 1: Net Area-->    
+        <div class="collapse bg-neutral collapse-arrow">
+            <input type="checkbox" /> 
+            <div class="collapse-title text-xl font-medium">
+                    Net Area (A<sub>n</sub>)
+            </div>
+        <div class="collapse-content"> 
+            <div class="equation">
+                    A<sub>n</sub> = A<sub>g</sub> - n( d<sub>b</sub>
+                    <span >
+                    + <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                        <span>1</span>
+                        <span style="border-top:1px solid">8</span>
+                        </span> )t
+                    </span>
+
+                    <span *ngIf="this.BlockshearService.sharedService.isStaggered">
+                        + ( <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                            <span>s<sup>2</sup></span>
+                            <span style="border-top:1px solid">4g</span>
+                            </span> )t
+                    </span>
+            </div>
+                        
+            <div class="solution" *ngIf="this.BlockshearService.AnResults"><br>
+                = {{this.BlockshearService.Ag}} - {{this.BlockshearService.n}}( {{this.BlockshearService.db}}
+                    <span *ngIf="this.BlockshearService.isholeDmg || this.BlockshearService.isholePunch">
+                + <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                        <span>1</span>
+                        <span style="border-top:1px solid">{{this.BlockshearService.holeResults}}</span>
+                        </span> </span>
+                        ) ({{this.BlockshearService.thiccness}})
+
+                    <span *ngIf="this.BlockshearService.sharedService.isStaggered">
+                        + ({{this.BlockshearService.SumSGT}})
+                    </span>
+                    <h5 class="answer" > {{this.BlockshearService.AnResults}} </h5>
+            </div>  
+        </div>
+        </div>
+<br>
+
+
+
+<!--EFFECTIVE NET AREA-->    
+        <div class="collapse bg-neutral collapse-arrow">
+            <input type="checkbox" /> 
+            <div class="collapse-title text-xl font-medium">
+                    Effective Net Area (A<sub>e</sub>)
+            </div>
+        <div class="collapse-content"> 
+            <div class="equation">
+                    A<sub>e</sub> = UA<sub>n</sub>
+            </div>
+                        
+            <div class="solution" *ngIf="this.BlockshearService.AeResults"><br>
+                    = ({{this.BlockshearService.sharedService.shearLagFactor.toFixed(2)}})({{this.BlockshearService.An}})
+            </div>  
+
+
+
+                <h5 class="answer" *ngIf="this.BlockshearService.AeResults">{{this.BlockshearService.AeResults}}</h5>
+        </div>
+        </div>
+<br>
+
+<!--STEP 3-1: LRFD-->    
+<div class="collapse bg-neutral collapse-arrow collapse">
+    <input type="checkbox" checked/> 
+    <div class="collapse-title text-xl font-medium">
+            Load and Resistance Factor Design (LRFD)
+    </div>
+<div class="collapse-content"> 
+        <!----------------YIELDING-->
+            <div class="collapse bg-secondary collapse-arrow">
+                <input type="checkbox" /> 
+                <div class="collapse-title text-xl font-medium">
+                        Yielding in the Gross Section
+                </div>
+            <div class="collapse-content"> 
+                        <div class="equation">
+                                T<sub>u</sub> = &Phi;A<sub>g</sub>F<sub>y</sub>
+                        </div>
+                                    
+                        <div class="solution" *ngIf="this.BlockshearService.yieldLRFD"><br>
+                                = 0.75({{this.BlockshearService.Ag}})({{this.BlockshearService.Fy}})
+                        </div>
+                            <h5 class="answer">{{this.BlockshearService.yieldLRFDResults}}</h5>
+                </div>
+        </div>
+<br>           
+
+<!----------------FRACTUER-->
+            <div class="collapse bg-secondary collapse-arrow">
+                <input type="checkbox" /> 
+                <div class="collapse-title text-xl font-medium">
+                        Fracture in the Effective Net Section
+                </div>
+            <div class="collapse-content"> 
+                        <div class="equation">
+                                T<sub>u</sub> = &Phi;A<sub>e</sub>F<sub>u</sub>
+                        </div>
+                                    
+                        <div class="solution" *ngIf="this.BlockshearService.fractureLRFD"><br>
+                                = 0.75({{this.BlockshearService.Ae.toFixed(2)}})({{this.BlockshearService.Fu}})
+                        </div>
+                            <h5 class="answer">{{this.BlockshearService.fractureLRFDResults}}</h5>
+                </div>
+        </div>
+<br>            
+
+<!-----------BLOCK SHEAR-->
+            <div class="collapse bg-secondary collapse-arrow">
+                <input type="checkbox" /> 
+                <div class="collapse-title text-xl font-medium">
+                        Block Shear
+                </div>
+            <div class="collapse-content"> 
+                        <div class="equation">
+                                T<sub>u</sub> = &Phi;(F<sub>v</sub>+F<sub>t</sub>)
+                        </div>
+                              <br>
+                        <div class="collapse bg-base-100 collapse-arrow">
+                        <input type="checkbox" /> 
+                        <div class="collapse-title text-xl font-medium">
+                                Net Area under Shear, A<sub>nv</sub> and Net Area under Tension, A<sub>nt</sub>
+                        </div>
+                            <div class="collapse-content"> 
+
+                                        <div class="equation"><br>
+                                                A<sub>nv</sub> = A<sub>gv</sub> - A<sub>holes</sub>
+                                        </div>
+                                        <div class="solution" *ngIf="this.BlockshearService.Anv"><br>
+                                                = {{this.BlockshearService.Agv}} - {{this.BlockshearService.holeShear.value}}( {{this.BlockshearService.db}}
+                                                <span *ngIf="this.BlockshearService.isholeDmg || this.BlockshearService.isholePunch">
+                                            + <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                    <span>1</span>
+                                                    <span style="border-top:1px solid">{{this.BlockshearService.holeResults}}</span>
+                                                    </span> </span>
+                                                    ) ({{this.BlockshearService.thiccness}})
+                            
+                                                <span *ngIf="this.BlockshearService.sharedService.isStaggered">
+                                                    + ({{this.BlockshearService.SumSGT}})
+                                                </span>
+                                        </div><br>
+                                        <div class="answer" *ngIf="this.BlockshearService.Anv" >Anv = {{this.BlockshearService.Anv}}</div><br><br>
+                                            
+
+                                        <div class="equation"><br>
+                                                A<sub>nt</sub> = A<sub>gt</sub> - A<sub>holes</sub>
+                                        </div>
+                                        <div class="solution" *ngIf="this.BlockshearService.Ant"><br>
+                                                = {{this.BlockshearService.Agt}} - {{this.BlockshearService.holeTension.value}}( {{this.BlockshearService.db}}
+                                                <span *ngIf="this.BlockshearService.isholeDmg || this.BlockshearService.isholePunch">
+                                            + <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                    <span>1</span>
+                                                    <span style="border-top:1px solid">{{this.BlockshearService.holeResults}}</span>
+                                                    </span> </span>
+                                                    ) ({{this.BlockshearService.thiccness}})
+                            
+                                                <span *ngIf="this.BlockshearService.sharedService.isStaggered">
+                                                    + ({{this.BlockshearService.SumSGT}})
+                                                </span>
+                                        </div><br>
+                                        <div class="answer" *ngIf="this.BlockshearService.Ant">Anv = {{this.BlockshearService.Ant}}</div>
+                            </div>
+
+
+
+                        </div><br>
+                        <div class="collapse bg-base-100 collapse-arrow">
+                        <input type="checkbox" /> 
+                        <div class="collapse-title text-xl font-medium">
+                                Shear Resistance, F<sub>V</sub>
+                        </div>
+                            <div class="collapse-content"> 
+
+                                        <div class="equation"><br>
+                                                F<sub>1V</sub> = 0.6F<sub>u</sub>A<sub>nv</sub>
+                                        </div>
+                                        <div class="solution" *ngIf="this.BlockshearService.F1v"><br>
+                                                = 0.6 ({{this.BlockshearService.Fu}})({{this.BlockshearService.Anv}})
+                                        </div><br>
+                                        <div class="solution" *ngIf="this.BlockshearService.F1v">F<sub>1V</sub> = {{this.BlockshearService.F1v}}</div><br><br>
+                                            
+
+                                        <div class="equation"><br>
+                                                F<sub>2V</sub> = 0.6F<sub>y</sub>A<sub>gv</sub>
+                                        </div>
+                                        <div class="solution" *ngIf="this.BlockshearService.F2v"><br>
+                                                = 0.6 ({{this.BlockshearService.Fy}})({{this.BlockshearService.Agv}})
+                                        </div><br>
+                                        <div class="solution" *ngIf="this.BlockshearService.F2v">F<sub>2V</sub> = {{this.BlockshearService.F2v}}</div><br><br>
+
+                                        <h5 class="answer" *ngIf="this.BlockshearService.Fv">F<sub>V</sub> = {{this.BlockshearService.Fv}}</h5>
+                            </div>
+
+                        </div><br>
+                        <div class="collapse bg-base-100 collapse-arrow">
+                        <input type="checkbox" /> 
+                        <div class="collapse-title text-xl font-medium">
+                                Tension Resistance, F<sub>T </sub>
+                        </div>
+                            <div class="collapse-content"> 
+
+                                        <div class="equation"><br>
+                                                F<sub>T</sub> = U<sub>bs</sub>F<sub>u</sub>A<sub>nt</sub>
+                                        </div>
+                                        <div class="solution" *ngIf="this.BlockshearService.Ft"><br>
+                                                = {{this.BlockshearService.Ubs}}({{this.BlockshearService.Fu}})({{this.BlockshearService.Ant}})
+                                        </div><br>
+                                        <div class="answer" *ngIf="this.BlockshearService.Ft">F<sub>T</sub> = {{this.BlockshearService.Ft}}</div>
+                                            
+                            </div>
+
+                        </div><br>
+
+
+
+
+
+                            <br>
+                            <div class="equation" *ngIf="this.BlockshearService.blockShearLRFDResults">
+                                T<sub>u</sub> = 0.75({{this.BlockshearService.Fv}} + {{this.BlockshearService.Ft.toFixed(2)}})
+                        </div>
+                            <h5 class="answer" *ngIf="this.BlockshearService.blockShearLRFDResults">{{this.BlockshearService.blockShearLRFDResults}}</h5>
+                </div>
+        </div>
+    </div>
+</div><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--STEP 4-2: ASD-->    
+<div class="collapse bg-neutral collapse-arrow collapse">
+    <input type="checkbox" checked/> 
+    <div class="collapse-title text-xl font-medium">
+            Allowable Strength Design (ASD)
+    </div>
+<div class="collapse-content"> 
+        <!----------------YIELDING-->
+            <div class="collapse bg-secondary collapse-arrow">
+                <input type="checkbox" /> 
+                <div class="collapse-title text-xl font-medium">
+                        Yielding in the Gross Section
+                </div>
+            <div class="collapse-content"> 
+                        <div class="equation">
+                                T<sub>a</sub> = 
+                                <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                    <span>A<sub>g</sub>F<sub>y</sub></span>
+                                    <span style="border-top:1px solid">Ω</span>
+                                    </span>
+                        </div>
+                                    
+                        <div class="solution" *ngIf="this.BlockshearService.yieldASD"><br>
+                                = <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                    <span>({{this.BlockshearService.Ag}})({{this.BlockshearService.Fy}})</span>
+                                    <span style="border-top:1px solid">1.67</span>
+                                    </span>
+                        </div>
+                            <h5 class="answer">{{this.BlockshearService.yieldASDResults}}</h5>
+                </div>
+        </div>
+<br>           
+
+<!----------------FRACTUER-->
+            <div class="collapse bg-secondary collapse-arrow">
+                <input type="checkbox" /> 
+                <div class="collapse-title text-xl font-medium">
+                        Fracture in the Effective Net Section
+                </div>
+            <div class="collapse-content"> 
+                        <div class="equation">
+                                T<sub>a</sub> = 
+                                <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                    <span>A<sub>e</sub>F<sub>u</sub></span>
+                                    <span style="border-top:1px solid">Ω</span>
+                                    </span>
+                        </div>
+                                    
+                        <div class="solution" *ngIf="this.BlockshearService.fractureLRFD"><br>
+                                = <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                    <span>({{this.BlockshearService.Ae.toFixed(2)}})({{this.BlockshearService.Fu}})</span>
+                                    <span style="border-top:1px solid">2.00</span>
+                                    </span>
+                        </div>
+                            <h5 class="answer">{{this.BlockshearService.fractureASDResults}}</h5>
+                </div>
+        </div>
+<br>            
+
+<!-----------BLOCK SHEAR-->
+            <div class="collapse bg-secondary collapse-arrow">
+                <input type="checkbox" /> 
+                <div class="collapse-title text-xl font-medium">
+                        Block Shear
+                </div>
+            <div class="collapse-content"> 
+                        <div class="equation">
+                                T<sub>a</sub> = 
+                                <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                    <span>(F<sub>v</sub>+F<sub>t</sub>)</span>
+                                    <span style="border-top:1px solid">Ω</span>
+                                    </span>
+                        </div>
+                              <br>
+                        <div class="collapse bg-base-100 collapse-arrow">
+                        <input type="checkbox" /> 
+                        <div class="collapse-title text-xl font-medium">
+                                Net Area under Shear, A<sub>nv</sub> and Net Area under Tension, A<sub>nt</sub>
+                        </div>
+                            <div class="collapse-content"> 
+
+                                        <div class="equation"><br>
+                                                A<sub>nv</sub> = A<sub>gv</sub> - A<sub>holes</sub>
+                                        </div>
+                                        <div class="solution" *ngIf="this.BlockshearService.Anv"><br>
+                                                = {{this.BlockshearService.Agv}} - {{this.BlockshearService.holeShear.value}}( {{this.BlockshearService.db}}
+                                                <span *ngIf="this.BlockshearService.isholeDmg || this.BlockshearService.isholePunch">
+                                            + <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                    <span>1</span>
+                                                    <span style="border-top:1px solid">{{this.BlockshearService.holeResults}}</span>
+                                                    </span> </span>
+                                                    ) ({{this.BlockshearService.thiccness}})
+                            
+                                                <span *ngIf="this.BlockshearService.sharedService.isStaggered">
+                                                    + ({{this.BlockshearService.SumSGT}})
+                                                </span>
+                                        </div><br>
+                                        <div class="answer" *ngIf="this.BlockshearService.Anv" >Anv = {{this.BlockshearService.Anv}}</div><br><br>
+                                            
+
+                                        <div class="equation"><br>
+                                                A<sub>nt</sub> = A<sub>gt</sub> - A<sub>holes</sub>
+                                        </div>
+                                        <div class="solution" *ngIf="this.BlockshearService.Ant"><br>
+                                                = {{this.BlockshearService.Agt}} - {{this.BlockshearService.holeTension.value}}( {{this.BlockshearService.db}}
+                                                <span *ngIf="this.BlockshearService.isholeDmg || this.BlockshearService.isholePunch">
+                                            + <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                    <span>1</span>
+                                                    <span style="border-top:1px solid">{{this.BlockshearService.holeResults}}</span>
+                                                    </span> </span>
+                                                    ) ({{this.BlockshearService.thiccness}})
+                            
+                                                <span *ngIf="this.BlockshearService.sharedService.isStaggered">
+                                                    + ({{this.BlockshearService.SumSGT}})
+                                                </span>
+                                        </div><br>
+                                        <div class="answer" *ngIf="this.BlockshearService.Ant">Anv = {{this.BlockshearService.Ant}}</div>
+                            </div>
+
+
+
+                        </div><br>
+                        <div class="collapse bg-base-100 collapse-arrow">
+                        <input type="checkbox" /> 
+                        <div class="collapse-title text-xl font-medium">
+                                Shear Resistance, F<sub>V</sub>
+                        </div>
+                            <div class="collapse-content"> 
+
+                                        <div class="equation"><br>
+                                                F<sub>1V</sub> = 0.6F<sub>u</sub>A<sub>nv</sub>
+                                        </div>
+                                        <div class="solution" *ngIf="this.BlockshearService.F1v"><br>
+                                                = 0.6 ({{this.BlockshearService.Fu}})({{this.BlockshearService.Anv}})
+                                        </div><br>
+                                        <div class="solution" *ngIf="this.BlockshearService.F1v">F<sub>1V</sub> = {{this.BlockshearService.F1v}}</div><br><br>
+                                            
+
+                                        <div class="equation"><br>
+                                                F<sub>2V</sub> = 0.6F<sub>y</sub>A<sub>gv</sub>
+                                        </div>
+                                        <div class="solution" *ngIf="this.BlockshearService.F2v"><br>
+                                                = 0.6 ({{this.BlockshearService.Fy}})({{this.BlockshearService.Agv}})
+                                        </div><br>
+                                        <div class="solution" *ngIf="this.BlockshearService.F2v">F<sub>2V</sub> = {{this.BlockshearService.F2v}}</div><br><br>
+
+                                        <h5 class="answer" *ngIf="this.BlockshearService.Fv">F<sub>V</sub> = {{this.BlockshearService.Fv}}</h5>
+                            </div>
+
+                        </div><br>
+                        <div class="collapse bg-base-100 collapse-arrow">
+                        <input type="checkbox" /> 
+                        <div class="collapse-title text-xl font-medium">
+                                Tension Resistance, F<sub>T </sub>
+                        </div>
+                            <div class="collapse-content"> 
+
+                                        <div class="equation"><br>
+                                                F<sub>T</sub> = U<sub>bs</sub>F<sub>u</sub>A<sub>nt</sub>
+                                        </div>
+                                        <div class="solution" *ngIf="this.BlockshearService.Ft"><br>
+                                                = {{this.BlockshearService.Ubs}}({{this.BlockshearService.Fu}})({{this.BlockshearService.Ant}})
+                                        </div><br>
+                                        <div class="answer" *ngIf="this.BlockshearService.Ft">F<sub>T</sub> = {{this.BlockshearService.Ft}}</div>
+                                            
+                            </div>
+
+                        </div><br>
+
+
+
+
+
+                            <br>
+                            <div class="equation" *ngIf="this.BlockshearService.blockShearASDResults">
+                                T<sub>u</sub> = 
+                                <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                    <span>({{this.BlockshearService.Fv}} + {{this.BlockshearService.Ft.toFixed(2)}})</span>
+                                    <span style="border-top:1px solid">2.00</span>
+                                    </span>
+                        </div>
+                            <h5 class="answer" *ngIf="this.BlockshearService.blockShearASDResults">{{this.BlockshearService.blockShearASDResults}}</h5>
+                </div>
+        </div>
+    </div>
+</div><br>
+
+
+
+
+<!--FINAL FINAL ANSWER-->
+    <div id="finalanswer">
+        <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary" >
+            <!-- LRFD Results -->  
+            <div id="BgLRFD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
+                <div class="stat-title" style="font-size: 24px; font-weight: 600;">LRFD</div>
+                <div id="LRFDResult" class="stat-value" *ngIf="this.BlockshearService.displayLRFDResult"> {{this.BlockshearService.displayLRFDResult.toFixed(2)}} </div>
+                <div id="LRFDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">Minimum T<sub>u</sub></div>
+            </div>
+            
+            <!-- ASD Results -->
+            <div id="BgASD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
+                <div class="stat-title" style="font-size: 24px; font-weight: 600;">ASD</div>
+                <div id="ASDResult" class="stat-value" *ngIf="this.BlockshearService.displayASDResult"> {{this.BlockshearService.displayASDResult.toFixed(2)}} </div>
+                <div id="ASDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">Minimum T<sub>a</sub></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

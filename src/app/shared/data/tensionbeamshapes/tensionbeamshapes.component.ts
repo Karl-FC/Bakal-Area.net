@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SharedVariable } from '../../../shared.service';
 import { beamShape } from '../../../shared.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BlockshearService } from '../../../pages/calculators/blockshear/blockshear.service';
 
 @Component({
   selector: 'app-tensionbeamshapes',
@@ -13,7 +14,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './tensionbeamshapes.component.scss'
 })
 export class TensionbeamshapesComponent implements OnInit {
-  constructor(private http: HttpClient, public sharedService: SharedVariable) { }
+  constructor(private http: HttpClient, 
+    public sharedService: SharedVariable,
+    private blockshear: BlockshearService) { }
 
   SteelShape: number = 0;
   selectedA: number | null = null;
@@ -36,11 +39,16 @@ export class TensionbeamshapesComponent implements OnInit {
     LoadSteelShapes() {
       let database: string = '';
                 if (this.SteelShape == 1) {
-                    database = 'assets/db/AISC15-imperial-Lshapes.json';}
+                    database = 'assets/db/AISC15-imperial-Lshapes.json';
+                    this.blockshear.SteelShapeServe = 1;}
                 else if (this.SteelShape == 2) {
-                  database = 'assets/db/AISC15-imperial-Ibeams.json';}
+                  database = 'assets/db/AISC15-imperial-Ibeams.json';
+                  this.blockshear.SteelShapeServe = 2;}
+                else if (this.SteelShape == 4) {
+                  database = 'assets/db/AISC15-imperial-Cshapes.json';
+                  this.blockshear.SteelShapeServe = 4;}
 
-      if (this.SteelShape != 3 && this.SteelShape != 0) {
+      if (this.SteelShape != 3 && this.SteelShape != 0) { //Yun mga di na need magload ng shapes
       this.http.get<beamShape[]>(database).subscribe(data => {
         this.allBeamShapes = data;
         this.filteredBeamShapes = data;
@@ -123,9 +131,6 @@ export class TensionbeamshapesComponent implements OnInit {
                   this.sharedService.tw.setValue(selectedBeamShape.tw);
                   console.log("tw is:", selectedBeamShape.tw);
 
-                  // Get Sx
-                  this.sharedService.Sx.setValue(selectedBeamShape.Sx);
-                  console.log("Sx is:", selectedBeamShape.Sx);
                   
         }
       }
@@ -138,6 +143,9 @@ export class TensionbeamshapesComponent implements OnInit {
     onCheckChange() {
       this.sharedService.SteelShapeSelect = this.SteelShape
       this.LoadSteelShapes();
+      this.blockshear.ChooseThickness(0)
+      this.blockshear.thiccness = 0
+      this.blockshear.useFlange = 0
     }
     
 

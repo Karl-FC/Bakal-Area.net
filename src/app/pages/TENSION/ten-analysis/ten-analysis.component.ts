@@ -21,7 +21,8 @@ export class TenAnalysisComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.mainTitle = 'Analysis Calculator for Axial Tension';
-    this.sharedService.subTitle = 'Select Tension Member:'
+    //this.sharedService.instructions = 'Instructions';
+    this.sharedService.subTitle = 'Tension Member:'
   }
 
 }

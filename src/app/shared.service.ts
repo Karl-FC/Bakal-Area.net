@@ -9,27 +9,31 @@ import { BehaviorSubject } from 'rxjs';
 export class SharedVariable {
   mainTitle: string = 'Bakal-AREA.net';
   subTitle: string = 'Loading...';
+  instructions  : string = 'Instructions: Input all the required variables in order and press "Calculate"';
   chosenBeamShape: BehaviorSubject<beamShape | null> = 
   new BehaviorSubject<beamShape | null>(null);
   chosenBeamShapeLabel = new BehaviorSubject<string>('');
 
   //ESSENTIALS
     E = new BehaviorSubject<number>(0);
-    Fy = new BehaviorSubject<number>(0);
+    Fy = new BehaviorSubject<number>(0); 
 
-    Fyield: FormControl = new FormControl(null);
+    Fyield: FormControl = new FormControl(null); //If it works, dont touch it lol
     Ag: FormControl = new FormControl(null);
     Load: FormControl = new FormControl(null);
     d: FormControl = new FormControl(null); //depth
 
   //TENSION
+    Fu: FormControl = new FormControl(null);
     t: FormControl = new FormControl(null);
     b: FormControl = new FormControl(null);
     SteelShapeSelect: number = 0; 
+    isStaggered: boolean = false;
     boltDiameter: FormControl = new FormControl(null);
     boltAmount: FormControl = new FormControl(null);
+    bolts: FormControl = new FormControl(null);
     shearLagFactor: number = 1; 
-    
+    totalSgt: number = 0; 
 
 
   //KLR TABLE

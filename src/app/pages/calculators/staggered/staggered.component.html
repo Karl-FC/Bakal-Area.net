@@ -1,113 +1,199 @@
 <div id="connect" class="bg-secondary">
 </div>
 <div id="contains" class="bg-neutral">
-<!--STEP 1: Fe-->    
-<br>
-<app-shearlag />
-  <br>
+  <!--SHEAR LAG FACTOR-->    
+        <br>
+    <app-shearlag />
+        <br>
 
 
 
 
-
-
-  <div class="collapse bg-base-100 collapse-plus">
-            <input type="checkbox" class="peer" /> 
-        <div class="collapse-title peer-checked:bg-secondary text-xl font-medium">         
-            Bolt Properties
+    <div class="collapse bg-base-100 collapse-plus">
+        <input type="checkbox" class="peer" /> 
+    <div class="collapse-title peer-checked:bg-secondary text-xl font-medium">         
+        Connections
+        </div>
+    <div class="collapse-content bg-secondary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content"> 
+        
+        <div id="container">
+          <div id="choices">
+                    <div class="form-control">
+                      <label class="label label-text cursor-pointer">
+                        <span>Bolt diameter, d<sub>b</sub></span> 
+                        <input type="number" id="boltDiameter" name="boltDiameter" value="boltDiameter"
+                      [formControl]="sharedService.boltDiameter">
+                      </label>
+                    </div>
+                    <div class="form-control">
+                      <label class="label label-text cursor-pointer">
+                        <span>No. of holes, n</span> 
+                        <input type="number" id="boltAmount" name="boltAmount" value="boltAmount"
+                      [formControl]="sharedService.boltAmount">
+                      </label>
+                    </div>
+                    <div class="form-control">
+                      <label class="label cursor-pointer">
+                        <span class="label-text">Consider Punching Standard hole</span> 
+                        <input type="checkbox" class="toggle toggle-sm" checked [(ngModel)]="this.BlockshearService.isholePunch" />
+                      </label>
+                    </div>
+                    <div class="form-control">
+                      <label class="label cursor-pointer">
+                        <span class="label-text">Consider Damaged hole edge</span> 
+                        <input type="checkbox" class="toggle toggle-sm" checked [(ngModel)]="this.BlockshearService.isholeDmg" />
+                      </label>
+                    </div>
+                    <div class="form-control">
+                      <label class="label label-text cursor-pointer">
+                        <span>Staggered holes</span> 
+                        <input type="checkbox" class="toggle" [(ngModel)]="sharedService.isStaggered" />
+                      </label>
+                    </div>
             </div>
-        <div class="collapse-content bg-secondary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">  
-            <div id="boltDiameter">
-                <label for="boltDiameter">Bolt diameter, d<sub>b</sub></label>
-                <input type="number" id="boltDiameter" name="boltDiameter" value="boltDiameter"
-                [formControl]="sharedService.boltDiameter"><br><br>
+
+          <div id="tablediv"  style="margin: 20px;" *ngIf="sharedService.isStaggered">
+              <div class="bg-neutral overflow-x-auto">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Stagger path</th>
+                        <th><div style="resize: horizontal;">s</div></th>
+                        <th><div style="resize: horizontal;">g</div></th>
+                        <th><div style="resize: horizontal;">t</div></th>
+                        <th><div style="resize: horizontal;">
+                          <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                            <span>s<sup>2</sup></span>
+                            <span style="border-top:1px solid;">4(g)</span>
+                            </span>t</div></th>
+                        <th style="color: red;"></th> <!-- Bagong column para sa "remove button" -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of staggerTable; let i = index" >
+                        <td>{{i+1}}</td>
+                        <td style="overflow-wrap: break-word;">{{row.stagPath}}</td>
+                        <td style="overflow-wrap: break-word;">{{row.s}}</td>
+                        <td style="overflow-wrap: break-word;">{{row.g}}</td>
+                        <td style="overflow-wrap: break-word;">{{row.t}}</td>
+                        <td style="overflow-wrap: break-word;">{{row.sgt}}</td>
+                        <td>
+                          <button (click)="removeRow(i)">Remove</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+        <br>
+        <div id="addRow">
+          <form>
+          
+          <label for="stagPath">Path:</label>
+          <input type="string" id="stagPath" name="stagPath" 
+          [formControl]="stagPath"> <br><br>
+
+          <label for="elemS">s:</label>
+          <input type="number" id="elemS" name="elemS" 
+          [formControl]="elemS" value="1" (input)="inserts()"> <br><br>
+
+          <label for="elemG">g:</label>
+          <input type="number" id="elemG" name="elemG" 
+          [formControl]="elemG" value="1"> <br>
+
+
+
+        </form>
+        <br><br>
+            <div id="addRowdiv" class="stats stats-vertical text-primary-content lg:stats-horizontal shadow bg-info">
+          <button (click)="addRow()">Calculate Stagger Path</button>
               </div>
-          </div>
-  </div><br>
-  
-  <div class="collapse bg-base-100 collapse-plus">
-    <input type="checkbox" class="peer" /> 
-<div class="collapse-title peer-checked:bg-secondary text-xl font-medium">         
-    Staggered
-    </div>
-<div class="collapse-content bg-secondary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content"> 
-    
-  <div id="container">
-    <div id="tablediv"  style="margin: 20px;">
-        <div class="bg-neutral overflow-x-auto">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Stagger path</th>
-                  <th><div style="resize: horizontal;">Length</div></th>
-                  <th><div style="resize: horizontal;">k</div></th>
-                  <th><div style="resize: horizontal;">r</div></th>
-                  <th><div style="resize: horizontal;">kL/r</div></th>
-                  <th style="color: red;"></th> <!-- Bagong column para sa "remove button" -->
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let row of AnalysisRows; let i = index" >
-                  <td>{{i+1}}</td>
-                  <td style="overflow-wrap: break-word;">{{row.element}}</td>
-                  <td style="overflow-wrap: break-word;">{{row.elemLength}}</td>
-                  <td style="overflow-wrap: break-word;">{{row.KFactor}}</td>
-                  <td style="overflow-wrap: break-word;">{{row.radiusGyration}}</td>
-                  <td style="overflow-wrap: break-word;">{{row.kLr}}</td>
-                  <td>
-                    <button (click)="removeRow(i)">Remove</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
-  <div id="addRow">
-    <form>
-      <input type="radio" id="xelement" name="element" [value]="false"
-          [formControl]="element" >
-          <label for="element">x-axis</label> <br>
-      <input type="radio" id="yelement" name="element" [value]="true"
-          [formControl]="element" > 
-          <label for="element">y-axis</label> <br>
-      
-      <label for="KFactor">Support Condition:</label>
-          <div class="tooltip tooltip-info" 
-                data-tip="Each element may have different conditions that affect how the buckling of the column behaves. See references (Table C-A-7.1) for the recommended values of K depending on the support condition">
-                        <button (click)="sharedService.noReloadPls($event)" style="transform: scale(0.7); vertical-align: top; margin-right: -5px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-                            </svg>                                          
-                        </button>
-            </div><br>
-      <select name="KFactor" [formControl]="KFactor">
-          <label for="KFactor" id="KFactor">Select K</label>
-        <option value=0.65>Fixed-Fixed</option>
-        <option value=0.8>Pinned-Fixed</option>
-        <option value=1.2>Roller-Fixed</option>
-        <option value=1>Pinned-Pinned</option>
-        <option value=2.1>Free-Fixed</option>
-        <option value=2>Roller-Pinned</option>
-      </select><br><br>
 
-    <label for="elemLength">Length (in inches):</label><br>
-    <input type="number" id="elemLength" name="elemLength" 
-    [formControl]="elemLength" value="1" (input)="insertLength()"> <br>
-  </form>
-  <br><br>
-      <div id="addRowdiv" class="stats stats-vertical text-primary-content lg:stats-horizontal shadow bg-info">
-    <button (click)="addRow()">CALCULATE</button>
+
+
+        </div>
         </div>
 
 
+        </div>
 
 
-  </div>
+        </div>
+      </div>
+<br>
+
+      <div class="collapse bg-base-100 collapse-plus">
+        <input type="checkbox" class="peer" /> 
+        <div class="collapse-title peer-checked:bg-secondary text-xl font-medium">         
+                Block Shear
+        </div>
+       <div class="collapse-content bg-secondary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content"> 
+              <div id="shearLag">
+                <label for="shearLag">Reduction Factor, U<sub>bs</sub>: </label>
+                  <select class="select w-full max-w-xs" [(ngModel)]="BlockshearService.Ubs">
+                    <option value="1">Welded Angle</option>
+                    <option value="1">Single-row beam end connections/option>
+                    <option value="1">Angle Ends</option>
+                    <option value="1">Gusset Plates</option>
+                    <option value="0.5">Multiple-row beam end connections</option>
+                  </select><br>
+                </div>
+      
+                    <div>
+                    <div class="equation" *ngIf="BlockshearService.Ubs!=0.5">
+                        U = 1.0
+                      </div>
+                    <div class="equation" *ngIf="BlockshearService.Ubs==0.5">
+                        U = 0.5
+                      </div>
+                      <br>
+                    </div>
+              <div class="form-control">
+                <label class="label label-text cursor-pointer">
+                  <span>Gross Area subject to shear</span> 
+                  <input type="number" id="Agv" name="Agv" value="Agv"
+                [formControl]="BlockshearService.LengthShear">
+                <span class="note" *ngIf="this.BlockshearService.thiccness"> &times; {{this.BlockshearService.thiccness}} A<sub>gv</sub></span> 
+                <span class="note" *ngIf="!this.BlockshearService.thiccness"> &times; t = A<sub>gv</sub></span>
+              </label>
+              <label class="label label-text cursor-pointer">
+                  <span>A<sub>holes</sub> subject to Shear</span> 
+                  <input type="number" id="AholeV" name="Aholev" value="AholeV"
+                [formControl]="BlockshearService.holeShear">
+              </label>
+              </div>
+              <div class="form-control">
+                <label class="label label-text cursor-pointer">
+                  <span>Gross Area subject to Tension</span> 
+                  <input type="number" id="Agt" name="Agt" value="Agt"
+                [formControl]="BlockshearService.LengthTension">
+                <span class="note" *ngIf="this.BlockshearService.thiccness"> &times; {{this.BlockshearService.thiccness}} = A<sub>gt</sub></span>
+                <span class="note" *ngIf="!this.BlockshearService.thiccness"> &times; t = A<sub>gt</sub></span>  
+                </label>
+                <label class="label label-text cursor-pointer">
+                  <span>A<sub>holes</sub> subject to Tension</span> 
+                  <input type="number" id="AholeV" name="Aholev" value="AholeV"
+                [formControl]="BlockshearService.holeTension">
+              </label>
+              </div>
+      </div>
+      </div>
+
+
+
+
+
+  <br>
+        <div style="justify-content: center; display: flex;">
+          <button class="btn btn-wide text-xl bg-info font-medium" id="calculate" (click)="TensileSolve()">Calculate</button> 
+        </div>
+
+
+        
 </div>
 
 
-</div>
 
 
 
@@ -115,30 +201,22 @@
 
 
 
-
-
-
-
-
-    <!--ERROR MESSAGES-->
-        <!--No beam-->
+<!--ERROR MESSAGES-->
+          <!--No beam-->
           <app-error-alert id="ErrAlert" style="display: none;" />
 
-        <!--No length-->
-        <div id="LengthError" role="alert" class="alert alert-error" style="display: none;">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-          </svg>
-          
-          <span>ERROR: Please insert Length</span>
-          </div>
-        <!--No K-->
-        <div id="KError" role="alert" class="alert alert-error" style="display: none;">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-          </svg>
+          <!--No length-->
+          <div id="LengthError" role="alert" class="alert alert-error" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
             
-          </div>
-  </div>
-  </div>
-</div>
+            <span>ERROR: Please insert Length</span>
+            </div>
+          <!--No K-->
+          <div id="KError" role="alert" class="alert alert-error" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+              
+            </div>
