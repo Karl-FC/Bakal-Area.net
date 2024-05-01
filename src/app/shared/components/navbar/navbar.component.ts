@@ -3,6 +3,11 @@ import { Component,Renderer2, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 
+interface Theme {
+  value: string;
+  label: string;
+}
+
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +20,19 @@ import { Router, ActivatedRoute, RouterModule, RouterOutlet } from '@angular/rou
 
 export class NavbarComponent implements OnInit {
   selectedTheme: string = localStorage.getItem('theme') || 'neutral'; // Initialized
+  themes: Theme[] = [
+    {value: 'neutral', label: 'Neutral'},
+    {value: 'midnight', label: 'Midnight'},
+    {value: 'three', label: '3 AM'},
+    {value: 'cad', label: 'CAD'},
+    {value: 'steel', label: 'Steel'},
+    {value: 'loverainville', label: 'Love and Rainville'},
+    {value: 'meds', label: 'Paracetamol'},
+    {value: 'coquette', label: 'Coquette'},
+    {value: 'shrek', label: 'Shrek'}
+  ];
+  
+
 
   constructor(private router: Router, 
     private route: ActivatedRoute,
