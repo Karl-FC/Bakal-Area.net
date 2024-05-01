@@ -158,22 +158,22 @@
                 <span class="note" *ngIf="!this.BlockshearService.thiccness"> &times; t = A<sub>gv</sub></span>
               </label>
               <label class="label label-text cursor-pointer">
-                  <span>A<sub>holes</sub> subject to Shear</span> 
-                  <input type="number" id="AholeV" name="Aholev" value="AholeV"
+                  <span>No. of holes subject to Shear</span> 
+                  <input class="noPahabol" type="number" id="AholeV" name="Aholev" value="AholeV"
                 [formControl]="BlockshearService.holeShear">
               </label>
               </div>
               <div class="form-control">
                 <label class="label label-text cursor-pointer">
                   <span>Gross Area subject to Tension</span> 
-                  <input type="number" id="Agt" name="Agt" value="Agt"
+                  <input style="margin-right: 17px;" type="number" id="Agt" name="Agt" value="Agt"
                 [formControl]="BlockshearService.LengthTension">
-                <span class="note" *ngIf="this.BlockshearService.thiccness"> &times; {{this.BlockshearService.thiccness}} = A<sub>gt</sub></span>
+                <span class="note" *ngIf="this.BlockshearService.thiccness"> &times;{{this.BlockshearService.thiccness}} = A<sub>gt</sub></span>
                 <span class="note" *ngIf="!this.BlockshearService.thiccness"> &times; t = A<sub>gt</sub></span>  
                 </label>
                 <label class="label label-text cursor-pointer">
-                  <span>A<sub>holes</sub> subject to Tension</span> 
-                  <input type="number" id="AholeV" name="Aholev" value="AholeV"
+                  <span>No. of holes subject to Tension</span> 
+                  <input class="noPahabol" type="number" id="AholeV" name="Aholev" value="AholeV"
                 [formControl]="BlockshearService.holeTension">
               </label>
               </div>

@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class BendDesignService {
+export class ShearDesignService {
   constructor(public sharedService: SharedVariable) { }
 
   DL = new BehaviorSubject<number>(0);
@@ -22,7 +22,6 @@ export class BendDesignService {
   chosenKFactor = new BehaviorSubject<number>(0);
 
   beamCase = new BehaviorSubject<number>(0);
-  defLimit = new BehaviorSubject<number>(0);
   chosenElemLength = new BehaviorSubject<number>(0);
 
     Ag: FormControl = new FormControl(null);

@@ -1,5 +1,5 @@
 import { Component, Renderer2, ElementRef, Output, EventEmitter } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { SharedVariable } from '../../../shared.service';
@@ -13,7 +13,7 @@ import { BendDesignService } from '../../BENDING/bend-design/bend-design.service
 @Component({
   selector: 'app-benddesign-loads',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ErrorAlertComponent],
+  imports: [CommonModule, ReactiveFormsModule, ErrorAlertComponent,FormsModule],
   templateUrl: './benddesign-loads.component.html',
   styleUrl: './benddesign-loads.component.scss'
 })

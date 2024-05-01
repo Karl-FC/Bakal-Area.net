@@ -46,7 +46,7 @@ export class ElasticBucklingService {
 
     //Fe:
     let Fe = (Math.pow(Math.PI, 2) * E) / Math.pow(maxKLr, 2);
-    if (Fe) {this.FeResult = "Fe = " + Fe};
+    if (maxKLr) {this.FeResult = "Fe = " + Fe};
     this.Fe = Fe
     console.log("Fe= (PI^2E)/ (MaxKLr)^2 " + Fe)
     console.log("Fe= (" + (Math.pow(Math.PI, 2)) + " * " + E + ")/ (" + maxKLr + ")^2 " + Fe)
@@ -55,7 +55,7 @@ export class ElasticBucklingService {
 
 //Solutions if Fe is > or < 4.71 chuchu
     //Ito kung Fe is less than or equal 4.71 something
-    if (Fe <= Fcheck) {
+    if (maxKLr <= Fcheck) {
             this.FeCheckIsLess = 1;
             console.log("Fe is less than" + Fcheck + ", so 0.658 gagamitin")
             let Fcr = (Math.pow(0.658, (Fy/Fe)) ) * (Fy)
@@ -95,7 +95,7 @@ export class ElasticBucklingService {
 
 
        //Ito naman kung greater than: 
-      } else {
+      } else if (Fe > Fcheck) {
             this.FeCheckIsLess = 2;
             console.log("Fe is greater than" + Fcheck + ", so 0.0.877Fe gagamitin") 
             let Fcr = 0.877 * Fe

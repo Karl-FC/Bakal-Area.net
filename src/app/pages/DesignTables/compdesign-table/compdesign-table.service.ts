@@ -212,8 +212,8 @@ export class CompdesignTableService {
                   let maxkLr = beamShape.maxkLr
                   let Fcheck = 4.71 * Math.sqrt(E/Fy);
 
-                  beamShape.Fe = (Math.pow(Math.PI, 2) * E) / Math.pow(maxkLr, 2);
-                  beamShape.Fcr = beamShape.Fe <= Fcheck ? Math.pow(0.658, Fy / beamShape.Fe) * Fy : 0.877 * beamShape.Fe;
+                  beamShape.Fe = (Math.pow(Math.PI, 2) * E) / Math.pow(maxkLr, 2); // Tiga solve si Fe
+                  beamShape.Fcr = beamShape.maxkLr <= Fcheck ? Math.pow(0.658, Fy / beamShape.Fe) * Fy : 0.877 * beamShape.Fe; // Check muna kung mas malaki si Kl/rrrr
                   beamShape.Pcr = beamShape.Fcr * beamShape.A;
 
                   beamShape.PnLRFD = 0.9 * beamShape.Pcr;
