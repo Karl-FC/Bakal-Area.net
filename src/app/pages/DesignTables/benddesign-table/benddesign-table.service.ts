@@ -1,19 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject, max } from 'rxjs';
-import { Component, Renderer2, ElementRef, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CompDesignComponent } from '../../COMPRESSION/comp-design/comp-design.component';
-import { CompDesignService } from '../../COMPRESSION/comp-design/comp-design.service';
-import { CompdesignLoadsComponent } from '../../calculators/compdesign-loads/compdesign-loads.component';
+import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
-import { BeamshapesComponent } from '../../../shared/data/beamshapes/beamshapes.component';
-import { BendDesignComponent } from '../../BENDING/bend-design/bend-design.component';
-import { BenddesignLoadsComponent } from '../../calculators/benddesign-loads/benddesign-loads.component';
 import { BendDesignService } from '../../BENDING/bend-design/bend-design.service';
-
-import { Sort,MatSortModule } from '@angular/material/sort';
-import { beamShape } from '../../../shared.service';
 
 export interface BeamShape {
   AISC_Manual_Label: string;
