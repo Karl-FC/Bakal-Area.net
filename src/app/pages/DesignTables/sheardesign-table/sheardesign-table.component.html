@@ -34,11 +34,11 @@
                     <th mat-sort-header="AISC_Manual_Label">Beam Shape</th>
                     <th mat-sort-header="W"><div style="resize: horizontal;">Weight</div></th>
                     <th mat-sort-header="Zx"><div style="resize: horizontal;">Z<sub>x</sub></div></th>
-                    <th><div style="resize: horizontal;">Z<sub>required (LRFD)</sub></div></th>
+                    <th><div style="resize: horizontal;">Z<sub>assumed (LRFD)</sub></div></th>
                     <th mat-sort-header="MuDemand"><div style="resize: horizontal;">Factored Ultimate Load Moment (M<sub>u</sub>)</div></th>
                     <th mat-sort-header="MuCapacity"><div style="resize: horizontal;">Nominal Moment Strength (&Phi;<sub>b</sub>M<sub>n</sub>)</div></th>
                     <th mat-sort-header="LRFDstatus"><div style="resize: horizontal;">LRFD Remarks</div></th>
-                    <th><div style="resize: horizontal;">Z<sub>required (ASD)</sub></div></th>
+                    <th><div style="resize: horizontal;">Z<sub>assumed (ASD)</sub></div></th>
                     <th mat-sort-header="MaDemand"><div style="resize: horizontal;">Required Strength (M<sub>a</sub>)</div></th>
                     <th mat-sort-header="MaCapacity"><div style="resize: horizontal;">Nominal Flexural Strength (M<sub>n</sub>/&Omega;<sub>b</sub>)</div></th>
                     <th mat-sort-header="ASDstatus"><div style="resize: horizontal;">ASD Remarks</div></th>
@@ -48,10 +48,8 @@
                     <th mat-sort-header="Wcondition"h><div style="resize: horizontal;">Web</div></th>     
                     <th mat-sort-header="bf2tf"><div style="resize: horizontal;">&lambda;<sub>f</sub></div></th>
                     <th mat-sort-header="htw"><div style="resize: horizontal;">&lambda;<sub>w</sub></div></th>
-                    <th><div style="resize: horizontal;">W<sub>u</sub> (NOT including Beam Weight)</div></th>
-                    <th><div style="resize: horizontal;">W<sub>a</sub> (NOT including Beam Weight)</div></th>
-                    <th><div style="resize: horizontal;">W<sub>u</sub> (Including Beam Weight)</div></th>
-                    <th><div style="resize: horizontal;">W<sub>a</sub> (Including Beam Weight)</div></th>
+                    <th><div style="resize: horizontal;">Wu</div></th>
+                    <th><div style="resize: horizontal;">Wa</div></th>
                   </tr>
                 </thead>
                 <tbody class="bg-neutral">
@@ -75,8 +73,6 @@
                       <td>{{ beamShape['h/tw'] }}</td>
                       <td>{{ beamShape.Wu }}</td>
                       <td>{{ beamShape.Wa }}</td>
-                      <td>{{ beamShape.WuNoBeam }}</td>
-                      <td>{{ beamShape.WaNoBeam }}</td>
                   </tr>
                 </tbody>
               </table>

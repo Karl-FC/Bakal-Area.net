@@ -55,9 +55,6 @@ export interface BeamShape {
   Lamda_Rw: number;
   beamCase: number;
   A: number;
-  WuNoBeam: number;
-  WaNoBeam: number;
-
 
 
 }
@@ -65,7 +62,7 @@ export interface BeamShape {
 @Injectable({
   providedIn: 'root'
 })
-export class BenddesignTableService {
+export class SheardesignTableService {
   public _beamShapes = new BehaviorSubject<BeamShape[]>([]);
   beamShapes$ = this._beamShapes.asObservable();
   beamFilter: BehaviorSubject<number> = new BehaviorSubject(1);
@@ -108,10 +105,8 @@ export class BenddesignTableService {
   //Prelim ANALYSUS (Ito yun mga assuming natin since di natin alam ang weight ng mismong beam)                   
         let WuLoad = 1.2 * DL + 1.6 * LL; //LRFD
                       console.log("*LRFD weight w/o self-weight: " + WuLoad);
-                      beamShape.WuNoBeam = WuLoad
         let WaLoad = DL + LL              //ASD
                       console.log("*ASD weight w/o self-weight: " + WaLoad);
-                      beamShape.WaNoBeam = WaLoad
         let TempLRFD = this.CaseCondition(beamCase, WuLoad, L);
                       console.log("Assumed LRFD Load: " + TempLRFD);
         let TempASD = this.CaseCondition(beamCase, WaLoad, L);
