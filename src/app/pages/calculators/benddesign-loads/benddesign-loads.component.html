@@ -43,7 +43,7 @@
                               </svg>                                          
                           </button>
                   </div><br>
-                  <input type="number" id="YieldStrength" name="YieldStrength" value="50"
+                  <input class="lalagyan" type="number" id="YieldStrength" name="YieldStrength" value="50"
                   [formControl]="Fy"> <br>
         
                   <label for="ModulusE">Modulus of Elasticity:</label>
@@ -55,7 +55,7 @@
                               </svg>                                          
                           </button>
                   </div><br>
-                  <input type="number" id="ModulusE" name="ModulusE" value="29000"
+                  <input class="lalagyan"  type="number" id="ModulusE" name="ModulusE" value="29000"
             [formControl]="E" ><br>
 
 <label for="beamConditions">Support Condition:</label>
@@ -67,7 +67,7 @@
                               </svg>                                          
                           </button>
               </div><br>
-                          <select id="beamConditions" name="beamCase" [formControl]="beamCase">
+                          <select class="lalagyan"  id="beamConditions" name="beamCase" [formControl]="beamCase">
                               <label for="beamCase" id="beamCase">Select K</label>
                             <option value=1>Uniformed Load: Simply Supp </option>
                             <option value=2>Uniformed Load: Fixed at one end, supported at other</option>
@@ -83,7 +83,7 @@
                               </svg>                                          
                           </button>
               </div><br>
-                          <select id="defLimit" name="defLimit" [(ngModel)]="this.SharedElements.defLimit">
+                          <select class="lalagyan"  id="defLimit" name="defLimit" [(ngModel)]="this.SharedElements.defLimit">
                             <option value=0 selected>None</option>
                             <option value=360><span style="font-style: italic;">l</span> / 360</option>
                             <option value=240><span style="font-style: italic;">l</span> / 240</option>
