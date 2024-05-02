@@ -17,12 +17,20 @@ bootstrapApplication(AppComponent, {
       provideRouter(
         [
           /*{path: 'Home', component: CompAnalysisComponent},*/
-          {path: 'Home', redirectTo: 'Compression/Analysis', pathMatch: 'full'},
+          {path: 'Home', redirectTo: 'Home', pathMatch: 'full'},
           {path: 'Tension', redirectTo: 'Tension/Analysis', pathMatch: 'full'},
           {path: 'Compression', redirectTo: 'Compression/Analysis', pathMatch: 'full'},
           {path: 'Shear', redirectTo: 'Shear/Analysis', pathMatch: 'full'},
 
           {path: '', redirectTo: 'Compression/Analysis', pathMatch: 'full'},
+           
+            {path: 'Home', 
+            loadComponent: () => import('./app/shared/components/homepage/homepage.component')
+                .then(c => c.HomepageComponent)},
+
+            {path: 'About', 
+            loadComponent: () => import('./app/shared/data/about-us/about-us.component')
+            .then(c => c.AboutUsComponent)},
 
           {path: 'Compression/Analysis', 
           loadComponent: () => import('./app/pages/COMPRESSION/comp-analysis/comp-analysis.component')

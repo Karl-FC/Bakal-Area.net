@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SharedVariable } from '../../../shared.service';
 
 @Component({
   selector: 'app-about-us',
@@ -7,6 +8,16 @@ import { Component } from '@angular/core';
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.scss'
 })
-export class AboutUsComponent {
+export class AboutUsComponent implements OnInit {  
 
+
+  constructor(private sharedService: SharedVariable) {
+  }
+
+  ngOnInit() {
+    this.sharedService.mainTitle = 'About';
+    this.sharedService.subTitle = '';
+    this.sharedService.instructions = '';
+    this.sharedService.extrainstructions = '';
+  }
 }
