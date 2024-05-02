@@ -10,13 +10,14 @@ import { BenddesignLoadsComponent } from '../../calculators/benddesign-loads/ben
 
 import { SheardesignTableComponent } from '../../DesignTables/sheardesign-table/sheardesign-table.component';
 import { ShearDesignService } from './shear-design.service';
+import { ShearDesignloadsComponent } from '../../calculators/shear-designloads/shear-designloads.component';
 
 @Component({
   selector: 'app-shear-design',
   standalone: true,
   imports: [RouterOutlet, FormsModule, CommonModule, 
     NavbarComponent, LeftsideComponent,
-    SheardesignTableComponent, BenddesignLoadsComponent
+    SheardesignTableComponent, ShearDesignloadsComponent
   ],
   templateUrl: './shear-design.component.html',
   styleUrl: './shear-design.component.scss'

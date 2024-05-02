@@ -6,6 +6,7 @@ import {  } from '../../BENDING/bend-design/bend-design.service';
 
 import { Sort,MatSortModule } from '@angular/material/sort';
 import { ShearDesignService } from '../../SHEAR/shear-design/shear-design.service';
+import { SharedVariable } from '../../../shared.service';
 
 export interface BeamShape {
   AISC_Manual_Label: string;
@@ -54,6 +55,19 @@ export interface BeamShape {
   Vx: number;
   requiredI: number;
 
+  tw: number;
+  d: number;
+  Ag: number;
+  Cv: number;
+  kv: number;
+  Phi: number;
+  Omega: number;
+  VuDemand: number;
+  VaDemand: number;
+  VuCapacity: number;
+  VaCapacity: number;
+  LRFDshear: string;
+  ASDshear: string;
 
 }
 
@@ -66,13 +80,13 @@ export class SheardesignTableService {
   beamFilter: BehaviorSubject<number> = new BehaviorSubject(1);
 
   
-  constructor(public shearedElement: ShearDesignService,
+  constructor(public shearedElement: ShearDesignService, public sharedService: SharedVariable,
     public http: HttpClient) {}
      
 
 
      
-    calculateStatus(beamShape: BeamShape) {
+    shearingCalcu(beamShape: BeamShape) {
 
       //Mga variables sa pagsolve sa analysis  
       
@@ -96,6 +110,12 @@ export class SheardesignTableService {
                    console.log("used Ix: " + Ix)
       let Sx = beamShape.Sx
                    console.log("used Sx: " + Sx)
+      let d = beamShape.d
+                   console.log("used d: " + d)
+      let tw = beamShape.tw
+                   console.log("used tw: " + tw)
+      let htw = beamShape['h/tw']
+                   console.log("used htw: " + htw)
 
       beamShape.defLimit = this.shearedElement.defLimit
       let defLimit = beamShape.defLimit
@@ -108,9 +128,9 @@ export class SheardesignTableService {
         let WaLoad = DL + LL              //ASD
                       console.log("*ASD weight w/o self-weight: " + WaLoad);
                       beamShape.WaNoBeam = WaLoad
-        let TempLRFD = this.CaseCondition(beamShape, beamCase, WuLoad, L, defLimit, LL, true);
-                      console.log(`Assumed ASD Load:  ${TempLRFD} , defLimit = ${defLimit}`);
-        let TempASD = this.CaseCondition(beamShape, beamCase, WaLoad, L, defLimit, LL, true);
+        let TempLRFD = this.CaseCondition(beamShape, beamCase, WuLoad, L, defLimit, LL, true, true);
+                      console.log(`Assumed LRFD Load:  ${TempLRFD} , defLimit = ${defLimit}`);
+        let TempASD = this.CaseCondition(beamShape, beamCase, WaLoad, L, defLimit, LL, true, false);
                       console.log(`Assumed ASD Load:  ${TempASD}, defLimit = ${defLimit}`);
 
   //Assume na compact ang flange para makuha kung anong Zx ang kelangan
@@ -133,15 +153,23 @@ export class SheardesignTableService {
       beamShape.Wa = (DL + Weight) + LL
           console.log("*ASD weight with self-weight: " + beamShape.Wa);
 
-      MuDemand = this.CaseCondition(beamShape, beamCase, beamShape.Wu, L, defLimit, LL, false);
+      MuDemand = this.CaseCondition(beamShape, beamCase, beamShape.Wu, L, defLimit, LL, false, true);
         console.log("*MuDemand: " + MuDemand);
-      MaDemand = this.CaseCondition(beamShape, beamCase, beamShape.Wa, L, defLimit, LL, false);
+      MaDemand = this.CaseCondition(beamShape, beamCase, beamShape.Wa, L, defLimit, LL, false, false);
       console.log("*MaDemand: " + MaDemand);
 
       beamShape.MuDemand = MuDemand
       console.log("*beamShape.MuDemand: " + beamShape.MuDemand);
       beamShape.MaDemand = MaDemand
       console.log("*beamShape.MaDemand: " + beamShape.MaDemand);  
+
+
+
+
+
+
+
+
 
 
       //Check Compactness
@@ -200,6 +228,10 @@ export class SheardesignTableService {
                   console.log("MuCapacity" + MuCapacity);
                   console.log("MaCapacity" + MaCapacity);
 
+
+      //SHEAR
+        this.Shears(beamShape, E, Fy, beamShape.d,beamShape.tw, beamShape['h/tw'])
+                         
 
       //status
       let LRFDstatus = MuCapacity > MuDemand ? 'SAFE' : 'UNSAFE'; // Compare kung mas malaki Pn(capacity) sa Pu(demand)
@@ -263,7 +295,7 @@ setBeamFilter(filter: number) {
       this.http.get<BeamShape[]>(database).subscribe(data => {
         // For each beam shape, calculate status then ilalagay sa beamShape na array
                 data.forEach(beamShape => {
-                  let calculateds = this.calculateStatus(beamShape);
+                  let calculateds = this.shearingCalcu(beamShape);
                         console.log("~~BEAMSHAPE: " + beamShape.AISC_Manual_Label + "~~~~~")
                   beamShape.LRFDstatus = calculateds.LRFDstatus;
                   beamShape.ASDstatus = calculateds.ASDstatus;
@@ -302,7 +334,8 @@ setBeamFilter(filter: number) {
     beamCase: number, 
     w: number, L: number, 
     defLimit: number, LiveL: number, 
-    isAssuming: boolean): number {
+    isAssumingDef: boolean,
+    isLRFD: boolean): number {
 
     let MnLoad: number = 0;
     let beamCond: string = '';
@@ -314,7 +347,7 @@ setBeamFilter(filter: number) {
       MnLoad = (w * Math.pow(L,2)) / 8;
       console.log("MnLoad = (" + w + " * " + "Math.pow(" + L + ",2)) / 8 ==    " + MnLoad)
       Vx = (w*L)/2
-            if (defLimit && isAssuming==true) {
+            if (defLimit && isAssumingDef==true) {
               let numerator = 5*(LiveL * Math.pow(L,4))*defLimit
               let denominator = 384*E*L*(Math.pow(12,2))*(Math.pow((1/12),4))
               let requiredI = numerator/denominator
@@ -323,11 +356,13 @@ setBeamFilter(filter: number) {
               beamShape.requiredI = numerator/denominator;
             }
       beamCond = "Uniformed Load: Simply Supp";
+      if (isLRFD==true && isAssumingDef==false) {beamShape.VuDemand = Vx} else if (isLRFD==false && isAssumingDef==false) {beamShape.VaDemand = Vx}
     }
     else if (beamCase == 2 ) { //Uniformed Load: Fixed at one end, supported at other
       MnLoad = (w * Math.pow(L,2)) / 8;
       console.log("MnLoad = (" + w + " * " + "Math.pow(" + L + ",2)) / 8 ==    " + MnLoad)
-          if (defLimit && isAssuming==true) {
+      Vx = (5*w*L)/8    
+          if (defLimit && isAssumingDef==true) {
               let numerator = (LiveL * Math.pow(L,4))*defLimit
               let denominator = 185*E*L*(Math.pow(12,2))*(Math.pow((1/12),4))
               let requiredI = numerator/denominator
@@ -336,11 +371,14 @@ setBeamFilter(filter: number) {
               beamShape.requiredI = numerator/denominator;
             }
       beamCond = "Uniformed Load: Fixed at one end, supported at other";
+      if (isLRFD==true && isAssumingDef==false) {beamShape.VuDemand = Vx} else if (isLRFD==false && isAssumingDef==false) {beamShape.VaDemand = Vx}
     }
     else if (beamCase == 3 ) { //Uniformed Load: Cantilevered
       MnLoad = (w * Math.pow(L,2)) / 2;
       console.log("MnLoad = (" + w + " * " + "Math.pow(" + L + ",2)) / 2 ==    " + MnLoad)
-          if (defLimit && isAssuming==true) {
+      Vx = (w*L)
+         
+          if (defLimit && isAssumingDef==true) {
               let numerator = (LiveL * Math.pow(L,4))*defLimit
               let denominator = 8*E*L*(Math.pow(12,2))*(Math.pow((1/12),4))
               let requiredI = numerator/denominator
@@ -348,6 +386,7 @@ setBeamFilter(filter: number) {
               beamShape.requiredI = numerator/denominator;
             }
       beamCond = "Uniformed Load: Cantilevered";
+      if (isLRFD==true && isAssumingDef==false) {beamShape.VuDemand = Vx} else if (isLRFD==false && isAssumingDef==false) {beamShape.VaDemand = Vx}
     }
   
     console.log(`"beamCase = ${beamCase},Condition: ${beamCond}, defLimit: ${defLimit}`);
@@ -391,6 +430,77 @@ setBeamFilter(filter: number) {
     };
   }
     
+
+  Shears(beamShape: BeamShape, E: number, Fy: number, d: number, tw: number, htw: number){
+    console.log("~~~~SOLVING FOR Cv~~~~~")
+    let kv=0
+    let Phi = 0
+    let Omega = 0
+    let eq1 = (Math.sqrt((E/Fy)))*2.24; //Equation 1: (2.24 sqrt( E/Fy))
+        let check1 = eq1
+    let eq2 = (Math.sqrt(((kv*E)/Fy)))*1.1;
+        let check2 = eq2
+    let eq3 = (Math.sqrt(((kv*E)/Fy)))*1.37;
+        let check3 = eq3
+
+      if (htw <= eq1) {
+        beamShape.Cv = 1
+        Phi = 1
+        Omega = 1.5
+      } else {
+        Phi = 0.9
+        Omega = 1.67
+                  if (htw < 260) {kv = 5}
+                  if (htw <= eq2) {beamShape.Cv = 1}
+                      else if (htw > eq2 && htw < eq3) {beamShape.Cv = eq2/htw}
+                      else if (htw > eq3) {
+                                          let numerator = 1.51*E*kv
+                                          let denominator = (Fy)*(Math.pow(htw,2))
+                                          beamShape.Cv = numerator/denominator}
+      }
+
+      console.log(`htw: ${htw}\n` +
+            `eq1: ${eq1}\n` +
+            `eq2: ${eq2}\n` +
+            `eq3: ${eq3}\n` +
+            `E: ${E}\n` +
+            `Fy: ${Fy}\n` +
+            `this.Cv: ${beamShape.Cv}\n` +
+            `this.Phi: ${beamShape.Phi}\n` +
+            `this.Omega: ${beamShape.Omega}\n` +
+            `this.kv: ${beamShape.kv}`);
+
+      //Solving Vn
+              let Aw = d*tw
+              let Cv = beamShape.Cv
+              let Vn = 0.6*Fy*Aw*Cv
+                    console.log(`Vn = 0.6FyAwCv.......... ${Vn} = 0.6(${Fy})(${Aw})(${Cv})`)
+      
+          //LRFD
+              beamShape.VuCapacity = Phi*Vn
+
+          //ASD
+              beamShape.VaCapacity = Vn/Omega
+
+              console.log(`Vu = ${beamShape.VuCapacity}, Va = ${beamShape.VaCapacity}`)
+
+              //status
+      beamShape.LRFDshear = beamShape.VuCapacity > beamShape.VuDemand ? 'SAFE' : 'UNSAFE'; // Compare kung mas malaki Pn(capacity) sa Pu(demand)
+      beamShape.ASDshear = beamShape.VaCapacity> beamShape.VaDemand ? 'SAFE' : 'UNSAFE'; // Compare kung mas malaki Pn(capacity) sa Pa(demand)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

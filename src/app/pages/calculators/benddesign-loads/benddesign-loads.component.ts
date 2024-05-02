@@ -9,6 +9,7 @@ import { ErrorAlertService } from '../../../shared/components/error-alert/error-
 import { BenddesignTableComponent } from '../../DesignTables/benddesign-table/benddesign-table.component';
 import { BenddesignTableService } from '../../DesignTables/benddesign-table/benddesign-table.service';
 import { BendDesignService } from '../../BENDING/bend-design/bend-design.service';
+import { SheardesignTableService } from '../../DesignTables/sheardesign-table/sheardesign-table.service';
 
 @Component({
   selector: 'app-benddesign-loads',
@@ -21,6 +22,7 @@ export class BenddesignLoadsComponent {
   constructor( private sharedService: SharedVariable, 
     public SharedElements: BendDesignService,
     private updater: BenddesignTableService,
+    private shears: SheardesignTableService,
     private errAlert: ErrorAlertService) {}
 
     LargestKL: { 
@@ -55,6 +57,7 @@ export class BenddesignLoadsComponent {
   
   refreshTable() {
     this.updater.loadTable();
+    this.shears.loadTable();
 
     let DL = Number(this.DL.value);
         this.SharedElements.DL.next(DL);

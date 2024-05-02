@@ -29,6 +29,7 @@
     "@angular-devkit/build-angular": "^17.0.10",
     "@angular/cli": "^17.2.2",
     "@angular/compiler-cli": "^17.2.0",
+    "@tailwindcss/typography": "^0.5.13",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.19",
     "daisyui": "^4.8.0",

@@ -1,0 +1,77 @@
+#itemsinput{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding-top: 40px;
+    padding-left: 30px;
+    margin-top: -30px;
+    box-sizing: border-box;
+}
+
+form h1 {
+    margin-left: -20px;
+}
+
+#variableForms {
+    display: flex;
+
+}
+        .columnthing {
+        flex: 1;
+
+        }
+
+                .lalagyan {
+                    width: 50%;
+                    min-width: 200px;
+                    max-width: 300px;
+                }
+
+
+#addElem{
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+#RefreshBtn{
+    padding: 20px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#addRow{
+    box-sizing: border-box;
+}
+
+@media (max-width: 850px) {
+    #DL, #LL,
+            #elemLength, 
+            #YieldStrength, 
+            #ModulusE,
+            #beamConditions {
+                max-width: 60%;
+            }
+}
+
+
+
+@media (max-width: 768px) {
+
+    form h1 {
+        margin-left: 0px;
+    }
+
+    #variableForms {
+        display: block;
+
+    }
+            .columnthing {
+            flex: none;
+
+            }
+            
+            
+}
