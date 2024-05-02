@@ -27,5 +27,7 @@ export class ShearAnalysisComponent implements OnInit {
   ngOnInit() {
     this.sharedService.mainTitle = 'Shear Analysis Calculator';
     this.sharedService.subTitle = 'Slenderness Check';
+    this.sharedService.instructions = 'Input all the required variables in order and then click "Calculate';
+      this.sharedService.extrainstructions = '';
   }
 }

@@ -6,88 +6,82 @@
         <div class="collapse bg-neutral collapse-arrow">
             <input type="checkbox" /> 
             <div class="collapse-title text-xl font-medium">
-                    Plastic Modulus (Z<sub>x</sub>)
-            </div>
-        <div class="collapse-content"> 
-                    <!--Check muna kung symmetrical o hinde-->
-                        <!--ASSYMETRICAL (DI MUNA IMPLEMENTED)
-                            <div id="assymetry" *ngIf="this.MaxMomentsService.sharedService.isSymmetry==false">
-                                <div id="Fechecker" class="infoquote" *ngIf="this.MaxMomentsService.PNAresults">
-                                    <p>d = {{this.MaxMomentsService.sharedService.d.value}}
-                                    <br>
-                                    d - (tf + tf2) = ({{this.MaxMomentsService.sharedService.tf.value}} + {{this.MaxMomentsService.sharedService.tf2.value}})
-                                    <br>
-                                    d = {{this.MaxMomentsService.dnot}}
-                                        </p><br><br>  
-                                </div> 
-                                        <p style="margin-left: 10%; font-style: italic;">Beam has asymmetrical flanges, therefore:</p><br>    
-                                            <div class="equation">
-                                                            A<sub>C</sub> = A<sub>T</sub>
-                                            </div>
-                                            <div class="solution" *ngIf="this.MaxMomentsService.PNAresults">
-                                                    ({{this.MaxMomentsService.sharedService.bf.value}}*{{this.MaxMomentsService.sharedService.tf.value}})
-                                                     + x({{this.MaxMomentsService.sharedService.tf.value}}) = 
-                                                     ({{this.MaxMomentsService.sharedService.bf2.value}}*{{this.MaxMomentsService.sharedService.tf2.value}}) 
-                                                     + [{{this.MaxMomentsService.dnot}}-x] [{{this.MaxMomentsService.sharedService.tw.value}}]
-                                            </div>
-                                            
-                                <h5 class="answer"> {{this.MaxMomentsService.PNAresults}} </h5>
+                    Web Shear Coefficient (C<sub>v</sub>)
+            </div> 
+            <div class="collapse-content"> 
+                <!--INFO fr-->        
+                    <div class="infoquote">
+                            <p>when h/t<sub>w</sub> &le; 2.24 &Sqrt;E/F<sub>y</sub>, <br>
+                                    &Phi;<sub>v</sub> = 1.00 (LRFD);<br>
+                                    &Omega;;<sub>v</sub> = 1.50 (ASD)<br>
+                                    and C<sub>v</sub> = 1.00
+                            </p>
+                                <br>
+                    </div>  
+                    <div class="solution" *ngIf="this.MaxMomentsService.sharedService.htw.value">
+                        <p style="margin-left: -40%;">h/tw = {{this.MaxMomentsService.sharedService.htw.value}}
+                            </p><br>
+                        <p style="margin-left: -30%;" *ngIf="this.MaxMomentsService.check1">
+                            2.24&radic;(<span>E</span>/F<sub>y</sub>) = 2.24&radic;[({{this.MaxMomentsService.E}})({{this.MaxMomentsService.Fy}})]
+                            = {{this.MaxMomentsService.check1}}
+                        </p>
+                    </div>
+                                        
+                    
+                <!--Less than 4.17-->        
+                <div id="lessthan" *ngIf="this.MaxMomentsService.sharedService.htw.value < this.MaxMomentsService.check1">
+                <p style="margin-left: 10%; font-style: italic;">h/tw is lesser or equal, therefore:</p><br>    
+                    <div class="equation">
+                                    C<sub>v</sub> = 1.0
+                                        <br>
+                                    &Phi;<sub>v</sub> = 1.0
+                                        <br>
+                                    &Omega;<sub>v</sub> = 1.5
+                                        <br><br>
+                    </div>
+                </div>
+                                        
+                <!--greater than 4.17--> 
+                <div id="greaterthan" *ngIf="this.MaxMomentsService.sharedService.htw.value > this.MaxMomentsService.check1">
+                <p style="font-style: italic;">Since h/tw is greater, therefore:</p><br>        
+                    <div class="equation">
+                                    &Phi;<sub>v</sub> = 0.9
+                                        <br>
+                                    &Omega;<sub>v</sub> = 1.67
+                                        <br><br>
+                                    <div class="infoquote">
+                                            <p>since h/t<sub>w</sub> &lt; 260, k<sub>v</sub> = 5 </p><br>
+                                            <p>if h/t<sub>w</sub> &le; 1.1 &radic;[(k<sub>v</sub>E)/F<sub>y</sub>], then C<sub>v</sub> = 1</p><br>
+                                            <p>if h/t<sub>w</sub> &gt; 1.1 &radic;[(k<sub>v</sub>E)/F<sub>y</sub>], then C<sub>v</sub> = 1.1 &radic;[(k<sub>v</sub>E)/F<sub>y</sub>]</p><br>
+                                            <p>if h/t<sub>w</sub> &gt; 1.37 &radic;[(k<sub>v</sub>E)/F<sub>y</sub>], then C<sub>v</sub> = 1.51 &radic;[(k<sub>v</sub>E)/(h/t<sub>w</sub>)(F<sub>y</sub>)<sup>2</sup>]</p><br><br>
+                                                </div>  
+                    </div>
+                    <div class="solution">
+                        <p style="margin-left: -10%;">
+                            1.1 &radic;[(k<sub>v</sub>E)/F<sub>y</sub>] = 1.1 &radic;[({{this.MaxMomentsService.kv}})({{this.MaxMomentsService.E}}) / {{this.MaxMomentsService.Fy}} ]
+                            = {{this.MaxMomentsService.check2}}
+                        </p>
+                    </div>
+                    <div class="solution">
+                        <p style="margin-left: -10%;">
+                            1.37 &radic;[(k<sub>v</sub>E)/F<sub>y</sub>] = 1.37 &radic;[({{this.MaxMomentsService.kv}})({{this.MaxMomentsService.E}}) / {{this.MaxMomentsService.Fy}} ]
+                            = {{this.MaxMomentsService.check3}}
+                        </p>
+                    </div>
+                                    <!--GREATER GREATERRR-->
+                <div id="greaterthan" style="margin-left: 20%">
+                    <p style="font-style: italic;">Therefore,</p><br>        
+                        <div class="equation">
+                                        C<sub>v</sub> = {{this.MaxMomentsService.Cv}}
+                                            <br>
+                        </div>
+                    </div> 
+                </div>
 
-                                <div class="solution" *ngIf="this.MaxMomentsService.PNAresults">
-                                    {{this.MaxMomentsService.dnot}} - {{this.MaxMomentsService.PNA.toFixed(2)}} = {{this.MaxMomentsService.PNAfrombelow.toFixed(2)}}
-                            </div><br>
-                                            <div class="equation">
-                                                            Z<sub>x</sub> = A<sub>C</sub>Y<sub>C</sub> + A<sub>T</sub>Y<sub>T</sub>
-                                            </div>
-                                            <div class="solution" *ngIf="this.MaxMomentsService.PNAresults">
-                                                 = ({{this.MaxMomentsService.sharedService.bf.value}})({{this.MaxMomentsService.sharedService.tf.value}})({{this.MaxMomentsService.PNA.toFixed(2)}} + 
-                                                        <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                                            <span>{{this.MaxMomentsService.sharedService.tf.value}}</span>
-                                                            <span style="border-top:1px solid">2</span>
-                                                            </span>
-                                                 ) + {{this.MaxMomentsService.PNA.toFixed(2)}}({{this.MaxMomentsService.sharedService.tf.value}})(
-                                                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                                        <span>{{this.MaxMomentsService.PNA.toFixed(2)}}</span>
-                                                        <span style="border-top:1px solid">2</span>
-                                                        </span>
-                                                 ) + {{this.MaxMomentsService.sharedService.bf2.value}}({{this.MaxMomentsService.sharedService.tf2.value}})
-                                                 ({{this.MaxMomentsService.PNAfrombelow.toFixed(2)}} + 
-                                                        <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                                            <span>{{this.MaxMomentsService.sharedService.tf2.value}}</span>
-                                                            <span style="border-top:1px solid">2</span>
-                                                            </span>) + {{this.MaxMomentsService.sharedService.tw.value}}({{this.MaxMomentsService.PNAfrombelow.toFixed(2)}})
-                                                            (<span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                                                <span>{{this.MaxMomentsService.PNAfrombelow.toFixed(2)}}</span>
-                                                                <span style="border-top:1px solid">2</span>
-                                                                </span>)
-                                            </div>
-                                            
-                                <h5 class="answer"> {{this.MaxMomentsService.ZResults}} </h5>
-
-                        </div>-->
-
-                        <div id="symmetrical">  
-                            <div class="equation">
-                                            Z<sub>x</sub> = A<sub>C</sub>Y<sub>C</sub> + A<sub>T</sub>Y<sub>T</sub>
-                            </div>
-                            <div class="solution" *ngIf="this.MaxMomentsService.ZResults">
-                                 = 2[({{this.MaxMomentsService.sharedService.tf.value}})({{this.MaxMomentsService.sharedService.bf.value}})
-                                 ({{this.MaxMomentsService.PNA.toFixed(2)}} + 
-                                 <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                    <span>{{this.MaxMomentsService.sharedService.tf.value}}</span>
-                                    <span style="border-top:1px solid">2</span>
-                                    </span>
-                                 ) + ({{this.MaxMomentsService.PNA.toFixed(2)}})({{this.MaxMomentsService.sharedService.tw.value}}(
-                                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                        <span>{{this.MaxMomentsService.PNA.toFixed(2)}}</span>
-                                        <span style="border-top:1px solid">2</span>
-                                        </span>
-                                 ))
-                                 ]
-                            </div>
+ 
                             
-                <h5 class="answer"> {{this.MaxMomentsService.ZResults}} </h5>
-            </div>
+                            
+        </div>
 
 
 
@@ -96,103 +90,29 @@
 
                         
             </div>
-        </div>
 <br>
-<!--STEP 2: Mp-->
+<!--STEP 2: Vn-->
             <div class="collapse bg-neutral collapse-arrow">
                 <input type="checkbox" /> 
                 <div class="collapse-title text-xl font-medium">
-                        Plastic Moment (M<sub>p</sub>)
+                    V<sub>n</sub>
                 </div>
-            <div class="collapse-content"> 
+            <div class="collapse-content">         
                         <div class="equation">
-                                M<sub>p</sub> = F<sub>y</sub>Z<sub>x</sub>
+                                V<sub>n</sub> = 0.6F<sub>y</sub>A<sub>w</sub>C<sub>v</sub>
                         </div>
                                     
-                        <div class="solution" *ngIf="this.MaxMomentsService.ZResults"><br>
-                                = ({{this.MaxMomentsService.sharedService.Fy.value}})({{this.MaxMomentsService.Z.toFixed(2)}})(1ft/12in)
+                        <div class="solution" *ngIf="this.MaxMomentsService.Vn"><br>
+                                = 0.6F<sub>y</sub>dt<sub>w</sub>C<sub>v</sub><br>
+                                = 0.6({{this.MaxMomentsService.Fy}})({{this.MaxMomentsService.sharedService.d.value}})({{this.MaxMomentsService.sharedService.tw.value}})({{this.MaxMomentsService.Cv.toFixed(2)}})
                         </div>
 
 
 
-                            <h5 class="answer"> {{this.MaxMomentsService.MpResults}} </h5>
-                </div>
-        </div>
-<br>           
-
-<!--STEP 3: Mn-->
-            <div class="collapse bg-neutral collapse-arrow">
-                <input type="checkbox" /> 
-                <div class="collapse-title text-xl font-medium">
-                        Nominal Strength (M<sub>n</sub>)
-                    </div>
-            <div class="collapse-content">
-                    <!--INFO fr-->        
-                    <div class="infoquote">
-                            <p>if flange is compact,
-                                    then M<sub>n</sub> = M<sub>p</sub>
-                                <br><br>
-                            <p>if flange is noncompact, then 
-                                    M<sub>n</sub> = M<sub>p</sub> - (M<sub>p</sub> - 0.7F<sub>y</sub>S<sub>x</sub>)
-                                    [(&lambda; - &lambda;<sub>pf</sub>) / (&lambda;<sub>rf</sub> - &lambda;<sub>pf</sub>)]
-                                <br><br>    
-                            <p>if flange is slender, then 
-                                    M<sub>n</sub> = (0.9Ek<sub>c</sub>S<sub>x</sub>) / &lambda;<sup>2</sup>
-                                </p><br><br>  
-                    </div> 
-                    <!--COMPACT FLANGE-->
-                    <div *ngIf="this.MaxMomentsService.sharedService.flangeStatus == 'compact'"> 
-                        <div class="equation">
-                                M<sub>n</sub> = M<sub>p</sub>
-                        </div>
-                    </div>
-                    <!--NONCOMPACT FLANGE-->
-                    <div *ngIf="this.MaxMomentsService.sharedService.flangeStatus == 'noncompact'"> 
-                        <div class="equation">
-                                M<sub>n</sub> = M<sub>p</sub> - (M<sub>p</sub> - 0.7F<sub>y</sub>S<sub>x</sub>)(
-                                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                        <span>&lambda;-&lambda;<sub>pf</sub></span>
-                                        <span style="border-top:1px solid;">&lambda;<sub>rf</sub>-&lambda;<sub>pf</sub></span>
-                                        </span>)
-                        </div>
-                                    
-                        <div class="solution" *ngIf="this.MaxMomentsService.MnResults"><br>
-                            = {{this.MaxMomentsService.Mp}} - [{{this.MaxMomentsService.Mp}}-
-                            (0.9)({{this.MaxMomentsService.sharedService.Fy.value}})
-                            ({{this.MaxMomentsService.sharedService.Sx.value}})]
-                            [<span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                    <span>{{this.MaxMomentsService.sharedService.bf2tf.value}} - {{this.MaxMomentsService.sharedService.F_LamdaP.toFixed(2)}}</span>
-                                    <span style="border-top:1px solid;">{{this.MaxMomentsService.sharedService.F_LamdaR.toFixed(2)}} - {{this.MaxMomentsService.sharedService.F_LamdaP.toFixed(2)}}</span>
-                                    </span>]
-                        </div>
-                    </div>
-                    <!--SLENDER FLANGE-->
-                    <div *ngIf="this.MaxMomentsService.sharedService.flangeStatus == 'slender'"> 
-                        <div class="equation">
-                               M<sub>n</sub> = 
-                                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                        <span>0.9Ek<sub>c</sub>S<sub>x</sub></span>
-                                        <span style="border-top:1px solid;">         &lambda;<sup>2</sup></span>
-                                        </span>
-                        </div>
-                                    
-                        <div class="solution" *ngIf="this.MaxMomentsService.ZResults"><br>
-                                = 
-                                <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                    <span>(0.9)({{this.MaxMomentsService.sharedService.E.value}})
-                                        ({{this.MaxMomentsService.kc.toFixed(2)}})({{this.MaxMomentsService.sharedService.Sx.value}})
-                                    </span>
-                                    <span style="border-top:1px solid;">{{this.MaxMomentsService.sharedService.bf2tf.value}}<sup>2</sup></span>
-                                    </span>
-                        </div>
-                    </div>
-
-
-
-                            <h5 class="answer"> {{this.MaxMomentsService.MnResults}} </h5>
+                            <h5 class="answer" *ngIf="this.MaxMomentsService.Vn">Vn = {{this.MaxMomentsService.Vn}} </h5>
                 </div>
         </div>
-<br>           
+<br>                 
 
 
 
@@ -204,13 +124,13 @@
     </div>
 <div class="collapse-content"> 
             <div class="equation">
-                    Bending Capacity = &Phi;<sub>b</sub>M<sub>n</sub>
+                    Shear Capacity = &Phi;<sub>V</sub>n
             </div>
                         
-            <div class="solution" *ngIf="this.MaxMomentsService.ZResults"><br>
-                     = (0.9)({{this.MaxMomentsService.Mn.toFixed(3)}})
+            <div class="solution" *ngIf="this.MaxMomentsService.Vn"><br>
+                     = ({{this.MaxMomentsService.Phi}})({{this.MaxMomentsService.Vn}})
             </div>
-                <h5 class="answer">{{this.MaxMomentsService.LRFDResult}}</h5>
+                <h5 class="answer" *ngIf="this.MaxMomentsService.Vn">Vu = {{this.MaxMomentsService.Vu}}</h5>
     </div>
 </div><br>
 
@@ -222,20 +142,20 @@
         </div>
     <div class="collapse-content"> 
                 <div class="equation">
-                    Bending Capacity = 
+                    Shear Capacity = 
                     <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                        <span>M<sub>n</sub></span>
+                        <span>V<sub>n</sub></span>
                         <span style="border-top:1px solid">Ω</span>
                         </span>
                 </div>
                             
-                <div class="solution" *ngIf="this.MaxMomentsService.ZResults"><br>=
+                <div class="solution" *ngIf="this.MaxMomentsService.Vn"><br>=
                     <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                        <span>{{this.MaxMomentsService.Mn.toFixed(3)}}</span>
-                        <span style="border-top:1px solid">1.67</span>
+                        <span>{{this.MaxMomentsService.Vn}}</span>
+                        <span style="border-top:1px solid">{{this.MaxMomentsService.Omega}}</span>
                         </span>
                 </div>
-                    <h5 class="answer"> {{this.MaxMomentsService.ASDResult}} </h5>
+                    <h5 class="answer" *ngIf="this.MaxMomentsService.Vn">Va = {{this.MaxMomentsService.Va}}</h5>
         </div>
     </div><br> 
 
@@ -248,15 +168,15 @@
             <!-- LRFD Results -->  
             <div id="BgLRFD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
                 <div class="stat-title" style="font-size: 24px; font-weight: 600;">LRFD</div>
-                <div id="LRFDResult" class="stat-value"> {{this.MaxMomentsService.displayLRFDResult}} </div>
-                <div id="LRFDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">&Phi;<sub>b</sub>M<sub>n</sub></div>
+                <div id="LRFDResult" class="stat-value"> {{this.MaxMomentsService.LRFDResult}} </div>
+                <div id="LRFDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">&Phi;<sub>v</sub>V<sub>n</sub></div>
             </div>
             
             <!-- ASD Results -->
             <div id="BgASD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
                 <div class="stat-title" style="font-size: 24px; font-weight: 600;">ASD</div>
-                <div id="ASDResult" class="stat-value"> {{this.MaxMomentsService.displayASDResult}} </div>
-                <div id="ASDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">M<sub>n</sub>/&Omega;</div>
+                <div id="ASDResult" class="stat-value"> {{this.MaxMomentsService.ASDResult}} </div>
+                <div id="ASDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">V<sub>n</sub>/&Omega;<sub>v</sub></div>
             </div>
         </div>
     </div>
