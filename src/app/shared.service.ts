@@ -10,6 +10,7 @@ export class SharedVariable {
   mainTitle: string = 'Bakal-AREA.net';
   subTitle: string = 'Loading...';
   instructions  : string = 'Instructions: Input all the required variables in order and press "Calculate"';
+  extrainstructions: string = '';
   chosenBeamShape: BehaviorSubject<beamShape | null> = 
   new BehaviorSubject<beamShape | null>(null);
   chosenBeamShapeLabel = new BehaviorSubject<string>('');

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { SharedVariable } from '../../../shared.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-title',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './title.component.html',
   styleUrl: './title.component.scss'
 })

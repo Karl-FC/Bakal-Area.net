@@ -25,7 +25,7 @@ export class CompdesignTableComponent implements OnInit {
   beamShapes$ = this.updater.beamShapes$;
   beamFilters = new FormControl('');
 
-  constructor(private updater: CompdesignTableService) {
+  constructor(private updater: CompdesignTableService, public sharedService: SharedVariable) {
     this.updater.updateTable$.subscribe(() => {
       this.updater.loadTable();
       console.log("updater worked on designtablecomponent");

@@ -66,7 +66,7 @@ set maxKL(value: number) {
 addRow() {
   console.log("addRow kinda works");
   console.log("Max kL is " + this.SharedElements.maxKL.value)
-  
+  this.refreshTable();
   
 
 

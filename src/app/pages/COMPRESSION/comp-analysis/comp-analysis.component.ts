@@ -32,5 +32,7 @@ export class CompAnalysisComponent implements OnInit {
   ngOnInit() {
     this.sharedService.mainTitle = 'Analysis Calculator for Axial Compression';
     this.sharedService.subTitle = 'Slenderness Check';
+    this.sharedService.instructions = `Instructions: Input all the required variables in order and then click "Determine Slenderness" to see if the chosen Wsection is compact, non-compact or slender.`;
+    this.sharedService.extrainstructions = `Afterwhich use the Table of Elements to assign elements and their properties, then click "Calculate.`
   }
 }

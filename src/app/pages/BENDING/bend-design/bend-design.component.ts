@@ -27,5 +27,7 @@ export class BendDesignComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.mainTitle = 'Design Calculator for Bending';
+    this.sharedService.instructions = 'Input all the required variables in order and then click "Refresh Table';
+      this.sharedService.extrainstructions = '';
   }
 }

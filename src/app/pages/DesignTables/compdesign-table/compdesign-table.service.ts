@@ -9,6 +9,7 @@ import { CompdesignLoadsComponent } from '../../calculators/compdesign-loads/com
 import { CompdesignTableComponent } from './compdesign-table.component';
 import { BehaviorSubject } from 'rxjs';
 import { BeamshapesComponent } from '../../../shared/data/beamshapes/beamshapes.component';
+import { SharedVariable } from '../../../shared.service';
 
 export interface BeamShape {
   AISC_Manual_Label: string;
@@ -48,22 +49,23 @@ export class CompdesignTableService {
   beamFilter: BehaviorSubject<number> = new BehaviorSubject(1);
   maxkLr:number = 0;
   
-  constructor(public sharedElement: CompDesignService,
+  constructor(public CompDesignService: CompDesignService,
+    public sharedService: SharedVariable,
      private http: HttpClient) {}
 
     calculateStatus(beamShape: BeamShape) {
-      // Get values from sharedElements
-      let kL = this.sharedElement.chosenkL.value
+      // Get values from CompDesignServices
+      let kL = this.CompDesignService.chosenkL.value
             console.log("used kL: " + kL)
-      let KFactor = this.sharedElement.chosenKFactor.value
+      let KFactor = this.CompDesignService.chosenKFactor.value
             console.log("used KFactor: " + KFactor)
-      let L = this.sharedElement.chosenElemLength.value
+      let L = this.CompDesignService.chosenElemLength.value
              console.log("used L: " + L)
-      let element = this.sharedElement.chosenElem.value
+      let element = this.CompDesignService.chosenElem.value
              console.log("used elmenet: " + element)
-      let DL = this.sharedElement.DL.value;
+      let DL = this.CompDesignService.DL.value;
              console.log("used DL: " + DL)
-      let LL = this.sharedElement.LL.value;
+      let LL = this.CompDesignService.LL.value;
              console.log("used LL: " + LL)
 
           
@@ -71,11 +73,11 @@ export class CompdesignTableService {
 
 
       //Mga variables sa pagsolve sa analysis
-      let E = this.sharedElement.E.value;
+      let E = this.CompDesignService.E.value;
                    console.log("used E: " + E)
-      let Fy = this.sharedElement.Fy.value;
+      let Fy = this.CompDesignService.Fy.value;
                     console.log("used Fy: " + Fy)
-      let maxkLr = this.sharedElement.maxkLr.value;
+      let maxkLr = this.CompDesignService.maxkLr.value;
                    console.log("used maxkLr: " + maxkLr)
       let Ag = beamShape.A
                    console.log("used Ag: " + Ag)
@@ -94,8 +96,8 @@ export class CompdesignTableService {
 
       // ANALYSIS
       let Fcheck = 4.71 * Math.sqrt(E / Fy);
-      let Fe = (Math.pow(Math.PI, 2) * E) / Math.pow(maxkLr, 2);
-      let Fcr = Fe <= Fcheck ? Math.pow(0.658, Fy / Fe) * Fy : 0.877 * Fe;
+      let Fe = 12*((Math.pow(Math.PI, 2) * E) / Math.pow(maxkLr, 2));
+      let Fcr = maxkLr <= Fcheck ? Math.pow(0.658, Fy / Fe) * Fy : 0.877 * Fe;
       let Pcr = Fcr * Ag;
       let PuLRFD = 0.9 * Pcr;
       let PuASD = Pcr / 1.67;
@@ -174,8 +176,8 @@ export class CompdesignTableService {
                   beamShape.PaLoad = status.PaLoad;
 
         // Calculate kLr for each beam shape
-              let k = this.sharedElement.chosenKFactor.value;
-              let L = this.sharedElement.chosenElemLength.value;
+              let k = this.CompDesignService.chosenKFactor.value;
+              let L = this.CompDesignService.chosenElemLength.value;
               let kLr_x = (k * L) / beamShape.rx;
                   console.log("SO rx is " + beamShape.rx)
               let kLr_y = (k * L) / beamShape.ry;
@@ -191,7 +193,7 @@ export class CompdesignTableService {
                   console.log("FOR COMPARISON: " +
                        "this.maxkLr = " + this.maxkLr + 
                        " kLr_x ~ kLr_y ==" + kLr_x + " ~ " + kLr_y +
-                       ">> this.sharedElement.maxkLr.value " + this.sharedElement.maxkLr.value);
+                       ">> this.CompDesignService.maxkLr.value " + this.CompDesignService.maxkLr.value);
 
               // Update maxkLr if current kLr is greater
               if (kLr_x > kLr_y) {
@@ -206,13 +208,13 @@ export class CompdesignTableService {
               } else console.log("Max kLr not updated huhu")
 
           //GEH SOLVE SOLVE NAAAA
-                  let E = this.sharedElement.E.value
-                  let Fy = this.sharedElement.Fy.value
+                  let E = this.CompDesignService.E.value
+                  let Fy = this.CompDesignService.Fy.value
                   
                   let maxkLr = beamShape.maxkLr
                   let Fcheck = 4.71 * Math.sqrt(E/Fy);
 
-                  beamShape.Fe = (Math.pow(Math.PI, 2) * E) / Math.pow(maxkLr, 2); // Tiga solve si Fe
+                  beamShape.Fe = 12*((Math.pow(Math.PI, 2) * E) / Math.pow(maxkLr, 2)); // Tiga solve si Fe
                   beamShape.Fcr = beamShape.maxkLr <= Fcheck ? Math.pow(0.658, Fy / beamShape.Fe) * Fy : 0.877 * beamShape.Fe; // Check muna kung mas malaki si Kl/rrrr
                   beamShape.Pcr = beamShape.Fcr * beamShape.A;
 
@@ -220,7 +222,7 @@ export class CompdesignTableService {
                   beamShape.PnASD = beamShape.Pcr / 1.67;
                       console.log("Fcheck = " + Fcheck)
                       console.log("Fe = " + beamShape.Fe)
-                      console.log("E = " + this.sharedElement.E.value + "   maxkLr =" + beamShape.maxkLr)
+                      console.log("E = " + this.CompDesignService.E.value + "   maxkLr =" + beamShape.maxkLr)
                       console.log("Fcr = " + beamShape.Fcr)
                       console.log("Pcr = " + beamShape.Pcr)
 

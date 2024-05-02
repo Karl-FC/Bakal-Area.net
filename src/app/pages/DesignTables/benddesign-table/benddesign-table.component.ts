@@ -26,7 +26,7 @@ export class BenddesignTableComponent implements OnInit {
   beamShapes$ = this.updater.beamShapes$;
   beamFilters = new FormControl('');
 
-  constructor(public updater: BenddesignTableService) {
+  constructor(public updater: BenddesignTableService, public sharedService: SharedVariable) {
     this.updater.updateTable$.subscribe(() => {
       this.updater.loadTable();
       console.log("updater worked on designtablecomponent");

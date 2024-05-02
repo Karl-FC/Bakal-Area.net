@@ -1,6 +1,14 @@
 <div id="container">
-    <form><span id="filter" class="form-control">
+    <form><span id="filter" class="form-control">     
       <label id="bFilterContainer" class="cursor-pointer label" >
+        <div class="tooltip tooltip-info" 
+        data-tip="Click the element beside the chosen column heading to sort the values in descending or ascending form">
+                <button (click)="sharedService.noReloadPls($event)" style="transform: scale(0.7); vertical-align: top; margin-right: -5px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                    </svg>                                          
+                </button>
+        </div>
         <span class="label-text">Filter</span>
         <span>
             <select id="beamsFilter" name="beamsFilter" [formControl]="beamFilters" (change)="onFilterChange()">
@@ -19,10 +27,10 @@
             <option value=13>W44</option>
             <option value=14>All All I-shapes</option>
             <option value=15>All beam shapes (NOT RECOMMENDED)</option>
-        </select><br><br>
+        </select>
         </span>
       </label>
-      </span>
+      </span><br><br>
     </form>
   
   
@@ -69,7 +77,7 @@
                       <td class="bg-accent">{{ beamShape.MaCapacity ? beamShape.MaCapacity : '-' }}</td>
                       <td style="font-weight: 600;">{{ beamShape.ASDstatus ? beamShape.ASDstatus : '-' }}</td>
                       <td class="bg-accent">{{ beamShape.Ix}}</td>
-                      <td>{{ beamShape.requiredI}}</td>   
+                      <td>{{ beamShape.requiredI ? beamShape.requiredI : '-'}}</td>   
                       <td>{{ beamShape.Sx}}</td>  
                       <td>{{ beamShape.Fcondition ? beamShape.Fcondition : '-'  }}</td>
                       <td>{{ beamShape.Wcondition ? beamShape.Wcondition : '-'  }}</td>                  

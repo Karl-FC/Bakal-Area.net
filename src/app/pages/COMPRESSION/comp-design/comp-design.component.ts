@@ -38,5 +38,7 @@ export class CompDesignComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.mainTitle = 'Design Calculator for Axial Compression';
+    this.sharedService.instructions = 'Input all the required variables in order, then use the Table of Elements to assign elements and their properties.';
+      this.sharedService.extrainstructions = 'Afterwhich, select the governing element then press "Refresh Table';
   }
 }
