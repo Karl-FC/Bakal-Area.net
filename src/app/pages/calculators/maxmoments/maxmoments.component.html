@@ -1,0 +1,265 @@
+<div id="summary">
+    <h1 class="formulaheader">Results</h1>
+    <div id="summarySquared">
+
+<!--STEP 1: Centroid-->    
+        <div class="collapse bg-neutral collapse-arrow">
+            <input type="checkbox" /> 
+            <div class="collapse-title text-xl font-medium">
+                    Plastic Modulus (Z<sub>x</sub>)
+            </div>
+        <div class="collapse-content"> 
+                    <!--Check muna kung symmetrical o hinde-->
+                        <!--ASSYMETRICAL (DI MUNA IMPLEMENTED)
+                            <div id="assymetry" *ngIf="this.MaxMomentsService.sharedService.isSymmetry==false">
+                                <div id="Fechecker" class="infoquote" *ngIf="this.MaxMomentsService.PNAresults">
+                                    <p>d = {{this.MaxMomentsService.sharedService.d.value}}
+                                    <br>
+                                    d - (tf + tf2) = ({{this.MaxMomentsService.sharedService.tf.value}} + {{this.MaxMomentsService.sharedService.tf2.value}})
+                                    <br>
+                                    d = {{this.MaxMomentsService.dnot}}
+                                        </p><br><br>  
+                                </div> 
+                                        <p style="margin-left: 10%; font-style: italic;">Beam has asymmetrical flanges, therefore:</p><br>    
+                                            <div class="equation">
+                                                            A<sub>C</sub> = A<sub>T</sub>
+                                            </div>
+                                            <div class="solution" *ngIf="this.MaxMomentsService.PNAresults">
+                                                    ({{this.MaxMomentsService.sharedService.bf.value}}*{{this.MaxMomentsService.sharedService.tf.value}})
+                                                     + x({{this.MaxMomentsService.sharedService.tf.value}}) = 
+                                                     ({{this.MaxMomentsService.sharedService.bf2.value}}*{{this.MaxMomentsService.sharedService.tf2.value}}) 
+                                                     + [{{this.MaxMomentsService.dnot}}-x] [{{this.MaxMomentsService.sharedService.tw.value}}]
+                                            </div>
+                                            
+                                <h5 class="answer"> {{this.MaxMomentsService.PNAresults}} </h5>
+
+                                <div class="solution" *ngIf="this.MaxMomentsService.PNAresults">
+                                    {{this.MaxMomentsService.dnot}} - {{this.MaxMomentsService.PNA.toFixed(2)}} = {{this.MaxMomentsService.PNAfrombelow.toFixed(2)}}
+                            </div><br>
+                                            <div class="equation">
+                                                            Z<sub>x</sub> = A<sub>C</sub>Y<sub>C</sub> + A<sub>T</sub>Y<sub>T</sub>
+                                            </div>
+                                            <div class="solution" *ngIf="this.MaxMomentsService.PNAresults">
+                                                 = ({{this.MaxMomentsService.sharedService.bf.value}})({{this.MaxMomentsService.sharedService.tf.value}})({{this.MaxMomentsService.PNA.toFixed(2)}} + 
+                                                        <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                            <span>{{this.MaxMomentsService.sharedService.tf.value}}</span>
+                                                            <span style="border-top:1px solid">2</span>
+                                                            </span>
+                                                 ) + {{this.MaxMomentsService.PNA.toFixed(2)}}({{this.MaxMomentsService.sharedService.tf.value}})(
+                                                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                        <span>{{this.MaxMomentsService.PNA.toFixed(2)}}</span>
+                                                        <span style="border-top:1px solid">2</span>
+                                                        </span>
+                                                 ) + {{this.MaxMomentsService.sharedService.bf2.value}}({{this.MaxMomentsService.sharedService.tf2.value}})
+                                                 ({{this.MaxMomentsService.PNAfrombelow.toFixed(2)}} + 
+                                                        <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                            <span>{{this.MaxMomentsService.sharedService.tf2.value}}</span>
+                                                            <span style="border-top:1px solid">2</span>
+                                                            </span>) + {{this.MaxMomentsService.sharedService.tw.value}}({{this.MaxMomentsService.PNAfrombelow.toFixed(2)}})
+                                                            (<span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                                <span>{{this.MaxMomentsService.PNAfrombelow.toFixed(2)}}</span>
+                                                                <span style="border-top:1px solid">2</span>
+                                                                </span>)
+                                            </div>
+                                            
+                                <h5 class="answer"> {{this.MaxMomentsService.ZResults}} </h5>
+
+                        </div>-->
+
+                        <div id="symmetrical">  
+                            <div class="equation">
+                                            Z<sub>x</sub> = A<sub>C</sub>Y<sub>C</sub> + A<sub>T</sub>Y<sub>T</sub>
+                            </div>
+                            <div class="solution" *ngIf="this.MaxMomentsService.ZResults">
+                                 = 2[({{this.MaxMomentsService.sharedService.tf.value}})({{this.MaxMomentsService.sharedService.bf.value}})
+                                 ({{this.MaxMomentsService.PNA.toFixed(2)}} + 
+                                 <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                    <span>{{this.MaxMomentsService.sharedService.tf.value}}</span>
+                                    <span style="border-top:1px solid">2</span>
+                                    </span>
+                                 ) + ({{this.MaxMomentsService.PNA.toFixed(2)}})({{this.MaxMomentsService.sharedService.tw.value}}(
+                                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                        <span>{{this.MaxMomentsService.PNA.toFixed(2)}}</span>
+                                        <span style="border-top:1px solid">2</span>
+                                        </span>
+                                 ))
+                                 ]
+                            </div>
+                            
+                <h5 class="answer"> {{this.MaxMomentsService.ZResults}} </h5>
+            </div>
+
+
+
+
+
+
+                        
+            </div>
+        </div>
+<br>
+<!--STEP 2: Mp-->
+            <div class="collapse bg-neutral collapse-arrow">
+                <input type="checkbox" /> 
+                <div class="collapse-title text-xl font-medium">
+                        Plastic Moment (M<sub>p</sub>)
+                </div>
+            <div class="collapse-content"> 
+                        <div class="equation">
+                                M<sub>p</sub> = F<sub>y</sub>Z<sub>x</sub>
+                        </div>
+                                    
+                        <div class="solution" *ngIf="this.MaxMomentsService.ZResults"><br>
+                                = ({{this.MaxMomentsService.sharedService.Fy.value}})({{this.MaxMomentsService.Z.toFixed(2)}})(1ft/12in)
+                        </div>
+
+
+
+                            <h5 class="answer"> {{this.MaxMomentsService.MpResults}} </h5>
+                </div>
+        </div>
+<br>           
+
+<!--STEP 3: Mn-->
+            <div class="collapse bg-neutral collapse-arrow">
+                <input type="checkbox" /> 
+                <div class="collapse-title text-xl font-medium">
+                        Nominal Strength (M<sub>n</sub>)
+                    </div>
+            <div class="collapse-content">
+                    <!--INFO fr-->        
+                    <div class="infoquote">
+                            <p>if flange is compact,
+                                    then M<sub>n</sub> = M<sub>p</sub>
+                                <br><br>
+                            <p>if flange is noncompact, then 
+                                    M<sub>n</sub> = M<sub>p</sub> - (M<sub>p</sub> - 0.7F<sub>y</sub>S<sub>x</sub>)
+                                    [(&lambda; - &lambda;<sub>pf</sub>) / (&lambda;<sub>rf</sub> - &lambda;<sub>pf</sub>)]
+                                <br><br>    
+                            <p>if flange is slender, then 
+                                    M<sub>n</sub> = (0.9Ek<sub>c</sub>S<sub>x</sub>) / &lambda;<sup>2</sup>
+                                </p><br><br>  
+                    </div> 
+                    <!--COMPACT FLANGE-->
+                    <div *ngIf="this.MaxMomentsService.sharedService.flangeStatus == 'compact'"> 
+                        <div class="equation">
+                                M<sub>n</sub> = M<sub>p</sub>
+                        </div>
+                    </div>
+                    <!--NONCOMPACT FLANGE-->
+                    <div *ngIf="this.MaxMomentsService.sharedService.flangeStatus == 'noncompact'"> 
+                        <div class="equation">
+                                M<sub>n</sub> = M<sub>p</sub> - (M<sub>p</sub> - 0.7F<sub>y</sub>S<sub>x</sub>)(
+                                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                        <span>&lambda;-&lambda;<sub>pf</sub></span>
+                                        <span style="border-top:1px solid;">&lambda;<sub>rf</sub>-&lambda;<sub>pf</sub></span>
+                                        </span>)
+                        </div>
+                                    
+                        <div class="solution" *ngIf="this.MaxMomentsService.MnResults"><br>
+                            = {{this.MaxMomentsService.Mp}} - [{{this.MaxMomentsService.Mp}}-
+                            (0.9)({{this.MaxMomentsService.sharedService.Fy.value}})
+                            ({{this.MaxMomentsService.sharedService.Sx.value}})]
+                            [<span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                    <span>{{this.MaxMomentsService.sharedService.bf2tf.value}} - {{this.MaxMomentsService.sharedService.F_LamdaP.toFixed(2)}}</span>
+                                    <span style="border-top:1px solid;">{{this.MaxMomentsService.sharedService.F_LamdaR.toFixed(2)}} - {{this.MaxMomentsService.sharedService.F_LamdaP.toFixed(2)}}</span>
+                                    </span>]
+                        </div>
+                    </div>
+                    <!--SLENDER FLANGE-->
+                    <div *ngIf="this.MaxMomentsService.sharedService.flangeStatus == 'slender'"> 
+                        <div class="equation">
+                               M<sub>n</sub> = 
+                                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                        <span>0.9Ek<sub>c</sub>S<sub>x</sub></span>
+                                        <span style="border-top:1px solid;">         &lambda;<sup>2</sup></span>
+                                        </span>
+                        </div>
+                                    
+                        <div class="solution" *ngIf="this.MaxMomentsService.ZResults"><br>
+                                = 
+                                <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                    <span>(0.9)({{this.MaxMomentsService.sharedService.E.value}})
+                                        ({{this.MaxMomentsService.kc.toFixed(2)}})({{this.MaxMomentsService.sharedService.Sx.value}})
+                                    </span>
+                                    <span style="border-top:1px solid;">{{this.MaxMomentsService.sharedService.bf2tf.value}}<sup>2</sup></span>
+                                    </span>
+                        </div>
+                    </div>
+
+
+
+                            <h5 class="answer"> {{this.MaxMomentsService.MnResults}} </h5>
+                </div>
+        </div>
+<br>           
+
+
+
+<!--STEP 4-1: LRFD-->    
+<div class="collapse bg-neutral collapse-arrow">
+    <input type="checkbox" /> 
+    <div class="collapse-title text-xl font-medium">
+            Design Strength (LRFD)
+    </div>
+<div class="collapse-content"> 
+            <div class="equation">
+                    Bending Capacity = &Phi;<sub>b</sub>M<sub>n</sub>
+            </div>
+                        
+            <div class="solution" *ngIf="this.MaxMomentsService.ZResults"><br>
+                     = (0.9)({{this.MaxMomentsService.Mn.toFixed(3)}})
+            </div>
+                <h5 class="answer">{{this.MaxMomentsService.LRFDResult}}</h5>
+    </div>
+</div><br>
+
+<!--STEP 4-2: ASD-->    
+    <div class="collapse bg-neutral collapse-arrow">
+        <input type="checkbox" /> 
+        <div class="collapse-title text-xl font-medium">
+                Allowable Strength (ASD)
+        </div>
+    <div class="collapse-content"> 
+                <div class="equation">
+                    Bending Capacity = 
+                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                        <span>M<sub>n</sub></span>
+                        <span style="border-top:1px solid">Ω</span>
+                        </span>
+                </div>
+                            
+                <div class="solution" *ngIf="this.MaxMomentsService.ZResults"><br>=
+                    <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                        <span>{{this.MaxMomentsService.Mn.toFixed(3)}}</span>
+                        <span style="border-top:1px solid">1.67</span>
+                        </span>
+                </div>
+                    <h5 class="answer"> {{this.MaxMomentsService.ASDResult}} </h5>
+        </div>
+    </div><br> 
+
+
+
+
+<!--FINAL FINAL ANSWER-->
+    <div id="finalanswer">
+        <div class="stats stats-vertical lg:stats-horizontal shadow bg-primary" >
+            <!-- LRFD Results -->  
+            <div id="BgLRFD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
+                <div class="stat-title" style="font-size: 24px; font-weight: 600;">LRFD</div>
+                <div id="LRFDResult" class="stat-value"> {{this.MaxMomentsService.displayLRFDResult}} </div>
+                <div id="LRFDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">&Phi;<sub>b</sub>M<sub>n</sub></div>
+            </div>
+            
+            <!-- ASD Results -->
+            <div id="BgASD" class="stat text-primary-content place-items-center" style="width: 300px; height: 130px;">
+                <div class="stat-title" style="font-size: 24px; font-weight: 600;">ASD</div>
+                <div id="ASDResult" class="stat-value"> {{this.MaxMomentsService.displayASDResult}} </div>
+                <div id="ASDSub" class="stat-desc" style="font-size: 20px; font-weight: 400; padding-top: 10px;">M<sub>n</sub>/&Omega;</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,18 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject, max } from 'rxjs';
-import { Component, Renderer2, ElementRef, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CompDesignComponent } from '../../COMPRESSION/comp-design/comp-design.component';
-import { CompDesignService } from '../../COMPRESSION/comp-design/comp-design.service';
-import { CompdesignLoadsComponent } from '../../calculators/compdesign-loads/compdesign-loads.component';
+import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
-import { BeamshapesComponent } from '../../../shared/data/beamshapes/beamshapes.component';
-import { BendDesignComponent } from '../../BENDING/bend-design/bend-design.component';
-import { BenddesignLoadsComponent } from '../../calculators/benddesign-loads/benddesign-loads.component';
-import { BendDesignService } from '../../BENDING/bend-design/bend-design.service';
+import {  } from '../../BENDING/bend-design/bend-design.service';
 
 import { Sort,MatSortModule } from '@angular/material/sort';
+import { ShearDesignService } from '../../SHEAR/shear-design/shear-design.service';
 
 export interface BeamShape {
   AISC_Manual_Label: string;
@@ -55,6 +48,11 @@ export interface BeamShape {
   Lamda_Rw: number;
   beamCase: number;
   A: number;
+  WuNoBeam: number;
+  WaNoBeam: number;
+  defLimit: number;
+  Vx: number;
+  requiredI: number;
 
 
 }
@@ -68,7 +66,7 @@ export class SheardesignTableService {
   beamFilter: BehaviorSubject<number> = new BehaviorSubject(1);
 
   
-  constructor(public sharedElement: BendDesignService,
+  constructor(public shearedElement: ShearDesignService,
     public http: HttpClient) {}
      
 
@@ -79,18 +77,18 @@ export class SheardesignTableService {
       //Mga variables sa pagsolve sa analysis  
       
       
-      let L = this.sharedElement.chosenElemLength.value
+      let L = this.shearedElement.chosenElemLength.value
              console.log("used L: " + L)
-      let DL = this.sharedElement.DL.value;
+      let DL = this.shearedElement.DL.value;
              console.log("used DL: " + DL)
-      let LL = this.sharedElement.LL.value;
+      let LL = this.shearedElement.LL.value;
              console.log("used LL: " + LL)
-      let beamCase = this.sharedElement.beamCase.value;
+      let beamCase = this.shearedElement.beamCase.value;
             console.log("Beam Case: " + beamCase)
               
-      let E = this.sharedElement.E.value;
+      let E = this.shearedElement.E.value;
                    console.log("used E: " + E)
-      let Fy = this.sharedElement.Fy.value;
+      let Fy = this.shearedElement.Fy.value;
                     console.log("used Fy: " + Fy)
       let Zx = beamShape.Zx
                    console.log("used Zx: " + Zx)
@@ -99,18 +97,21 @@ export class SheardesignTableService {
       let Sx = beamShape.Sx
                    console.log("used Sx: " + Sx)
 
-
+      beamShape.defLimit = this.shearedElement.defLimit
+      let defLimit = beamShape.defLimit
 
 
   //Prelim ANALYSUS (Ito yun mga assuming natin since di natin alam ang weight ng mismong beam)                   
         let WuLoad = 1.2 * DL + 1.6 * LL; //LRFD
                       console.log("*LRFD weight w/o self-weight: " + WuLoad);
+                      beamShape.WuNoBeam = WuLoad
         let WaLoad = DL + LL              //ASD
                       console.log("*ASD weight w/o self-weight: " + WaLoad);
-        let TempLRFD = this.CaseCondition(beamCase, WuLoad, L);
-                      console.log("Assumed LRFD Load: " + TempLRFD);
-        let TempASD = this.CaseCondition(beamCase, WaLoad, L);
-                      console.log("Assumed ASD Load: " + TempASD);
+                      beamShape.WaNoBeam = WaLoad
+        let TempLRFD = this.CaseCondition(beamShape, beamCase, WuLoad, L, defLimit, LL, true);
+                      console.log(`Assumed ASD Load:  ${TempLRFD} , defLimit = ${defLimit}`);
+        let TempASD = this.CaseCondition(beamShape, beamCase, WaLoad, L, defLimit, LL, true);
+                      console.log(`Assumed ASD Load:  ${TempASD}, defLimit = ${defLimit}`);
 
   //Assume na compact ang flange para makuha kung anong Zx ang kelangan
         let ZU = ((TempLRFD*12)/(0.9*Fy));        //Mu = 0.9FyZx
@@ -132,9 +133,9 @@ export class SheardesignTableService {
       beamShape.Wa = (DL + Weight) + LL
           console.log("*ASD weight with self-weight: " + beamShape.Wa);
 
-      MuDemand = this.CaseCondition(beamCase, beamShape.Wu, L);
+      MuDemand = this.CaseCondition(beamShape, beamCase, beamShape.Wu, L, defLimit, LL, false);
         console.log("*MuDemand: " + MuDemand);
-      MaDemand = this.CaseCondition(beamCase, beamShape.Wa, L);
+      MaDemand = this.CaseCondition(beamShape, beamCase, beamShape.Wa, L, defLimit, LL, false);
       console.log("*MaDemand: " + MaDemand);
 
       beamShape.MuDemand = MuDemand
@@ -268,6 +269,7 @@ setBeamFilter(filter: number) {
                   beamShape.ASDstatus = calculateds.ASDstatus;
                   beamShape.ZU = calculateds.ZU;
                   beamShape.ZA = calculateds.ZA;
+                  console.log("requiredI = " + beamShape.requiredI);
                   beamShape.MuCapacity = calculateds.MuCapacity;
                   beamShape.MaCapacity = calculateds.MaCapacity;
                   beamShape.MuDemand = calculateds.MuDemand;
@@ -296,28 +298,61 @@ setBeamFilter(filter: number) {
 
   
   
-  CaseCondition(beamCase: number, w: number, L: number): number {
+  CaseCondition(beamShape: BeamShape, 
+    beamCase: number, 
+    w: number, L: number, 
+    defLimit: number, LiveL: number, 
+    isAssuming: boolean): number {
+
     let MnLoad: number = 0;
     let beamCond: string = '';
+    let Vx:number = 0;
+     //Gamit natin is Max deflection na formula para mahanap Ix
+    let E = Number(this.shearedElement.E.value);
   
     if (beamCase == 1 ) { //Uniformed Load: Simply Supp 
       MnLoad = (w * Math.pow(L,2)) / 8;
       console.log("MnLoad = (" + w + " * " + "Math.pow(" + L + ",2)) / 8 ==    " + MnLoad)
+      Vx = (w*L)/2
+            if (defLimit && isAssuming==true) {
+              let numerator = 5*(LiveL * Math.pow(L,4))*defLimit
+              let denominator = 384*E*L*(Math.pow(12,2))*(Math.pow((1/12),4))
+              let requiredI = numerator/denominator
+              console.log(`requiredI: ${requiredI}`)
+              console.log(`5*(${LiveL})(${L}^2)(${defLimit}) / 3(${E})(${L})(12^2)(1/12)^4`)
+              beamShape.requiredI = numerator/denominator;
+            }
       beamCond = "Uniformed Load: Simply Supp";
     }
     else if (beamCase == 2 ) { //Uniformed Load: Fixed at one end, supported at other
       MnLoad = (w * Math.pow(L,2)) / 8;
       console.log("MnLoad = (" + w + " * " + "Math.pow(" + L + ",2)) / 8 ==    " + MnLoad)
+          if (defLimit && isAssuming==true) {
+              let numerator = (LiveL * Math.pow(L,4))*defLimit
+              let denominator = 185*E*L*(Math.pow(12,2))*(Math.pow((1/12),4))
+              let requiredI = numerator/denominator
+              console.log(`requiredI: ${requiredI}`)
+              console.log(`(${LiveL})(${L}^4)(${defLimit}) / 185(${E})(${L})(12^2)(1/12)^4`)
+              beamShape.requiredI = numerator/denominator;
+            }
       beamCond = "Uniformed Load: Fixed at one end, supported at other";
     }
     else if (beamCase == 3 ) { //Uniformed Load: Cantilevered
       MnLoad = (w * Math.pow(L,2)) / 2;
       console.log("MnLoad = (" + w + " * " + "Math.pow(" + L + ",2)) / 2 ==    " + MnLoad)
+          if (defLimit && isAssuming==true) {
+              let numerator = (LiveL * Math.pow(L,4))*defLimit
+              let denominator = 8*E*L*(Math.pow(12,2))*(Math.pow((1/12),4))
+              let requiredI = numerator/denominator
+              console.log(`requiredI: ${requiredI}`)
+              beamShape.requiredI = numerator/denominator;
+            }
       beamCond = "Uniformed Load: Cantilevered";
     }
   
-    console.log("beamCase = " + beamCase + "      Condition: " + beamCond);
+    console.log(`"beamCase = ${beamCase},Condition: ${beamCond}, defLimit: ${defLimit}`);
     return MnLoad;
+    ;
   }
   
 

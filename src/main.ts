@@ -20,7 +20,7 @@ bootstrapApplication(AppComponent, {
           {path: 'Home', redirectTo: 'Compression/Analysis', pathMatch: 'full'},
           {path: 'Tension', redirectTo: 'Tension/Analysis', pathMatch: 'full'},
           {path: 'Compression', redirectTo: 'Compression/Analysis', pathMatch: 'full'},
-          {path: 'Shear', redirectTo: 'Shear/Design', pathMatch: 'full'},
+          {path: 'Shear', redirectTo: 'Shear/Analysis', pathMatch: 'full'},
 
           {path: '', redirectTo: 'Compression/Analysis', pathMatch: 'full'},
 
@@ -48,10 +48,15 @@ bootstrapApplication(AppComponent, {
           loadComponent: () => import('./app/pages/BENDING/bend-design/bend-design.component')
               .then(c => c.BendDesignComponent)},
 
+        {path: 'Shear/Analysis', 
+          loadComponent: () => import('./app/pages/SHEAR/shear-analysis/shear-analysis.component')
+              .then(c => c.ShearAnalysisComponent)},
+              
         {path: 'Shear/Design', 
           loadComponent: () => import('./app/pages/SHEAR/shear-design/shear-design.component')
               .then(c => c.ShearDesignComponent)},
         ]), provideAnimationsAsync()
+        
     ]
 })
 .catch((err) => console.error(err));

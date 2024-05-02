@@ -34,22 +34,25 @@
                     <th mat-sort-header="AISC_Manual_Label">Beam Shape</th>
                     <th mat-sort-header="W"><div style="resize: horizontal;">Weight</div></th>
                     <th mat-sort-header="Zx"><div style="resize: horizontal;">Z<sub>x</sub></div></th>
-                    <th><div style="resize: horizontal;">Z<sub>assumed (LRFD)</sub></div></th>
+                    <th><div style="resize: horizontal;">Z<sub>required (LRFD)</sub></div></th>
                     <th mat-sort-header="MuDemand"><div style="resize: horizontal;">Factored Ultimate Load Moment (M<sub>u</sub>)</div></th>
                     <th mat-sort-header="MuCapacity"><div style="resize: horizontal;">Nominal Moment Strength (&Phi;<sub>b</sub>M<sub>n</sub>)</div></th>
                     <th mat-sort-header="LRFDstatus"><div style="resize: horizontal;">LRFD Remarks</div></th>
-                    <th><div style="resize: horizontal;">Z<sub>assumed (ASD)</sub></div></th>
+                    <th><div style="resize: horizontal;">Z<sub>required (ASD)</sub></div></th>
                     <th mat-sort-header="MaDemand"><div style="resize: horizontal;">Required Strength (M<sub>a</sub>)</div></th>
                     <th mat-sort-header="MaCapacity"><div style="resize: horizontal;">Nominal Flexural Strength (M<sub>n</sub>/&Omega;<sub>b</sub>)</div></th>
                     <th mat-sort-header="ASDstatus"><div style="resize: horizontal;">ASD Remarks</div></th>
                     <th mat-sort-header="Ix"><div style="resize: horizontal;">I<sub>x</sub></div></th>
+                    <th mat-sort-header="Irequired"><div style="resize: horizontal;">I<sub>required</sub></div></th>
                     <th mat-sort-header="Sx"><div style="resize: horizontal;">S<sub>x</sub></div></th>    
                     <th mat-sort-header="Fcondition"><div style="resize: horizontal;">Flange</div></th>
                     <th mat-sort-header="Wcondition"h><div style="resize: horizontal;">Web</div></th>     
                     <th mat-sort-header="bf2tf"><div style="resize: horizontal;">&lambda;<sub>f</sub></div></th>
                     <th mat-sort-header="htw"><div style="resize: horizontal;">&lambda;<sub>w</sub></div></th>
-                    <th><div style="resize: horizontal;">Wu</div></th>
-                    <th><div style="resize: horizontal;">Wa</div></th>
+                    <th><div style="resize: horizontal;">W<sub>u</sub> (Including Beam Weight)</div></th>
+                    <th><div style="resize: horizontal;">W<sub>u</sub> (NOT including Beam Weight)</div></th>
+                    <th><div style="resize: horizontal;">W<sub>a</sub> (Including Beam Weight)</div></th>
+                    <th><div style="resize: horizontal;">W<sub>a</sub> (NOT including Beam Weight)</div></th>
                   </tr>
                 </thead>
                 <tbody class="bg-neutral">
@@ -65,14 +68,17 @@
                       <td>{{ beamShape.MaDemand ? beamShape.MaDemand : '-' }}</td>
                       <td class="bg-accent">{{ beamShape.MaCapacity ? beamShape.MaCapacity : '-' }}</td>
                       <td style="font-weight: 600;">{{ beamShape.ASDstatus ? beamShape.ASDstatus : '-' }}</td>
-                      <td class="bg-accent">{{ beamShape.Ix}}</td>  
+                      <td class="bg-accent">{{ beamShape.Ix}}</td>
+                      <td>{{ beamShape.requiredI}}</td>   
                       <td>{{ beamShape.Sx}}</td>  
                       <td>{{ beamShape.Fcondition ? beamShape.Fcondition : '-'  }}</td>
                       <td>{{ beamShape.Wcondition ? beamShape.Wcondition : '-'  }}</td>                  
                       <td>{{ beamShape['bf/2tf'] }}</td>
                       <td>{{ beamShape['h/tw'] }}</td>
-                      <td>{{ beamShape.Wu }}</td>
-                      <td>{{ beamShape.Wa }}</td>
+                      <td class="bg-accent">{{ beamShape.Wu }}</td>
+                      <td>{{ beamShape.WuNoBeam }}</td>
+                      <td class="bg-accent">{{ beamShape.Wa }}</td>
+                      <td>{{ beamShape.WaNoBeam }}</td>
                   </tr>
                 </tbody>
               </table>
