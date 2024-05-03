@@ -31,5 +31,8 @@ export class TenDesignComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.mainTitle = 'Design Calculator for Axial Tension';
+    this.sharedService.instructions = 'Input all the required variables in order and then click "Refresh Table';
+      this.sharedService.extrainstructions = '';
+      this.sharedService.showExtras = true;
   } 
 }

@@ -154,7 +154,7 @@
                   <span>Gross Area subject to shear</span> 
                   <input type="number" id="Agv" name="Agv" value="Agv"
                 [formControl]="BlockshearService.LengthShear">
-                <span class="note" *ngIf="this.BlockshearService.thiccness"> &times; {{this.BlockshearService.thiccness}} A<sub>gv</sub></span> 
+                <span class="note" *ngIf="this.BlockshearService.thiccness"> &times; {{this.BlockshearService.thiccness}} = A<sub>gv</sub></span> 
                 <span class="note" *ngIf="!this.BlockshearService.thiccness"> &times; t = A<sub>gv</sub></span>
               </label>
               <label class="label label-text cursor-pointer">
