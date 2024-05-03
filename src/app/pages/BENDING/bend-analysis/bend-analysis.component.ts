@@ -31,5 +31,6 @@ export class BendAnalysisComponent implements OnInit {
       this.sharedService.subTitle = 'Slenderness Check';
       this.sharedService.instructions = `Instructions: Input all the required variables in order and then click "Determine" to see if the chosen Wsection is compact, non-compact or slender.`;
     this.sharedService.extrainstructions = `Note: For every new Wsection chosen and after inputting the required values for Fy and E, remember to click the "Determine" first to update the results below.`
-    }
+    this.sharedService.showExtras = true;
+  }
 }

@@ -1,14 +1,15 @@
 <div id="navbar"><app-navbar /></div>
 <!--TITLE-->
 <div id="top" class="flex flex-col w-full bg-secondary card" 
-    style="z-index: 0;">
+    style="z-index: 0;"
+    *ngIf="this.sharedSettings.showExtras">
     <app-title />
 </div>
 
 
 <div id="contentall">
     
-    <div id="leftside">
+    <div id="leftside" *ngIf="this.sharedSettings.showExtras">
     <app-leftside/>
     </div> 
              <div id="columns">

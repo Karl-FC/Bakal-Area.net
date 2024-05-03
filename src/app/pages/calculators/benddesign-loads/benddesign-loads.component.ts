@@ -19,7 +19,7 @@ import { SheardesignTableService } from '../../DesignTables/sheardesign-table/sh
   styleUrl: './benddesign-loads.component.scss'
 })
 export class BenddesignLoadsComponent {
-  constructor( private sharedService: SharedVariable, 
+  constructor( public sharedService: SharedVariable, 
     public SharedElements: BendDesignService,
     private updater: BenddesignTableService,
     private shears: SheardesignTableService,

@@ -11,6 +11,7 @@ export class SharedVariable {
   subTitle: string = 'Loading...';
   instructions  : string = 'Instructions: Input all the required variables in order and press "Calculate"';
   extrainstructions: string = '';
+  showExtras: boolean = true;
   chosenBeamShape: BehaviorSubject<beamShape | null> = 
   new BehaviorSubject<beamShape | null>(null);
   chosenBeamShapeLabel = new BehaviorSubject<string>('');
