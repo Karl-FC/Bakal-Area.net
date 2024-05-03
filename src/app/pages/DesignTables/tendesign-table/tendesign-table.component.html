@@ -1,0 +1,93 @@
+<div id="container">
+    <form><span id="filter" class="form-control">
+      <div class="tooltip tooltip-info" 
+          data-tip="Click the element beside the chosen column heading to sort the values in descending or ascending form">
+                  <button (click)="sharedService.noReloadPls($event)" style="transform: scale(0.7); vertical-align: top; margin-right: -5px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                      </svg>                                          
+                  </button>
+          </div>
+          <label id="shapeChooser" class="cursor-pointer label" >
+            <span class="label-text">Tension Member:</span>
+            <span>
+                <select id="beamsFilter" name="beamsFilter" [formControl]="beamFilters" (change)="onFilterChange()">
+                  <option selected value=16>L-shapes (Angles)</option>
+                  <option value=15>I-beams</option>
+                <option value=17>C-shapes (Channels)</option>
+                <option value=15>All beam shapes (NOT RECOMMENDED)</option>
+            </select><br><br>
+            </span>
+          </label>
+      <label id="bFilterContainer" class="cursor-pointer label" *ngIf="this.updater.beamFilter.value != 16 && this.updater.beamFilter.value != 17">
+        <span class="label-text">Filter</span>
+        <span>
+            <select id="beamsFilter" name="beamsFilter" [formControl]="beamFilters" (change)="onFilterChange()">
+            <option selected value=1>All W-shapes</option>
+             <option value=2>W4-8</option>
+             <option value=3>W10</option>
+             <option value=4>W12</option>
+             <option value=5>W14</option>
+             <option value=6>W16</option>
+             <option value=7>W18</option>
+             <option value=8>W21</option>
+             <option value=9>W24</option>
+            <option value=10>W27</option>
+            <option value=11>W33</option>
+            <option value=12>W40</option>
+            <option value=13>W44</option>
+            <option value=14>All I-shapes</option>
+        </select><br><br>
+        </span>
+      </label>
+      </span>
+    </form>
+  
+  
+      <div id="tablediv">
+          <div>
+              <table matSort (matSortChange)="this.sortData($event)" class="table">
+                <thead id="heading" style="position: sticky; top: 0;">
+                  <tr class="bg-primary" style="position: sticky; top: 0;"> <!--Di gumagana sticky awits-->
+                    <th mat-sort-header="AISC_Manual_Label">Beam Shape</th>
+                    <th mat-sort-header="W">W</th>
+                    <th mat-sort-header="A"><div style="resize: horizontal;">Gross Area (A<sub>g</sub>)</div></th>
+                    <th mat-sort-header='rmin'><div style="resize: horizontal;">Radius of Gyration (r<sub>min</sub>)</div></th>
+                    <th mat-sort-header='rDemand'><div style="resize: horizontal;">r<sub>demand</sub></div></th>
+                    <th mat-sort-header="Aholes"><div style="resize: horizontal;">Hole Area (A<sub>holes</sub>)</div></th>
+                    <th mat-sort-header="AgLRFD"><div style="resize: horizontal;">Area Demand (LRFD)</div></th>
+                    <th mat-sort-header="LRFDstatus"><div style="resize: horizontal;">LRFD Remarks</div></th>
+                    <th mat-sort-header="AgASD"><div style="resize: horizontal;">Area Demand (ASD)</div></th>
+                    <th mat-sort-header="ASDstatus"><div style="resize: horizontal;">ASD Remarks</div></th>
+                    <th mat-sort-header="t"><div style="resize: horizontal;">Thickness (t)</div></th>
+                    <th mat-sort-header="tf"><div style="resize: horizontal;">Flange thickness (t<sub>f</sub>)</div></th>
+                    <th mat-sort-header="tw"><div style="resize: horizontal;">Web thickness (t<sub>w</sub>)</div></th>
+                    <th mat-sort-header='rx'><div style="resize: horizontal;">Radius of Gyration (r<sub>x</sub>)</div></th>
+                    <th mat-sort-header='ry'><div style="resize: horizontal;">Radius of Gyration (r<sub>y</sub>)</div></th>
+                    <th mat-sort-header='rz'><div style="resize: horizontal;">Radius of Gyration (r<sub>z</sub>)</div></th>
+                  </tr>
+                </thead>
+                <tbody class="bg-neutral">
+                  <tr class="hover" *ngFor="let beamShape of beamShapes$ | async">
+                      <td  style="font-weight: 500;">{{ beamShape.AISC_Manual_Label }}</td>
+                      <td class="bg-accent">{{ beamShape.W }}</td>
+                      <td>{{ beamShape.A }}</td>
+                      <td class="bg-accent">{{ beamShape.rmin }}</td>
+                      <td>{{ beamShape.rDemand }}</td>    
+                      <td>{{ beamShape.Aholes ? beamShape.Aholes : '-'}}</td>
+                      <td class="bg-accent">{{ beamShape.AgDemandLRFD ? beamShape.AgDemandLRFD : '-'}}</td>
+                      <td style="font-weight: 600;">{{ beamShape.LRFDstatus ? beamShape.LRFDstatus : '-' }}</td>
+                      <td class="bg-accent">{{ beamShape.AgDemandASD ? beamShape.AgDemandASD : '-'}}</td>
+                      <td style="font-weight: 600;">{{ beamShape.ASDstatus ? beamShape.ASDstatus : '-' }}</td>
+                      <td>{{ beamShape.t }}</td> 
+                      <td>{{ beamShape.tf }}</td> 
+                      <td>{{ beamShape.tw }}</td>     
+                      <td>{{ beamShape.rx }}</td> 
+                      <td>{{ beamShape.ry }}</td> 
+                      <td>{{ beamShape.rz }}</td>            
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+      </div>
+  </div>

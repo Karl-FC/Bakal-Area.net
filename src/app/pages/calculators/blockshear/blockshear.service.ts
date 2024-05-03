@@ -200,7 +200,7 @@ let n = Number(this.n)
 
 
             //CARD:
-                if (this.blockShearLRFDResults && this.yieldASD && this.fractureASD)
+                if (this.blockShearLRFD > 0 && this.yieldASD && this.fractureASD)
                   {this.displayLRFDResult = Math.min(Number(this.yieldLRFD), 
                     Number(this.fractureLRFD), 
                     Number(this.Tu))}
@@ -231,7 +231,7 @@ let n = Number(this.n)
       
     
       //CARD:
-      if (this.blockShearASDResults && this.yieldASD && this.fractureASD) {
+      if (this.blockShearASD> 0 && this.yieldASD && this.fractureASD) {
         {this.displayASDResult = Math.min(Number(this.yieldASD), 
           Number(this.fractureASD), 
           Number(this.Ta))};
@@ -240,40 +240,6 @@ let n = Number(this.n)
           Number(this.fractureASD))};  
           console.log(`yield ASD: ${this.yieldASD}, fracture ASD: ${this.fractureASD}, block shear: ${this.Ta}`)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-   /*     
-
-        //LRFD
-        this.Ro = 0.9
-        this.MuLRFD = Ro*Mn
-        this.MuLRFD = MuLRFD
-       
-
-      
-    //ASD
-        this.Om = 1.67
-        this.MaASD = (Mn)/Om
-        this.MaASD = MaASD
-        this.displayMaASD = MaASD.toFixed(3);
-        if (MaASD) {(this.ASDResult = "Ma = " + MaASD),
-      (this.displayASDResult = displayMaASD)
-*/
   }
 
 

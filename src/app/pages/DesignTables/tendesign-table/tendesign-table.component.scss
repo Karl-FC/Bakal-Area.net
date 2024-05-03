@@ -1,0 +1,87 @@
+#container {
+    max-width: 83vw;
+    box-sizing: border-box;
+    
+}
+
+#filter {
+    padding: 20px;
+    padding-bottom: 0;
+    margin-left: 10px;
+    margin-bottom: -20px;
+    font-weight: 500;
+    display: flex;
+    align-items:start;
+
+}
+
+#filter label  {
+    display: inline-block;
+}
+
+#filter span  {
+    padding-left: 20px;
+}
+
+#filter label span {
+    margin-top: 5px;
+    font-size: 12pt;
+}
+
+#tablediv {
+    overflow: scroll;
+    margin-top: 2px;
+    padding: 30px;
+    width: 100%;
+}
+
+table thead tr th {
+    max-width: 150px;
+    max-height: 75px;
+    white-space: normal;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+/* RESPONSIVE LAYOUTS*/
+
+    @media (max-width: 1024px) {
+        //Laptops
+
+        #container {
+            max-width: 100vw;
+        }
+        #tablediv {
+            margin-top: 5px;
+            padding-left: 10px;
+            box-sizing: border-box;
+            width: 100%;    
+        }
+    }
+
+    //Tablet (768x628)
+    @media (max-width: 768px) {
+        #beamsFilter{
+            max-width: 70%;
+        }
+
+        #tablediv {
+            margin-top: 5px;
+            margin-left: 0px;
+            box-sizing: border-box; 
+            padding: 0px;
+            width: 100vw;
+        }
+
+        #container {
+            max-width: 80vw;
+            box-sizing: border-box;
+            
+        }
+    }
+
+    @media (max-width: 415px) {              
+        #beamsFilter{
+            max-width: 50%;
+        } 
+    }
