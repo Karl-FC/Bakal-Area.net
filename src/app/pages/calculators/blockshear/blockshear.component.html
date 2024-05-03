@@ -130,14 +130,17 @@
                                 Net Area under Shear, A<sub>nv</sub> and Net Area under Tension, A<sub>nt</sub>
                         </div>
                             <div class="collapse-content"> 
-
+                                <div class="solution" *ngIf="this.BlockshearService.Anv"><br>
+                                        A<sub>gv</sub> = ({{this.BlockshearService.LengthShear.value}})({{this.BlockshearService.thiccness}})  = {{this.BlockshearService.Agv}}
+                                 </div>
+                                
                                         <div class="equation"><br>
                                                 A<sub>nv</sub> = A<sub>gv</sub> - A<sub>holes</sub>
                                         </div>
                                         <div class="solution" *ngIf="this.BlockshearService.Anv"><br>
                                                 = {{this.BlockshearService.Agv}} - {{this.BlockshearService.holeShear.value}}( {{this.BlockshearService.db}}
                                                 <span *ngIf="this.BlockshearService.isholeDmg || this.BlockshearService.isholePunch">
-                                            + <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                        + <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
                                                     <span>1</span>
                                                     <span style="border-top:1px solid">{{this.BlockshearService.holeResults}}</span>
                                                     </span> </span>
@@ -148,15 +151,18 @@
                                                 </span>
                                         </div><br>
                                         <div class="answer" *ngIf="this.BlockshearService.Anv" >Anv = {{this.BlockshearService.Anv}}</div><br><br>
-                                            
 
+                                        <div class="solution" *ngIf="this.BlockshearService.Anv"><br>
+                                                A<sub>gt</sub> = ({{this.BlockshearService.LengthTension.value}})({{this.BlockshearService.thiccness}})  = {{this.BlockshearService.Agt}}
+                                         </div>
                                         <div class="equation"><br>
                                                 A<sub>nt</sub> = A<sub>gt</sub> - A<sub>holes</sub>
                                         </div>
                                         <div class="solution" *ngIf="this.BlockshearService.Ant"><br>
                                                 = {{this.BlockshearService.Agt}} - {{this.BlockshearService.holeTension.value}}( {{this.BlockshearService.db}}
                                                 <span *ngIf="this.BlockshearService.isholeDmg || this.BlockshearService.isholePunch">
-                                            + <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
+                                                        {{this.BlockshearService.holeTension.value}}
+                                                        + <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
                                                     <span>1</span>
                                                     <span style="border-top:1px solid">{{this.BlockshearService.holeResults}}</span>
                                                     </span> </span>
@@ -166,7 +172,7 @@
                                                     + ({{this.BlockshearService.SumSGT}})
                                                 </span>
                                         </div><br>
-                                        <div class="answer" *ngIf="this.BlockshearService.Ant">Anv = {{this.BlockshearService.Ant}}</div>
+                                        <div class="answer" *ngIf="this.BlockshearService.Ant">Ant = {{this.BlockshearService.Ant}}</div>
                             </div>
 
 
@@ -225,7 +231,7 @@
 
                             <br>
                             <div class="equation" *ngIf="this.BlockshearService.blockShearLRFDResults">
-                                T<sub>u</sub> = 0.75({{this.BlockshearService.Fv}} + {{this.BlockshearService.Ft.toFixed(2)}})
+                                T<sub>u</sub> = 0.75({{this.BlockshearService.Fv.toFixed(2)}} + {{this.BlockshearService.Ft.toFixed(2)}})
                         </div>
                             <h5 class="answer" *ngIf="this.BlockshearService.blockShearLRFDResults">{{this.BlockshearService.blockShearLRFDResults}}</h5>
                 </div>
@@ -328,6 +334,10 @@
                                 Net Area under Shear, A<sub>nv</sub> and Net Area under Tension, A<sub>nt</sub>
                         </div>
                             <div class="collapse-content"> 
+                                        <div class="solution" *ngIf="this.BlockshearService.Anv"><br>
+                                               A<sub>gv</sub> = ({{this.BlockshearService.LengthShear.value}})({{this.BlockshearService.thiccness}})  = {{this.BlockshearService.Agv}}
+                                        </div>
+
 
                                         <div class="equation"><br>
                                                 A<sub>nv</sub> = A<sub>gv</sub> - A<sub>holes</sub>
@@ -345,8 +355,14 @@
                                                     + ({{this.BlockshearService.SumSGT}})
                                                 </span>
                                         </div><br>
-                                        <div class="answer" *ngIf="this.BlockshearService.Anv" >Anv = {{this.BlockshearService.Anv}}</div><br><br>
+                                        <div class="answer" *ngIf="this.BlockshearService.Anv" >Anv = {{this.BlockshearService.Anv}}</div><br>
                                             
+
+
+
+                                        <div class="solution" *ngIf="this.BlockshearService.Ant"><br>
+                                                A<sub>gt</sub> = ({{this.BlockshearService.LengthTension.value}})({{this.BlockshearService.thiccness}})
+                                         </div>
 
                                         <div class="equation"><br>
                                                 A<sub>nt</sub> = A<sub>gt</sub> - A<sub>holes</sub>
@@ -354,6 +370,7 @@
                                         <div class="solution" *ngIf="this.BlockshearService.Ant"><br>
                                                 = {{this.BlockshearService.Agt}} - {{this.BlockshearService.holeTension.value}}( {{this.BlockshearService.db}}
                                                 <span *ngIf="this.BlockshearService.isholeDmg || this.BlockshearService.isholePunch">
+                                                        {{this.BlockshearService.holeTension.value}}
                                             + <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
                                                     <span>1</span>
                                                     <span style="border-top:1px solid">{{this.BlockshearService.holeResults}}</span>
@@ -364,7 +381,7 @@
                                                     + ({{this.BlockshearService.SumSGT}})
                                                 </span>
                                         </div><br>
-                                        <div class="answer" *ngIf="this.BlockshearService.Ant">Anv = {{this.BlockshearService.Ant}}</div>
+                                        <div class="answer" *ngIf="this.BlockshearService.Ant">Ant = {{this.BlockshearService.Ant}}</div>
                             </div>
 
 
@@ -423,9 +440,9 @@
 
                             <br>
                             <div class="equation" *ngIf="this.BlockshearService.blockShearASDResults">
-                                T<sub>u</sub> = 
+                                T<sub>a</sub> = 
                                 <span style="display:inline-flex;flex-direction:column;vertical-align:middle;">
-                                    <span>({{this.BlockshearService.Fv}} + {{this.BlockshearService.Ft.toFixed(2)}})</span>
+                                    <span>({{this.BlockshearService.Fv.toFixed(2)}} + {{this.BlockshearService.Ft.toFixed(2)}})</span>
                                     <span style="border-top:1px solid">2.00</span>
                                     </span>
                         </div>
