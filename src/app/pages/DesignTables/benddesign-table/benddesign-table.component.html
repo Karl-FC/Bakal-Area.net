@@ -50,6 +50,9 @@
                     <th mat-sort-header="MaDemand"><div style="resize: horizontal;">Required Strength (M<sub>a</sub>)</div></th>
                     <th mat-sort-header="MaCapacity"><div style="resize: horizontal;">Nominal Flexural Strength (M<sub>n</sub>/&Omega;<sub>b</sub>)</div></th>
                     <th mat-sort-header="ASDstatus"><div style="resize: horizontal;">ASD Remarks</div></th>
+                    <th mat-sort-header="deflectionMax"><div style="resize: horizontal;">Def<sub>max</sub></div></th>
+                    <th mat-sort-header="defAllowable"><div style="resize: horizontal;">Def<sub>allowable</sub></div></th>
+                    <th mat-sort-header="ASDstatus"><div style="resize: horizontal;">Deflection Remarks</div></th>
                     <th mat-sort-header="Ix"><div style="resize: horizontal;">I<sub>x</sub></div></th>
                     <th mat-sort-header="Irequired"><div style="resize: horizontal;">I<sub>required</sub></div></th>
                     <th mat-sort-header="Sx"><div style="resize: horizontal;">S<sub>x</sub></div></th>    
@@ -76,6 +79,9 @@
                       <td>{{ beamShape.MaDemand ? beamShape.MaDemand : '-' }}</td>
                       <td class="bg-accent">{{ beamShape.MaCapacity ? beamShape.MaCapacity : '-' }}</td>
                       <td style="font-weight: 600;">{{ beamShape.ASDstatus ? beamShape.ASDstatus : '-' }}</td>
+                      <td >{{ beamShape.deflectionMax}}</td>
+                      <td class="bg-accent">{{ beamShape.defAllowable}}</td>
+                      <td style="font-weight: 600;">{{ beamShape.ASDdeflection ? beamShape.ASDdeflection : '-' }}</td>
                       <td class="bg-accent">{{ beamShape.Ix}}</td>
                       <td>{{ beamShape.requiredI ? beamShape.requiredI : '-'}}</td>   
                       <td>{{ beamShape.Sx}}</td>  

@@ -47,7 +47,10 @@
                   </ul></li>
         </ul>
       </div>
-      <a (click)="reLoad($event)" class="btn btn-ghost text-xl">Bakal-AREA.net</a>
+      <a (click)="reLoad($event)" 
+      class="btn btn-ghost text-xl">
+      <img src='assets/images/Logo.png' width="32px">
+      Bakal-AREA.net</a>
     </div>
     
 
@@ -113,7 +116,7 @@
         </div>
         <ul tabindex="0" style="z-index: 999;" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <div class="hidePC">
-          <h1 (click)="reLoad($event)"
+          <h1 routerLinkActive="active" routerLink="/Home"
           style="font-size: 18px; 
                     font-weight: 600;
                     padding:2px">Bakal-AREA.net</h1>

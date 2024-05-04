@@ -69,6 +69,11 @@ export interface BeamShape {
   LRFDshear: string;
   ASDshear: string;
 
+  deflectionMax: number;
+  defAllowable: number;
+  LRFDdeflection: string;
+  ASDdeflection: string;
+
 }
 
 @Injectable({
@@ -354,6 +359,12 @@ setBeamFilter(filter: number) {
               console.log(`requiredI: ${requiredI}`)
               console.log(`5*(${LiveL})(${L}^2)(${defLimit}) / 3(${E})(${L})(12^2)(1/12)^4`)
               beamShape.requiredI = numerator/denominator;
+
+              let Defnumerator = 5*(LiveL * Math.pow(L,4))
+              let Defdenominator = 384*E*(Math.pow(12,2))*(Math.pow((1/12),4))*beamShape.Ix
+              beamShape.deflectionMax = Defnumerator/Defdenominator
+
+              beamShape.defAllowable = L/defLimit
             }
       beamCond = "Uniformed Load: Simply Supp";
       if (isLRFD==true && isAssumingDef==false) {beamShape.VuDemand = Vx} else if (isLRFD==false && isAssumingDef==false) {beamShape.VaDemand = Vx}
@@ -487,7 +498,15 @@ setBeamFilter(filter: number) {
               //status
       beamShape.LRFDshear = beamShape.VuCapacity > beamShape.VuDemand ? 'SAFE' : 'UNSAFE'; // Compare kung mas malaki Pn(capacity) sa Pu(demand)
       beamShape.ASDshear = beamShape.VaCapacity> beamShape.VaDemand ? 'SAFE' : 'UNSAFE'; // Compare kung mas malaki Pn(capacity) sa Pa(demand)
-  }
+  
+        if (beamShape.defLimit) {
+              //status Defelction
+              beamShape.LRFDdeflection = beamShape.defAllowable > beamShape.deflectionMax ? 'SAFE' : 'UNSAFE'; // Compare kung mas malaki Pn(capacity) sa Pu(demand)
+              beamShape.ASDdeflection = beamShape.defAllowable> beamShape.deflectionMax ? 'SAFE' : 'UNSAFE'; // Compare kung mas malaki Pn(capacity) sa Pa(demand)
+                      }
+  
+  
+    }
 
 
 

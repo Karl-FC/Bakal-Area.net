@@ -1,0 +1,143 @@
+body {
+    width: 100vh;
+}
+  
+
+
+            #content {
+                display: flex;
+
+            }
+
+                        #Main {
+                            height:210vh;
+                            margin-top: -25px;
+                            padding: 30px;
+                            border-top-left-radius: 0;
+                            border-top-right-radius: 15px;
+                        }
+
+                        #gallery{
+                            height: 200vh;
+                            border-top-left-radius: 0;
+                            border-top-right-radius: 0;
+                            margin-top: -15px;
+                            display: grid;
+                            grid-template-columns: auto auto auto;
+                            column-gap: 15px;
+                            row-gap: 20px;
+                        }
+
+
+                        
+
+                    .content {
+                        grid-row: 1;
+                    }
+                    
+                    .divider {
+                        grid-row: 2;
+                        /* Style your divider here */
+                    }
+
+                    #results {
+                        border-radius: 25px;
+                        grid-row: 3;
+                        display: grid;
+                    }
+
+
+
+
+
+
+
+
+
+/* RESPONSIVE LAYOUTS*/
+
+@media (max-width: 1024px) {
+    //Laptops
+    #top{
+        border-bottom-left-radius: 0;
+    }
+
+    #contentall {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #leftside {
+        display: none;
+    }
+
+    #columns {
+        width: 100%;
+    }
+
+    #Main {
+        height: 150vh;
+        grid-column: span 4 ;
+    }
+
+}
+
+@media (max-width: 866px) {
+    #Main {
+        height: 150vh;
+        grid-column: span 3 ;
+    }
+
+}
+
+//Tablet (768x628)
+@media (max-width: 768px) {
+    #content {
+        display: flex;
+        flex-direction: column;
+    }
+    #contentall {
+        display: flex;
+        flex-direction: column;
+    }
+    #leftside {
+        display: none;
+    }
+    #columns {
+        width: 100%;
+    }
+    #Main {
+        height: 150vh;
+        box-sizing: border-box;
+        padding-left: 10%;
+    }
+
+}
+
+@media (max-width: 615px) {
+    #top {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    #Main {
+        height: 135vh;
+        box-sizing: border-box;
+        padding-left: 10%;
+    }
+}
+
+@media (max-width: 425px) {
+    #top {
+      width: 100%;
+      box-sizing: border-box; /* makes sure padding and border are included in the element's total width */
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    #Main {
+        height: 135vh;
+        width: 100vw;
+        box-sizing: border-box;
+    }
+}

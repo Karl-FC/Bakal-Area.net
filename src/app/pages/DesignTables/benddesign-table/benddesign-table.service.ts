@@ -51,6 +51,11 @@ export interface BeamShape {
   Vx: number;
   requiredI: number;
 
+  deflectionMax: number;
+  defAllowable: number;
+  LRFDdeflection: string;
+  ASDdeflection: string;
+
 
 
 }
@@ -202,6 +207,12 @@ export class BenddesignTableService {
       //status
       let LRFDstatus = MuCapacity > MuDemand ? 'SAFE' : 'UNSAFE'; // Compare kung mas malaki Pn(capacity) sa Pu(demand)
       let ASDstatus = MaCapacity> MaDemand ? 'SAFE' : 'UNSAFE'; // Compare kung mas malaki Pn(capacity) sa Pa(demand)
+
+      if (beamShape.defLimit) {
+        //status Defelction
+        beamShape.LRFDdeflection = beamShape.defAllowable > beamShape.deflectionMax ? 'SAFE' : 'UNSAFE'; // Compare kung mas malaki Pn(capacity) sa Pu(demand)
+        beamShape.ASDdeflection = beamShape.defAllowable> beamShape.deflectionMax ? 'SAFE' : 'UNSAFE'; // Compare kung mas malaki Pn(capacity) sa Pa(demand)
+                }
           
       
 
@@ -312,6 +323,7 @@ setBeamFilter(filter: number) {
       MnLoad = (w * Math.pow(L,2)) / 8;
       console.log("MnLoad = (" + w + " * " + "Math.pow(" + L + ",2)) / 8 ==    " + MnLoad)
       Vx = (w*L)/2
+
             if (defLimit && isAssuming==true) {
               let numerator = 5*(LiveL * Math.pow(L,4))*defLimit
               let denominator = 384*E*L*(Math.pow(12,2))*(Math.pow((1/12),4))
@@ -319,6 +331,12 @@ setBeamFilter(filter: number) {
               console.log(`requiredI: ${requiredI}`)
               console.log(`5*(${LiveL})(${L}^2)(${defLimit}) / 3(${E})(${L})(12^2)(1/12)^4`)
               beamShape.requiredI = numerator/denominator;
+
+              let Defnumerator = 5*(LiveL * Math.pow(L,4))
+              let Defdenominator = 384*E*(Math.pow(12,2))*(Math.pow((1/12),4))*beamShape.Ix
+              beamShape.deflectionMax = Defnumerator/Defdenominator
+
+              beamShape.defAllowable = L/defLimit
             }
       beamCond = "Uniformed Load: Simply Supp";
     }
@@ -332,6 +350,12 @@ setBeamFilter(filter: number) {
               console.log(`requiredI: ${requiredI}`)
               console.log(`(${LiveL})(${L}^4)(${defLimit}) / 185(${E})(${L})(12^2)(1/12)^4`)
               beamShape.requiredI = numerator/denominator;
+
+              let Defnumerator = (LiveL * Math.pow(L,4))
+              let Defdenominator = 185*E*(Math.pow(12,2))*(Math.pow((1/12),4))*beamShape.Ix
+              beamShape.deflectionMax = Defnumerator/Defdenominator
+
+              beamShape.defAllowable = L/defLimit
             }
       beamCond = "Uniformed Load: Fixed at one end, supported at other";
     }
@@ -344,6 +368,12 @@ setBeamFilter(filter: number) {
               let requiredI = numerator/denominator
               console.log(`requiredI: ${requiredI}`)
               beamShape.requiredI = numerator/denominator;
+
+              let Defnumerator = (LiveL * Math.pow(L,4))
+              let Defdenominator = 8*E*(Math.pow(12,2))*(Math.pow((1/12),4))*beamShape.Ix
+              beamShape.deflectionMax = Defnumerator/Defdenominator
+
+              beamShape.defAllowable = L/defLimit
             }
       beamCond = "Uniformed Load: Cantilevered";
     }

@@ -30,5 +30,7 @@ export class ShearDesignComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.mainTitle = 'Shear Design Calculator';
+    this.sharedService.instructions = 'Input all the required variables in order and then click "Refresh Table';
+    this.sharedService.extrainstructions = '';
   }
 }

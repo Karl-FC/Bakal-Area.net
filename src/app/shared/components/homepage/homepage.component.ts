@@ -1,12 +1,31 @@
-import { Component } from '@angular/core';
+import { SharedVariable } from '../../../shared.service';
+import { CommonModule } from '@angular/common';
+import { Component,Renderer2, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router, ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [],
+  imports: [RouterModule, RouterOutlet, FormsModule, CommonModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {  
+
+
+  constructor(public sharedService: SharedVariable,
+              private router: Router) {  }
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.sharedService.mainTitle = ' ';
+      this.sharedService.instructions = ' ';
+      this.sharedService.extrainstructions = '';
+      this.sharedService.showExtras = true;
+    });
+    console.log('hehe')
+  }
+  
 
 }
