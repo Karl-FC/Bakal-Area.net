@@ -10,7 +10,6 @@ body {
             }
 
                         #Main {
-                            height:210vh;
                             margin-top: -25px;
                             padding: 30px;
                             border-top-left-radius: 0;
@@ -18,7 +17,6 @@ body {
                         }
 
                         #gallery{
-                            height: 200vh;
                             border-top-left-radius: 0;
                             border-top-right-radius: 0;
                             margin-top: -15px;
@@ -26,9 +24,33 @@ body {
                             grid-template-columns: auto auto auto;
                             column-gap: 15px;
                             row-gap: 20px;
+                            padding-bottom: 30px;
+                            justify-content: space-evenly;
                         }
 
+                        .topic
+                            {
+                                transition: transform 0.3s ease;
+                            }
 
+                                    .topicpic {
+                                        width: 100%;
+                                        max-height: 200px;
+                                        
+                                    }
+
+
+
+                        //Hover
+
+
+                        .card-body:hover  { //Di gumagana :(
+                            background-color: --bg-accent;
+                        }
+
+                        .topic:hover {
+                           transform: scale(1.05);
+                        }
                         
 
                     .content {
@@ -40,11 +62,6 @@ body {
                         /* Style your divider here */
                     }
 
-                    #results {
-                        border-radius: 25px;
-                        grid-row: 3;
-                        display: grid;
-                    }
 
 
 
@@ -53,6 +70,34 @@ body {
 
 
 
+
+/* RESPONSIVE LAYOUTS*/
+@media (max-width: 1445px) {
+    #gallery{
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-evenly;
+    }
+}
+
+@media (max-width: 831px) {
+    #gallery{
+        display: grid;
+        grid-template-columns: auto;
+        justify-content: space-evenly;
+    }
+}
+
+@media (max-width: 475px) {
+    .topicpic, .card.w-96.bg-base-100.shadow-xl 
+    {
+        width: 70vw;
+    }
+
+    .card-body {
+        padding: 10%;
+    }
+}
 
 /* RESPONSIVE LAYOUTS*/
 
@@ -75,20 +120,8 @@ body {
         width: 100%;
     }
 
-    #Main {
-        height: 150vh;
-        grid-column: span 4 ;
-    }
-
 }
 
-@media (max-width: 866px) {
-    #Main {
-        height: 150vh;
-        grid-column: span 3 ;
-    }
-
-}
 
 //Tablet (768x628)
 @media (max-width: 768px) {
@@ -107,7 +140,6 @@ body {
         width: 100%;
     }
     #Main {
-        height: 150vh;
         box-sizing: border-box;
         padding-left: 10%;
     }
@@ -121,7 +153,6 @@ body {
     }
 
     #Main {
-        height: 135vh;
         box-sizing: border-box;
         padding-left: 10%;
     }
@@ -136,7 +167,6 @@ body {
     }
 
     #Main {
-        height: 135vh;
         width: 100vw;
         box-sizing: border-box;
     }
