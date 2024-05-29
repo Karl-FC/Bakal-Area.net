@@ -1,0 +1,11 @@
+#BackWords:hover, #Copyright:hover {
+    font-weight: 600;
+}
+
+#github {
+    transition: transform 0.2s ease;
+}
+
+#github:hover {
+    transform: scale(1.25);
+}

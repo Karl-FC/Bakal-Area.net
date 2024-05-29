@@ -8,12 +8,13 @@ import { LeftsideComponent } from './shared/components/leftside/leftside.compone
 import { CompAnalysisComponent } from './pages/COMPRESSION/comp-analysis/comp-analysis.component';
 import { TitleComponent } from './shared/components/title/title.component';
 import { SharedVariable } from './shared.service';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, FormsModule, CommonModule, RouterModule,
-    NavbarComponent, LeftsideComponent, CompAnalysisComponent, TitleComponent
+    NavbarComponent, LeftsideComponent, CompAnalysisComponent, TitleComponent,FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -26,4 +27,7 @@ export class AppComponent {
 
   constructor(public sharedSettings: SharedVariable) {}
 
+  BackButton() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 }

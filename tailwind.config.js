@@ -139,6 +139,7 @@ module.exports = {
         "warning": "#B37422",
         "error": "#8A0C18",
         "base-content": "#FFA500", //Default text
+        "primary-content": "#FFA500",
         
       },
     },  'pastel','garden', 'lofi','dark', 'business', 'luxury']
