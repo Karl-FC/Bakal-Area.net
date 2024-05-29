@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject  } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
+
+import { Analytics } from '@angular/fire/analytics';
+import { getAnalytics, logEvent } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-footer',
@@ -9,6 +12,8 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
+  private analytics = inject(Analytics);
+
   BackWords() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -17,4 +22,10 @@ export class FooterComponent {
     event.preventDefault();
     location.reload();
   }
+
+  butclick(){
+    const analytics = getAnalytics();
+  logEvent(analytics, 'notification_received');
+  }
 }
+

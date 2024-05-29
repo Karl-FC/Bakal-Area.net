@@ -66,10 +66,7 @@ src/assets/db/AISCimperial_L.csv
 src/assets/db/AISCimperial-Cshapes.csv
 src/assets/db/~$AISCimperial.xlsx
 
-src/app/app.component.ts
-<<<<<<< HEAD
-app.component.ts
-src/app/app.component.ts
-=======
-app.component.ts
->>>>>>> fa110915d2dc516e271b9dda3332e431d41dcbe0
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
