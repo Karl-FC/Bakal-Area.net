@@ -2,10 +2,14 @@
     font-weight: 600;
 }
 
-#github {
+#github, #logo {
     transition: transform 0.2s ease;
 }
 
 #github:hover {
     transform: scale(1.25);
+}
+
+#logo:hover {
+    transform: scale(1.05);
 }

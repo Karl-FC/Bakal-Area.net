@@ -12,4 +12,9 @@ export class FooterComponent {
   BackWords() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  reLoad(event: Event) {
+    event.preventDefault();
+    location.reload();
+  }
 }

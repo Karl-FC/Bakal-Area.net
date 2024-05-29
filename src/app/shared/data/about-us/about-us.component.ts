@@ -20,5 +20,9 @@ export class AboutUsComponent implements OnInit {
     this.sharedService.subTitle = '';
     this.sharedService.instructions = '';
     this.sharedService.extrainstructions = '';
+    this.sharedService.showExtras = false
+      setTimeout(() => {
+        this.sharedService.showExtras = false;
+      }, 10);
   }
 }
