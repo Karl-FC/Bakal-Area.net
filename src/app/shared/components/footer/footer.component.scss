@@ -1,0 +1,25 @@
+#BackWords:hover, #Copyright:hover {
+    font-weight: 600;
+}
+
+#logo, #twitter, #fb {
+    transition: transform 0.2s ease;
+}
+
+#github {
+    transition: transform 0.2s ease;
+    transform: scale(0.25);
+    margin: -35px;;
+}
+
+        #github:hover {
+            transform: scale(0.32);
+        }
+
+        #twitter:hover, #fb:hover {
+            transform: scale(1.28);
+        }
+
+#logo:hover {
+    transform: scale(1.05);
+}

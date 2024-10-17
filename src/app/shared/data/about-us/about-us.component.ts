@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedVariable } from '../../../shared.service';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [],
+  imports: [FooterComponent],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.scss'
 })
@@ -19,5 +20,9 @@ export class AboutUsComponent implements OnInit {
     this.sharedService.subTitle = '';
     this.sharedService.instructions = '';
     this.sharedService.extrainstructions = '';
+    this.sharedService.showExtras = false
+      setTimeout(() => {
+        this.sharedService.showExtras = false;
+      }, 10);
   }
 }

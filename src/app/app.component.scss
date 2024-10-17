@@ -1,3 +1,8 @@
+::ng-deep .mat-sort-header-arrow {
+    color: oklch(var(--bc)) !important;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black !important;
+  }
+
 body {
     width: 100%;
 }
@@ -92,3 +97,23 @@ body {
     }
 }
 
+#buttonBack {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 99999999;
+    scale: 1.45;
+    opacity: 70%;
+
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    
+}
+
+    #chev {
+        margin-left: -15px;
+    }
+
+#buttonBack:hover {
+    transform: scale(1.15);
+    opacity: 100%;
+}

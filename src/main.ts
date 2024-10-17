@@ -10,6 +10,8 @@ import { TenAnalysisComponent } from './app/pages/TENSION/ten-analysis/ten-analy
 import { TenDesignComponent } from './app/pages/TENSION/ten-design/ten-design.component';
 import { ShearDesignComponent } from './app/pages/SHEAR/shear-design/shear-design.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/fire/analytics';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -63,7 +65,7 @@ bootstrapApplication(AppComponent, {
         {path: 'Shear/Design', 
           loadComponent: () => import('./app/pages/SHEAR/shear-design/shear-design.component')
               .then(c => c.ShearDesignComponent)},
-        ]), provideAnimationsAsync()
+        ]), provideAnimationsAsync(), provideFirebaseApp(() => initializeApp({"projectId":"bakal-areanet","appId":"1:990730367254:web:928e22ea602d948f9e6037","storageBucket":"bakal-areanet.appspot.com","apiKey":"AIzaSyDP_ZlH8J_583JWRRrHJLzZ-RH5tY3e-tY","authDomain":"bakal-areanet.firebaseapp.com","messagingSenderId":"990730367254","measurementId":"G-NZ21RMSBVE"})), provideAnalytics(() => getAnalytics()), ScreenTrackingService
         
     ]
 })

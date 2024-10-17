@@ -65,3 +65,8 @@ src/assets/db/AISC15-imperial-Ibeams.csv
 src/assets/db/AISCimperial_L.csv
 src/assets/db/AISCimperial-Cshapes.csv
 src/assets/db/~$AISCimperial.xlsx
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
