@@ -25,4 +25,4 @@ Bakal-AREA.net is equipped with a variety of features designed to make the proce
 We hope that Bakal-AREA.net will serve as a valuable tool for both students and professional engineers, helping to bridge the gap between traditional engineering practices and the latest software technology.
 
 # Demo:
-[Video Demonstration and Tutorial]([https://duckduckgo.com](https://youtu.be/ccukHLxUFs0))
+[Video Demonstration and Tutorial](https://youtu.be/ccukHLxUFs0)
