@@ -23,3 +23,6 @@ Bakal-AREA.net is equipped with a variety of features designed to make the proce
 - **Learning Feature**: Bakal-AREA.net is not just a tool, but also a learning platform. It includes a feature that helps users learn about the NSCP, NBCP, and AISC standards.
 
 We hope that Bakal-AREA.net will serve as a valuable tool for both students and professional engineers, helping to bridge the gap between traditional engineering practices and the latest software technology.
+
+# Demo:
+[Video Demonstration and Tutorial]([https://duckduckgo.com](https://youtu.be/ccukHLxUFs0))
