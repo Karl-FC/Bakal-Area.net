@@ -12,61 +12,54 @@ import { ShearDesignComponent } from './app/pages/SHEAR/shear-design/shear-desig
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/fire/analytics';
+import { provideServiceWorker } from '@angular/service-worker';
+import { isDevMode } from '@angular/core';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
-      provideRouter(
-        [
-          /*{path: 'Home', component: CompAnalysisComponent},*/
-          {path: 'home', redirectTo: 'Home', pathMatch: 'full'},
-          {path: 'Tension', redirectTo: 'Tension/Analysis', pathMatch: 'full'},
-          {path: 'Compression', redirectTo: 'Compression/Analysis', pathMatch: 'full'},
-          {path: 'Shear', redirectTo: 'Shear/Analysis', pathMatch: 'full'},
-
-          {path: '', redirectTo: 'Home', pathMatch: 'full'},
-           
-            {path: 'Home', 
+    provideRouter([
+        /*{path: 'Home', component: CompAnalysisComponent},*/
+        { path: 'home', redirectTo: 'Home', pathMatch: 'full' },
+        { path: 'Tension', redirectTo: 'Tension/Analysis', pathMatch: 'full' },
+        { path: 'Compression', redirectTo: 'Compression/Analysis', pathMatch: 'full' },
+        { path: 'Shear', redirectTo: 'Shear/Analysis', pathMatch: 'full' },
+        { path: '', redirectTo: 'Home', pathMatch: 'full' },
+        { path: 'Home',
             loadComponent: () => import('./app/shared/components/homepage/homepage.component')
-                .then(c => c.HomepageComponent)},
-
-            {path: 'About', 
+                .then(c => c.HomepageComponent) },
+        { path: 'About',
             loadComponent: () => import('./app/shared/data/about-us/about-us.component')
-            .then(c => c.AboutUsComponent)},
-
-          {path: 'Compression/Analysis', 
-          loadComponent: () => import('./app/pages/COMPRESSION/comp-analysis/comp-analysis.component')
-              .then(c => c.CompAnalysisComponent)},
-
-          {path: 'Compression/Design', 
-          loadComponent: () => import('./app/pages/COMPRESSION/comp-design/comp-design.component')
-              .then(c => c.CompDesignComponent)},
-
-          {path: 'Tension/Analysis', 
-          loadComponent: () => import('./app/pages/TENSION/ten-analysis/ten-analysis.component')
-              .then(c => c.TenAnalysisComponent)},
-
-          {path: 'Tension/Design', 
-          loadComponent: () => import('./app/pages/TENSION/ten-design/ten-design.component')
-              .then(c => c.TenDesignComponent)},
-
-          {path: 'Bending/Analysis', 
-          loadComponent: () => import('./app/pages/BENDING/bend-analysis/bend-analysis.component')
-              .then(c => c.BendAnalysisComponent)},
-
-          {path: 'Bending/Design', 
-          loadComponent: () => import('./app/pages/BENDING/bend-design/bend-design.component')
-              .then(c => c.BendDesignComponent)},
-
-        {path: 'Shear/Analysis', 
-          loadComponent: () => import('./app/pages/SHEAR/shear-analysis/shear-analysis.component')
-              .then(c => c.ShearAnalysisComponent)},
-              
-        {path: 'Shear/Design', 
-          loadComponent: () => import('./app/pages/SHEAR/shear-design/shear-design.component')
-              .then(c => c.ShearDesignComponent)},
-        ]), provideAnimationsAsync(), provideFirebaseApp(() => initializeApp({"projectId":"bakal-areanet","appId":"1:990730367254:web:928e22ea602d948f9e6037","storageBucket":"bakal-areanet.appspot.com","apiKey":"AIzaSyDP_ZlH8J_583JWRRrHJLzZ-RH5tY3e-tY","authDomain":"bakal-areanet.firebaseapp.com","messagingSenderId":"990730367254","measurementId":"G-NZ21RMSBVE"})), provideAnalytics(() => getAnalytics()), ScreenTrackingService
-        
-    ]
+                .then(c => c.AboutUsComponent) },
+        { path: 'Compression/Analysis',
+            loadComponent: () => import('./app/pages/COMPRESSION/comp-analysis/comp-analysis.component')
+                .then(c => c.CompAnalysisComponent) },
+        { path: 'Compression/Design',
+            loadComponent: () => import('./app/pages/COMPRESSION/comp-design/comp-design.component')
+                .then(c => c.CompDesignComponent) },
+        { path: 'Tension/Analysis',
+            loadComponent: () => import('./app/pages/TENSION/ten-analysis/ten-analysis.component')
+                .then(c => c.TenAnalysisComponent) },
+        { path: 'Tension/Design',
+            loadComponent: () => import('./app/pages/TENSION/ten-design/ten-design.component')
+                .then(c => c.TenDesignComponent) },
+        { path: 'Bending/Analysis',
+            loadComponent: () => import('./app/pages/BENDING/bend-analysis/bend-analysis.component')
+                .then(c => c.BendAnalysisComponent) },
+        { path: 'Bending/Design',
+            loadComponent: () => import('./app/pages/BENDING/bend-design/bend-design.component')
+                .then(c => c.BendDesignComponent) },
+        { path: 'Shear/Analysis',
+            loadComponent: () => import('./app/pages/SHEAR/shear-analysis/shear-analysis.component')
+                .then(c => c.ShearAnalysisComponent) },
+        { path: 'Shear/Design',
+            loadComponent: () => import('./app/pages/SHEAR/shear-design/shear-design.component')
+                .then(c => c.ShearDesignComponent) },
+    ]), provideAnimationsAsync(), provideFirebaseApp(() => initializeApp({ "projectId": "bakal-areanet", "appId": "1:990730367254:web:928e22ea602d948f9e6037", "storageBucket": "bakal-areanet.appspot.com", "apiKey": "AIzaSyDP_ZlH8J_583JWRRrHJLzZ-RH5tY3e-tY", "authDomain": "bakal-areanet.firebaseapp.com", "messagingSenderId": "990730367254", "measurementId": "G-NZ21RMSBVE" })), provideAnalytics(() => getAnalytics()), ScreenTrackingService,
+    provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    })
+]
 })
 .catch((err) => console.error(err));
